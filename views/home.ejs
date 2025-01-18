@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Manoti">
+  <meta name="description" content="Manoti provides you with free, up-to-date financial data & interactive charts on companies listed on the Victoria Falls Stock Exchange (VFEX) - empowering your investment strategies.">
+  <meta name="keywords" content="manoti, vfex, victoria falls stock exchange, zimbabwe stocks, zimbabwe shares, vfex stock prices, victoria falls stock exchange share prices, zimbabwe stock market analysis, how to invest in victoria falls stock exchange, free stock charts zimbabwe, best vfex shares to buy, vfex direct, zse, zimbabwe stock exchange">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url('fonts/lato/Lato-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url('fonts/lato/Lato-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url('fonts/lato/Lato-Italic.ttf') format('truetype');
+      font-weight: 400;
+      font-style: italic;
+    }
+  </style>
+  <title>Manoti: Free Stock Price, Market & Financial Data for the Victoria Falls Stock Exchange - VFEX</title>
+</head>
+<body>
+  <header>
+    <h1>
+      Manoti.
+    </h1>
+  </header>
+
+  <section>
+    <div>
+      <p id="hero-text">
+        The data you need for savvy investments on the Victoria Falls Stock Exchange (VFEX)
+      </p>
+    </div>
+  </section>
+
+  <aside>
+    <div id="aside-container">
+      <h4>VFEX Market Summary</h4>
+
+      <div id="alsi">
+        <p>All Share Index</p>
+        <p><%= alsi.close %></p>
+        <div <% if (alsi.priceChange > 0) { %> 
+          class="daily-change-overview up" 
+          <% } else if (alsi.priceChange < 0) { %> 
+          class="daily-change-overview down"
+          <% } else { %> 
+          class="daily-change-overview no-change"
+          <% } %> >
+          <p class="price-change">
+            <%= alsi.priceChange %>
+          </p>
+          <p class="text-divider">
+            /
+          </p>
+          <p class="percentage-change">
+            <%= alsi.percentageChange %>
+          </p>
+        </div>
+      </div>
+      
+      <div id="market-cap">
+        <p>Market cap</p>
+        <p id="vfexMarketCap"><%= vfexMarketCap %></p>
+        <div class="chart">
+          <div class="tooltip__pie-chart">
+            <p class="equity"></p>
+            <p class="value"></p>
+          </div>
+          <%- pieChart %>
+        </div>  
+      </div>
+
+      <div id="eod-change">
+        <p>VFEX equities 1 day price change</p>
+        <div class="chart">
+          <div class="tooltip__heat-map">
+            <p class="name"></p>
+            <p class="price-change"></p>
+            <p class="heatmap-price"></p>
+          </div>
+          <%- heatMap %>
+        </div>  
+      </div>
+
+      <div id="median-pe-ratio">
+        <p>Median P/E ratio</p> 
+        <p><%= medianPEratio %></p>
+      </div>
+
+      <div id="no-of-equities">
+        <p>Listed equities</p>
+        <p><%= numberOfListedEquities %></p>
+        </p>
+      </div>
+      <div id="listing-timeline">
+        <p>Timeline of listings on the VFEX</p>
+        <%- timeline %>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <div id="date-currency-container">
+      <p id="latest-date-update">
+        last updated:<time datetime=<%= lastTradingDayDateFormattedReversed %> > <%= lastTradingDayDateFormatted %></time>
+      </p>
+      <p id="price-disclaimer">
+        currency: USD
+      </p>
+    </div>
+    <ul>
+      <% equityData.forEach( item => {%>
+        <li>
+          <article class="carousel-grid-container">
+            <button class="carousel__button carousel__button--left is-hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 15" fill="none" stroke="#000020" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+
+            <div class="carousel__track-grid-container">
+              <div class="carousel__sub-grid carousel__sub-grid--1 current-slide">
+                <div>
+                  <p>
+                    <%= item.name %>
+                  </p>
+                  <p>
+                    <%= item.ticker %>
+                  </p>
+                </div>
+
+                <div>
+                  <p>
+                    market cap
+                  </p>
+                  <p>
+                    <%= item.marketCap %>
+                  </p>
+                </div>
+    
+                <div>
+                  <p>
+                    price (1 day)
+                  </p>
+                  <p>
+                    <%= item.price %>
+                  </p>
+                  <!-- determining the class to apply to the text  -->
+                  <!-- class will apply font color -->
+                  <div <% if (item.priceChange > 0) { %> 
+                    class="daily-change-overview up" 
+                    <% } else if (item.priceChange < 0) { %> 
+                    class="daily-change-overview down"
+                    <% } else { %> 
+                    class="daily-change-overview no-change"
+                    <% } %> >
+                    <p class="price-change">
+                      <%= item.priceChange %>
+                    </p>
+                    <p class="text-divider">
+                      /
+                    </p>
+                    <p class="percentage-change">
+                      <%= item.pricePercentageChange %>
+                    </p>
+                  </div>
+                </div>
+
+                <!-- <div class="market__cap"></div> -->
+    
+                <div class="chart">
+                  <div class="tooltip">
+                    <p class="price"></p>
+                    <p class="date"></p>
+                    <p>
+                      volume: <span class="volume"></span>
+                    </p>
+                  </div>
+    
+                  <%- item.chart %>                  
+    
+                </div>  
+              </div>
+
+              <div class="carousel__sub-grid carousel__sub-grid--2 is-hidden">
+                <h6 class="sub-grid__title">
+                  <%= item.name %> Market Highlights
+                </h6>
+                <% (item.marketStatistics).forEach( d => {%>
+                  <div class="sub-grid__metrics">
+                    <p><%= d.metric %></p>
+                    <p><%= d.value %></p>
+                  </div>
+                <% }) %>
+              </div>
+
+              <div class="carousel__sub-grid carousel__sub-grid--3 is-hidden">
+                <h6 class="sub-grid__title">
+                  <%= item.name %> 20<%= item.FY %> Financial Statements Summary
+                </h6>
+                <% (item.financialStatementSummary).forEach( d => {%>
+                  <div class="sub-grid__metrics">
+                    <p><%= d.metric %></p>
+                    <p><%= d.value %></p>
+                    <p><%= d.change %> YoY</p>
+                  </div>
+                <% }) %>
+              </div>     
+              </div>
+            </div>
+
+            <button class="carousel__button carousel__button--right">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 15" fill="none" stroke="#000020" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+
+            <div class="carousel__nav">
+              <button class="carousel__indicator carousel-icon-1 current-slide"></button>
+              <button class="carousel__indicator carousel-icon-2"></button>
+              <button class="carousel__indicator carousel-icon-3"></button>
+            </div>
+  
+          </article>
+        </li>
+        </li>
+      <% }) %>
+    </ul>    
+  </main>
+  
+  <footer>
+    <p>Contact us</p>
+    <p>
+      &copy; 2024 - <%= year %> Manoti. All rights reserved.
+    </p>
+    <p>
+      <span class="disclaimer">Disclaimer</span>: You should not rely on any information contained in this website - it is provided for informational purposes only.
+Manoti does not guarantee
+that the information provided will be error free, timely, accurate or complete. The use of any information on this website is at user's sole risk. Before making any
+investment decision we recommend that you consider whether it is appropriate for your situation and seek appropriate financial, taxation and legal advice. Manoti
+does not accept any liability for any loss or damage which may arise directly or indirectly from use of or reliance on this information.
+    </p>
+  </footer>
+  
+  <script src="d3.v7.min.js"></script>
+   <script src="tooltip/lineChart.js"></script>
+   <script src="tooltip/pieChart.js"></script>
+   <script src="tooltip/heatMap.js"></script>
+   <script src="touchSlider.js"></script>
+   <script>
+      tooltipFunction(<%-  JSON.stringify(equityData) %>)
+      pieChart(<%- JSON.stringify(marketCapData) %>)
+      heatMap(<%- JSON.stringify(heatMapData) %>)
+      heatMap
+    </script>
+</body>
+</html>
