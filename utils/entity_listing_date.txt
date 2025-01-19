@@ -1,0 +1,16 @@
+'[
+  {"date":"2020-10","entity":"Seed Co Int."},
+  {"date":"2021-07","entity":"Padenga Holdings"},
+  {"date":"2021-12","entity":"Caledonia Mining ZDR"},
+  {"date":"2022-11","entity":"Nedbank Zimbabwe ZDR"},
+  {"date":"2022-12","entity":"Simbisa Brands"},
+  {"date":"2022-12","entity":"National Foods"},
+  {"date":"2023-02","entity":"Innscor Africa"},
+  {"date":"2023-03","entity":"Axia Corp."},
+  {"date":"2023-04","entity":"African Sun"},
+  {"date":"2023-05","entity":"WestProp Holdings"},
+  {"date":"2023-05","entity":"First Capital Bank"},
+  {"date":"2023-07","entity":"Zimplow Holdings"},
+  {"date":"2024-04","entity":"Edgars Stores"},
+  {"date":"2024-10","entity":"Invictus Energy ZDR"}
+]'

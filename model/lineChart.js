@@ -105,7 +105,7 @@ const svgChartElement = ( closingPriceDataArray, tradingVolumeDataArray, priceCh
     .attr("class", "chart-sub-title")
     .attr("x", width / 2)
     .attr("y", -10)
-    .text("price (30 day)");
+    .text("price - 30day");
 
   // add horizontal grid lines to chart
   const GridLine = () => axisLeft().scale(yScale);

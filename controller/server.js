@@ -5,7 +5,7 @@ import logger from '../model/logger.js';
 import homeRoute from '../routes/home/index.js';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6410;
 
 app.set('view engine', 'ejs');
 
