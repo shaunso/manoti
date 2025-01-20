@@ -1,3 +1,22 @@
+@font-face {
+  font-family: "Lato";
+  src: url('fonts/lato/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url('fonts/lato/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url('fonts/lato/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
 :root {
   --bg-color: #F2F1F0;
   --bg-color__slides: rgba(249, 249, 249, 0.871);
@@ -52,21 +71,8 @@ body > section > *, body > main {
   padding: 0 1rem;
 }
 
-h1 {
-  background-color: var(--sec-color);
-  color: var(--ter-color);
-  font-size: var(--font-size-large);
-  text-align: center;
-  padding: 1rem 0 0.5rem 0;
-  font-family: var(--font-family);
-}
-h1::after{
-  content: '';
-  display: block;
-  width: 100%;
-  height: 0.15rem;
-  background-color: var(--ter-color);
-  margin-top: 0.55rem;
+header > h1 > a {
+  pointer-events: none;
 }
 
 body > header, body > section, body > footer {
@@ -85,12 +91,6 @@ p#hero-text {
   font-weight: var(--font-weight-bold);
   margin: 2rem 0;
   font-size: var(--font-size-medium);
-}
-
-header ~ hr {
-  width: 100%;
-  color: var(--sec-color);
-  margin-bottom: 0.5rem;
 }
 
 div#date-currency-container {
@@ -320,10 +320,6 @@ div.carousel__sub-grid--1 > div:nth-child(3) {
   justify-content: center;
 }
 
-div.carousel__sub-grid--1 > div:nth-child(3) > p:nth-child(1) {
-  color: var(--prim-color);
-}
-
 div.daily-change-overview {
   display: flex;
 }
@@ -358,7 +354,7 @@ svg {
 }
 
 .tick text {
-  fill: var(--prim-color);
+  fill: var(--sec-color);
   vertical-align: baseline;
   font-family: var(--font-family);
 }
@@ -449,29 +445,6 @@ div.sub-grid__metrics {
 
 div.sub-grid__metrics > p:nth-child(2) {
   font-size: var(--font-size-normal);
-  font-weight: var(--font-weight-bold);
-}
-
-footer {
-  background-color: var(--sec-color);
-  padding: 2rem 1.75rem;
-  color: var(--ter-color);
-  display: flex;
-  flex-direction: column;
-  font-size: var(--font-size-normal_small);
-}
-
-footer > p:nth-child(1) {
-  word-spacing: 3px;
-  font-weight: var(--font-weight-bold);
-}
-
-footer > p:nth-child(2) {
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-x_small);
-}
-
-footer > p > span.disclaimer {
   font-weight: var(--font-weight-bold);
 }
 
@@ -709,17 +682,13 @@ footer > p > span.disclaimer {
   svg  {
     padding-top: 0rem;
   }
-
-  footer {
-    padding: 1rem 1.5rem;
-  }
-
-  footer > p:nth-child(2) {
-    font-size: var(--font-size-small);
-  }
 }
 
 @media (max-width: 570px) {
+  div.carousel__sub-grid--1 > div:first-child {
+    font-size: var(--font-size-small);
+  }
+
   svg  {
     padding-top: 1rem;
   }
@@ -789,6 +758,7 @@ footer > p > span.disclaimer {
 
   div.carousel__sub-grid--1 > div:first-child {
     flex-basis: auto;
+    font-size: var(--font-size-normal_small);
   }
 
   div.carousel__sub-grid--1 > div:first-child > p:nth-child(1) {
@@ -821,6 +791,10 @@ footer > p > span.disclaimer {
     display: inline;
   }
 
+  div.carousel__sub-grid--3 > div {
+    align-self: end;
+  }
+
   h6.sub-grid__title {
     grid-area: title;
     font-size: var(--font-size-small);
@@ -850,14 +824,5 @@ footer > p > span.disclaimer {
   
   .tick {
     font-size: var(--font-size-normal_small);
-  }
-
-  footer {
-    row-gap: 0.15rem;
-  }
-
-  footer > p:nth-child(1) {
-    font-size: 0.7rem;
-    word-spacing: 1.75px;
   }
 }

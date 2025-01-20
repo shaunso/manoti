@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found.">
+  <%- include('partials/head') %>
+  <link rel="stylesheet" href="styles/404.css">
+  <title>Manoti: Page Not Found!</title>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <div>
+    <p>Page not found.</p>
+    <p>return to <a href="/" target="_self">home page</a></p>
+  </div>
+  
+  <footer>
+    <p>
+      &copy; 2024 - <%= new Date().getFullYear().toString() %> Manoti. All rights reserved.
+    </p>
+  </footer>
+</body>
+</html>

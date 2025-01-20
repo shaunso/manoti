@@ -1,0 +1,178 @@
+@font-face {
+  font-family: "Lato";
+  src: url('../fonts/lato/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url('../fonts/lato/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url('../fonts/lato/Lato-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+:root {
+  --bg-color: #F2F1F0;
+  --sec-color: #204134;
+  --ter-color: #F2F1F0;
+
+  --font-family: "Lato", Helvetica;
+  --font-size-xxxx_large: 5rem;
+  --font-size-xxx_large: 3.5rem;
+  --font-size-xx_large: 3rem;
+  --font-size-x_large: 2.75rem;
+  --font-size-large: 2.25rem;
+  --font-size-medium_large: 1.75rem;
+  --font-size-medium: 1.625rem;
+  --font-size-normal_medium: 1.5rem;
+  --font-size-normal: 1.375rem;
+  --font-size-normal_small: 1.125rem;
+  --font-size-small: 0.875rem;
+  --font-size-x_small: 0.75rem;
+  --font-size-xx_small: 0.625rem;
+
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: var(--font-family);
+  color: var(--sec-color);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body > div  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  height: 60vh;
+}
+
+div#container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+}
+
+body > div > div > p {
+  width: fit-content;
+}
+
+body > div > div > p:first-child {
+  font-size: var(--font-size-xxxx_large);
+  font-weight: var(--font-weight-bold);
+}
+
+body > div > div > p:last-child {
+  font-size: var(--font-size-medium);
+  position: relative;
+  left: 8px;
+}
+
+a {
+  color: var(--sec-color);
+  transition: all 100ms ease-in;
+}
+
+a:visited {
+  text-decoration: solid var(--sec-color) 4px;
+} 
+
+a:hover {
+  opacity: 0.6;
+  text-decoration: none;
+}
+
+body > footer {
+  padding: 1rem 1.5rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width:600px) {
+  body > div > div > p:first-child {
+    font-size: var(--font-size-xxx_large);
+  }
+}
+
+@media (max-width: 397px) {
+  body > div > div {
+    align-items: start;
+  }
+
+  body > div > div > p:first-child {
+    font-size: 2.5rem;
+  }
+
+  body > div > div > p:last-child {
+    left: 4px;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --font-size-xx_large: 2.75rem;
+    --font-size-x_large: 2.5rem;
+    --font-size-large: 2rem;
+    --font-size-medium_large: 1.625rem;
+    --font-size-medium: 1.5rem;
+    --font-size-normal_medium: 1.375rem;
+    --font-size-normal: 1.25rem;
+    --font-size-normal_small: 1rem;
+    --font-size-small: 0.75rem;
+    --font-size-x_small: 0.625rem;
+    --font-size-xx_small: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size-xx_large: 2.5rem;
+    --font-size-x_large: 2.125rem;
+    --font-size-large: 1.85rem;
+    --font-size-medium_large: 1.5rem;
+    --font-size-medium: 1.375rem;
+    --font-size-normal_medium: 1.25rem;
+    --font-size-normal: 1.125rem;
+    --font-size-normal_small: 0.875rem;
+    --font-size-small: 0.625rem;
+    --font-size-x_small: 0.5rem;
+    --font-size-xx_small: 0.375rem;
+  }
+}
+
+@media (max-width: 479px) {
+  :root {
+    --font-size-xx_large: 2rem;
+    --font-size-x_large: 1.75rem;
+    --font-size-large: 1.5rem;
+    --font-size-medium_large: 1.375rem;
+    --font-size-medium: 1.25rem;
+    --font-size-normal_medium: 1.125rem;
+    --font-size-normal: 1rem;
+    --font-size-normal_small: 0.75rem;
+    --font-size-small: 0.5rem;
+    --font-size-x_small: 0.375rem;
+    --font-size-xx_small: 0.125rem;
+  }
+}

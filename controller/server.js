@@ -21,6 +21,11 @@ app.use(logger);
 // home page route
 app.use('/', homeRoute);
 
+// contact page
+app.get('/contact', async(req, res) => {
+  res.status(200).render('contact');
+});
+
 // robots file
 app.get('/robots.txt', async(req, res) => {
   res.status(200).sendFile('robots.txt');
@@ -32,8 +37,8 @@ app.get('/sitemap.xml', async(req, res) => {
 });
 
 // 404 page
-app.all('*', (req, res) => {
-  res.status(404).send('<h1>404! Page not found</h1>');
+app.all('*', async(req, res) => {
+  res.status(404).render('404');
 });
 
 app.listen (PORT);

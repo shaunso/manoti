@@ -6,37 +6,12 @@
   <meta name="author" content="Manoti">
   <meta name="description" content="Manoti provides you with free, up-to-date financial data & interactive charts on companies listed on the Victoria Falls Stock Exchange (VFEX) - empowering your investment strategies.">
   <meta name="keywords" content="manoti, vfex, victoria falls stock exchange, zimbabwe stocks, zimbabwe shares, vfex stock prices, victoria falls stock exchange share prices, zimbabwe stock market analysis, how to invest in victoria falls stock exchange, free stock charts zimbabwe, best vfex shares to buy, vfex direct, zse, zimbabwe stock exchange">
+  <%- include('partials/head') %>
   <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <script defer src="https://analytics.manoti.co/script.js" data-website-id="ebdfd445-af17-4d20-8586-9a0a25a9901c"></script>
-  <style>
-    @font-face {
-      font-family: "Lato";
-      src: url('fonts/lato/Lato-Regular.ttf') format('truetype');
-      font-weight: 400;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: "Lato";
-      src: url('fonts/lato/Lato-Bold.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-    @font-face {
-      font-family: "Lato";
-      src: url('fonts/lato/Lato-Italic.ttf') format('truetype');
-      font-weight: 400;
-      font-style: italic;
-    }
-  </style>
   <title>Manoti: Free Stock Price, Market & Financial Data for the Victoria Falls Stock Exchange - VFEX</title>
 </head>
 <body>
-  <header>
-    <h1>
-      Manoti.
-    </h1>
-  </header>
+  <%- include('partials/header') %>
 
   <section>
     <div>
@@ -236,19 +211,7 @@
     </ul>    
   </main>
   
-  <footer>
-    <!-- <p>Contact us</p> -->
-    <p>
-      &copy; 2024 - <%= year %> Manoti. All rights reserved.
-    </p>
-    <p>
-      <span class="disclaimer">Disclaimer</span>: You should not rely on any information contained in this website - it is provided for informational purposes only.
-Manoti does not guarantee
-that the information provided will be error free, timely, accurate or complete. The use of any information on this website is at user's sole risk. Before making any
-investment decision we recommend that you consider whether it is appropriate for your situation and seek appropriate financial, taxation and legal advice. Manoti
-does not accept any liability for any loss or damage which may arise directly or indirectly from use of or reliance on this information.
-    </p>
-  </footer>
+  <%- include('partials/footer') %>
   
   <script src="d3.v7.min.js"></script>
    <script src="tooltip/lineChart.js"></script>
