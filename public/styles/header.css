@@ -26,5 +26,5 @@ header > h1 > a {
 }
 
 header > h1 > a:hover {
-  opacity: 0.7;
+  opacity: 0.8;
 }

@@ -60,6 +60,7 @@ const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-
 const zeroDecimalPointSignedNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: 'exceptZero',  maximumFractionDigits: 0 });
 const oneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const twoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const twoDecimalPointNumberNoSignFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const cuurencyTwoSignificantFiguresNumberFormatterObject = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 2 });
 const percentageOneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const percentageTwoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', maximumSignificantDigits: 2 });
@@ -202,7 +203,7 @@ const priceChangeAllShareIndex = +currentAllShareIndex.all_share_index - +previo
 const priceChangeDifferenceAllShareIndex = ( priceChangeAllShareIndex * 10000000 ) / ( +previousAllShareIndex.all_share_index * 10000000);
 const percentageChangeAllShareIndex = percentageTwoSignificantDigitsNumberFormatterObject.format(priceChangeDifferenceAllShareIndex);
 const alsi = {
-  close: +currentAllShareIndex.all_share_index,
+  close: twoDecimalPointNumberNoSignFormatterObject.format(+currentAllShareIndex.all_share_index),
   priceChange: (priceChangeAllShareIndex) ? twoDecimalPointNumberFormatterObject.format(priceChangeAllShareIndex) : '---',
   percentageChange: (priceChangeAllShareIndex) ? percentageChangeAllShareIndex : '---',
 }
