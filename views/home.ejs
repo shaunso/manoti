@@ -214,15 +214,15 @@
   <%- include('partials/footer') %>
   
   <script src="d3.v7.min.js"></script>
-   <script src="tooltip/lineChart.js"></script>
-   <script src="tooltip/pieChart.js"></script>
-   <script src="tooltip/heatMap.js"></script>
-   <script src="touchSlider.js"></script>
-   <script>
-      tooltipFunction(<%-  JSON.stringify(equityData) %>)
-      pieChart(<%- JSON.stringify(marketCapData) %>)
-      heatMap(<%- JSON.stringify(heatMapData) %>)
-      heatMap
-    </script>
+  <script src="tooltip/lineChart.js"></script>
+  <script src="tooltip/pieChart.js"></script>
+  <script src="tooltip/heatMap.js"></script>
+  <script src="touchSlider.js"></script>
+  <script>
+    tooltipFunction(<%-  JSON.stringify(equityData) %>)
+    pieChart(<%- JSON.stringify(marketCapData) %>)
+    heatMap(<%- JSON.stringify(heatMapData) %>)
+    heatMap
+  </script>
 </body>
 </html>
