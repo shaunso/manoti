@@ -1,4 +1,6 @@
 User-Agent: *
 Allow: /
 
+Disallow: admin.manoti.co/
+
 Sitemap: https://www.manoti.co/sitemap.xml

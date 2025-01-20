@@ -791,6 +791,10 @@ div.sub-grid__metrics > p:nth-child(2) {
     display: inline;
   }
 
+  div.carousel__sub-grid--2, div.carousel__sub-grid--3 {
+    align-items: end;
+  }
+
   div.carousel__sub-grid--3 > div {
     align-self: end;
   }
