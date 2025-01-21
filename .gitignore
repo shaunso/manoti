@@ -1,3 +1,4 @@
 .env
 node_modules/
 utils/log.txt
+utils/logs_bckup.txt
