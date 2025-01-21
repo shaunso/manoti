@@ -4,10 +4,10 @@ const router = express.Router();
 import { median } from 'd3';
 
 import { priceVolumeData, indicesData, summaryData, vfexSummaryData } from '../../model/db_results.js';
-import svgChartElement from '../../model/lineChart.js';
-import pieChartSVG from '../../model/pieChart.js';
-import heatMapSVG from '../../model/heatMap.js';
-import timelineSVG from '../../model/timeline.js';
+import svgChartElement from '../../model/charts/lineChart.js';
+import pieChartSVG from '../../model/charts/pieChart.js';
+import heatMapSVG from '../../model/charts/heatMap.js';
+import timelineSVG from '../../model/charts/timeline.js';
 
 // wait for the data from the db to be returned
 const priceVolumeDataQueryResult = await priceVolumeData();

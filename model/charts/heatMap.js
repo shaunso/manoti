@@ -42,10 +42,7 @@ const heatMapSVG = (dataset) => {
       } else if (d.priceDifference < 0) {
         return negativeColors
       } else return noChangeColor
-    })
-
-    .append('title')
-    .text(d=>d.name);
+    });
 
   const svgString = dom.serialize(); 
   const svgStart = svgString.indexOf( '<svg' );

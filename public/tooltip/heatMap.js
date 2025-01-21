@@ -11,6 +11,7 @@ function heatMap(data) {
     const price = data[m].price;
     
     square.addEventListener('pointerover', (e) => {
+      console.log([`clientX: ${e.clientX}`, `clientY: ${e.clientY}`, `layerX: ${e.layerX}`, `layerY: ${e.layerY}`])
       tooltip.style.display = 'block';
       tooltip.style.top = ( e.layerY * 7 )  + 'px';
       tooltip.style.left = ( e.clientX + 5 )  + 'px';
