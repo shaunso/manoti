@@ -1,10 +1,11 @@
 {
   "name": "manoti",
-  "version": "1.0.0",
-  "description": "",
+  "version": "4.0.5",
+  "description": "victoria falls stock exchange dashboard",
   "main": "controller/server.js",
   "type": "module",
   "scripts": {
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon controller/server.js"
   },
@@ -17,7 +18,12 @@
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "jsdom": "^24.1.0",
-    "mysql2": "^3.10.1",
-    "nodemon": "^3.1.4"
+    "mysql2": "^3.10.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "nodemon": "^3.1.4",
+    "rollup": "^4.31.0"
   }
 }
