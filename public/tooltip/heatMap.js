@@ -10,11 +10,15 @@ function heatMap(data) {
     const value = data[m].priceDifference;
     const price = data[m].price;
     
-    square.addEventListener('pointerover', (e) => {
-      console.log([`clientX: ${e.clientX}`, `clientY: ${e.clientY}`, `layerX: ${e.layerX}`, `layerY: ${e.layerY}`])
+    square.addEventListener('pointermove', (e) => {
+      const heatMapContainerYposition = document.querySelector('svg#heat-map').getBoundingClientRect().top;
+      const pointerPosition = e.clientY;
+      const tooltipYaxisPosition = pointerPosition - heatMapContainerYposition;
+      console.log(e)
+
       tooltip.style.display = 'block';
-      tooltip.style.top = ( e.layerY * 7 )  + 'px';
-      tooltip.style.left = ( e.clientX + 5 )  + 'px';
+      tooltip.style.top = ( tooltipYaxisPosition - 50 ) + 'px';
+      tooltip.style.left = ( e.clientX + 7.5 )  + 'px';
       tooltip.querySelector('.name').textContent = equity;
       tooltip.querySelector('.price-change').textContent = numberFormatterObject.format(value);
       tooltip.querySelector('.heatmap-price').textContent = price;

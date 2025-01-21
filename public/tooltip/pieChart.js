@@ -3,17 +3,20 @@ function pieChart(data) {
 
   const arcs = Array.from( document.querySelectorAll('#pie-chart path') );
   const tooltip = document.querySelector('.tooltip__pie-chart');
-  const radius = document.getElementById('market-cap').getBoundingClientRect().width / 2;
 
   let m = 0;
   arcs.forEach( arc => {
     const equity = data[m].name;
     const value = data[m].marketCap;
     
-    arc.addEventListener('pointerover', (e) => {
+    arc.addEventListener('pointermove', (e) => {
+      const pieChartContainerYposition = document.querySelector('svg#pie-chart').getBoundingClientRect().top;
+      const pointerPosition = e.clientY;
+      const tooltipYaxisPosition = pointerPosition - pieChartContainerYposition;
+
       tooltip.style.display = 'block';
-      tooltip.style.top = radius  + 'px';
-      tooltip.style.left = e.clientX  + 'px';
+      tooltip.style.top = ( tooltipYaxisPosition - 37.5 ) + 'px';
+      tooltip.style.left = ( e.clientX + 7.5 )  + 'px';
       tooltip.querySelector('.equity').textContent = equity;
       tooltip.querySelector('.value').textContent = numberFormatterObject.format(value);
     });

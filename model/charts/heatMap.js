@@ -7,7 +7,7 @@ const heatMapSVG = (dataset) => {
   const dom = new JSDOM();
   const body = dom.window.document.body;
 
-  dataset.sort((a, b) => a.priceDifference - b.priceDifference).reverse();
+  dataset.sort( (a, b) => a.priceDifference - b.priceDifference ).reverse();
 
   const positiveColors = '#0f8f3c';  
   const noChangeColor = '#878787';  
