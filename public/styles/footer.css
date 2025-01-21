@@ -50,6 +50,8 @@ footer > p:nth-child(2) {
 footer > p:nth-child(3) {
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-x_small);
+  letter-spacing: 0.5px;
+  word-spacing: 1.0px;
 }
 
 footer > p > span.disclaimer {

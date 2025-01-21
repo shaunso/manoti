@@ -4,7 +4,7 @@ function tooltipFunction(data) {
   const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits:4});
   const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
 
-  const dateFormatter = date => { return d3.timeFormat("%d-%b-%Y")( (new Date().getTimezoneOffset() < 0) ? date : d3.utcDay.offset(date, 1) )};
+  const dateFormatter = date => { return timeFormat("%d-%b-%Y")( (new Date().getTimezoneOffset() < 0) ? date : utcDay.offset(date, 1) )};
 
   let n = 0;
   tooltipRectangles.forEach( (rectangle) => {
@@ -15,15 +15,15 @@ function tooltipFunction(data) {
     const tooltipDot = document.querySelectorAll('svg#linechart circle')[n];
     const tooltipLineX = document.querySelectorAll('.tooltip-line-x')[n];
 
-    const xAccessor = d => d3.isoParse(d[0]);
+    const xAccessor = d => isoParse(d[0]);
     const yAccessor = d => +d[1];
 
-    const xScale = d3.scaleTime()
-      .domain( d3.extent(price, xAccessor) )
+    const xScale = scaleTime()
+      .domain( extent(price, xAccessor) )
       .range([0, 400 - 80]);
 
-    const yScale = d3.scaleLinear()
-      .domain( [0, d3.max(price, yAccessor)] )
+    const yScale = scaleLinear()
+      .domain( [0, max(price, yAccessor)] )
       .range([80 - 55 + 15, 0])
       .nice();
 
@@ -46,8 +46,8 @@ function tooltipFunction(data) {
         return (xPos / 1.75 ) + 'px'
       };
 
-      const [xCord] = d3.pointer(e);
-      const bisectDate = d3.bisector(xAccessor).center;
+      const [xCord] = pointer(e);
+      const bisectDate = bisector(xAccessor).center;
       const x0 = xScale.invert(xCord);
 
       const i = bisectDate(price, x0);

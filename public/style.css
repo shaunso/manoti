@@ -773,7 +773,7 @@ div.sub-grid__metrics > p:nth-child(2) {
   }
 
   div.carousel__sub-grid--2, div.carousel__sub-grid--3 {
-    align-items: end;
+    align-items: center;
   }
 
   div.carousel__sub-grid--3 > div {
