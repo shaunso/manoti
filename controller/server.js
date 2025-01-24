@@ -3,6 +3,8 @@ import 'dotenv/config';
 
 import logger from '../model/logger.js';
 import homeRoute from '../routes/home/index.js';
+import tickerPage from '../routes/companyPageData/index.js'
+
 
 const app = express();
 const PORT = process.env.PORT || 6410;
@@ -20,6 +22,9 @@ app.use(logger);
 
 // home page route
 app.use('/', homeRoute);
+
+// entity data page route
+app.use('/data/ticker', tickerPage);
 
 // contact page
 app.get('/contact', async(req, res) => {
