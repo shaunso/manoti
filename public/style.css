@@ -3,6 +3,7 @@
   --bg-color__slides: rgba(249, 249, 249, 0.871);
   --prim-color: #0F0F0F;
   --sec-color: #204134;
+  --sec-color_60_perc: #20413499;
   --sec-color_80_perc: rgba(32, 65, 52, 0.8);
   --sec-color_border: rgba(32, 65, 52, 0.9);
   --ter-color: #F2F1F0;
@@ -96,9 +97,13 @@ aside {
   padding: 1rem 1rem 0 1rem;
   background-color: var(--bg-color);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 2.5px;
-  border-right: #20413499 2.5px solid;
+  border-right: var(--sec-color_60_perc) 2.5px solid;
   font-size: var(--font-size-normal_small);
   grid-row: 2/4;
+}
+
+aside > * {
+  position: fixed;
 }
 
 aside > div#aside-container > h4 {
@@ -205,9 +210,7 @@ main li {
 
 /* GRID CONTAINER */
 article.carousel-grid-container {
-  border-bottom: #20413499 solid 2.5px;
-  /* border-radius: 4px; */
-  /* background-color: var(--bg-color__slides); */
+  border-bottom: var(--sec-color_60_perc) solid 2.5px;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px -1.75px 1px 0px;
   display: grid;
   grid-template-areas: 
@@ -264,7 +267,6 @@ button.carousel__indicator {
   cursor: pointer;
   margin-right: 0.45rem;
 }
-
 
 button.carousel__indicator.current-slide {
   background-color: var(--sec-color);
@@ -483,7 +485,7 @@ div.sub-grid__metrics > p:nth-child(2) {
   }
 
   div.carousel__sub-grid--1 > div:first-child {
-    font-size: var(--font-size-normal_small);
+    font-size: var(--font-size-small);
   }
 
   div.carousel__sub-grid--1 > div:nth-child(3) > div.daily-change-overview > p.text-divider {
@@ -607,6 +609,10 @@ div.sub-grid__metrics > p:nth-child(2) {
     grid-row: 3/4;
   }
 
+  aside > * {
+    position: static;
+  }
+
   aside > div#aside-container {
     display: flex;
     flex-wrap: wrap;
@@ -657,6 +663,14 @@ div.sub-grid__metrics > p:nth-child(2) {
     display: none;
   }
 
+  div.carousel__sub-grid--1 > div:first-child {
+    font-size: 0.8rem;
+  }
+
+  div.daily-change-overview p {
+    font-size: 0.8rem;
+  }
+
   div.carousel__sub-grid--2, div.carousel__sub-grid--3 {
     grid-template-areas: 
       "title title title"
@@ -702,6 +716,7 @@ div.sub-grid__metrics > p:nth-child(2) {
     --font-size-normal_medium: 1.125rem;
     --font-size-normal: 1rem;
     --font-size-normal_small: 0.75rem;
+    --font-size-smallish: 0.6rem
     --font-size-small: 0.5rem;
     --font-size-x_small: 0.375rem;
     --font-size-xx_small: 0.125rem;
@@ -751,7 +766,11 @@ div.sub-grid__metrics > p:nth-child(2) {
 
   div.carousel__sub-grid--1 > div:first-child {
     flex-basis: auto;
-    font-size: var(--font-size-normal_small);
+    font-size: 0.7rem;
+  }
+
+  div.daily-change-overview p {
+    font-size: 0.7rem;
   }
 
   div.carousel__sub-grid--1 > div:first-child > p:nth-child(1) {
