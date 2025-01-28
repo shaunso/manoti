@@ -47,6 +47,11 @@
         </div>
       </div>
       
+      <div id="total-turnover">
+        <p>Turnover (50 day avg.)</p>
+        <p><%= marketTurnover50dayAverage %></p>
+      </div>
+
       <div id="market-cap">
         <p>Market cap</p>
         <p id="vfexMarketCap"><%= vfexMarketCap %></p>
@@ -60,7 +65,7 @@
       </div>
 
       <div id="eod-change">
-        <p>VFEX equities price - 1 day change</p>
+        <p>Equities 1 day price change</p>
         <div class="chart">
           <div class="tooltip__heat-map">
             <p class="name"></p>
@@ -77,13 +82,8 @@
       </div>
 
       <div id="no-of-equities">
-        <p>Listed equities</p>
+        <p>No. of listed companies</p>
         <p><%= numberOfListedEquities %></p>
-        </p>
-      </div>
-      <div id="listing-timeline">
-        <p>Timeline of listings on the VFEX</p>
-        <%- timeline %>
       </div>
     </div>
   </aside>
