@@ -300,10 +300,6 @@ div.daily-change-overview {
   display: flex;
 }
 
-p.text-divider {
-  margin: 0 2.5px;
-}
-
 div.chart {
   position: relative;
   width: 100%;
@@ -434,6 +430,25 @@ div.sub-grid__metrics > p:nth-child(2) {
   cursor: pointer;
 }
 
+svg.lucide-triangle {
+  margin: 0 4px;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  position: relative;
+  top: 1px;
+}
+
+.lucide-up {
+  fill: green;
+}
+
+.lucide-down {
+  fill: crimson;
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+}
+
 .up {
   color: green;
 }
@@ -476,12 +491,17 @@ div.sub-grid__metrics > p:nth-child(2) {
     font-size: var(--font-size-small);
   }
 
-  div.carousel__sub-grid--1 > div:nth-child(3) > div.daily-change-overview > p.text-divider {
-    margin: 0 2px;
-  }
-
   .price {
     font-weight: var(--font-weight-bold);
+  }
+
+  svg.lucide-triangle {
+    margin: 0 3.5px;
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    position: relative;
+    top: 1px;
   }
 }
 
@@ -506,6 +526,15 @@ div.sub-grid__metrics > p:nth-child(2) {
 
   svg  {
     padding-top: 0.5rem;
+  }
+
+  svg.lucide-triangle {
+    margin: 0 2px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    position: relative;
+    top: 1px;
   }
 }
 
@@ -577,6 +606,15 @@ div.sub-grid__metrics > p:nth-child(2) {
   .tooltip {
     font-size: var(--font-size-small);
     width: 98px;
+  }
+
+  svg.lucide-triangle {
+    margin: 0 3px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    position: relative;
+    top: 0;
   }
 }
 
@@ -682,6 +720,15 @@ div.sub-grid__metrics > p:nth-child(2) {
   svg  {
     padding-top: 0rem;
   }
+
+  svg.lucide-triangle {
+    margin: 0 2px;
+    width: 11px;
+    height: 11px;
+    padding: 0;
+    position: relative;
+    top: 2px;
+  }
 }
 
 @media (max-width: 570px) {
@@ -695,6 +742,15 @@ div.sub-grid__metrics > p:nth-child(2) {
 
   svg  {
     padding-top: 1rem;
+  }
+
+  svg.lucide-triangle {
+    margin: 0 2px;
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    position: relative;
+    top: 2px;
   }
 }
 
@@ -791,11 +847,11 @@ div.sub-grid__metrics > p:nth-child(2) {
     align-items: baseline;
   }
 
-  div.carousel__sub-grid--1 > div:nth-child(3) > div.daily-change-overview > p.text-divider {
-    margin: 0 1.5px;
-    font-weight: 400;
-    top: 1px;
-    display: inline;
+  svg.lucide-triangle {
+    margin: 0 2px;
+    width: 8px;
+    height: 8px;
+    top: 0;
   }
 
   div.carousel__sub-grid--2, div.carousel__sub-grid--3 {
