@@ -6,6 +6,7 @@ const priceVolumeData30DaysJoined = process.env.PRICE_VOLUME_DATA_QUERY;
 const indices = process.env.INDICES_QUERY;
 const summary = process.env.SUMMARY_QUERY;
 const vfexSummary = process.env.VFEX_SUMMARY_QUERY;
+const turnover = process.env.TURNOVER_50_DAY;
 
 const priceVolumeData = () => {
   return new Promise( (resolve, reject)=>{
@@ -55,4 +56,16 @@ const vfexSummaryData = () => {
   });
 };
 
-export { priceVolumeData, indicesData, summaryData, vfexSummaryData };
+const turnover50dayData = () => {
+  return new Promise( (resolve, reject)=>{
+    pool.execute(turnover,  (error, result) => {
+      if(error){
+        console.error(error)
+        return reject('An error occured while executing the [ -- vfex summary -- ] query on the database');
+      }
+      return resolve(result);
+      });
+  });
+};
+
+export { priceVolumeData, indicesData, summaryData, vfexSummaryData, turnover50dayData };

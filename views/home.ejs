@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Manoti">
   <meta name="description" content="Manoti provides you with free, up-to-date financial data & interactive charts on companies listed on the Victoria Falls Stock Exchange (VFEX) - empowering your investment strategies.">
   <meta name="keywords" content="manoti, vfex, victoria falls stock exchange, zimbabwe stocks, zimbabwe shares, vfex stock prices, victoria falls stock exchange share prices, zimbabwe stock market analysis, how to invest in victoria falls stock exchange, free stock charts zimbabwe, best vfex shares to buy, vfex direct, zse, zimbabwe stock exchange">
@@ -38,15 +37,26 @@
           <p class="price-change">
             <%= alsi.priceChange %>
           </p>
-          <p class="text-divider">
-            /
-          </p>
+          <div class="text-divider">
+            <% if (alsi.priceChange > 0) { %> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-up"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+              <% } else if (alsi.priceChange < 0) { %> 
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-down"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+              <% } else { %> 
+              /
+              <% } %> 
+          </div>
           <p class="percentage-change">
             <%= alsi.percentageChange %>
           </p>
         </div>
       </div>
       
+      <div id="total-turnover">
+        <p>Turnover (50 day avg.)</p>
+        <p><%= marketTurnover50dayAverage %></p>
+      </div>
+
       <div id="market-cap">
         <p>Market cap</p>
         <p id="vfexMarketCap"><%= vfexMarketCap %></p>
@@ -60,7 +70,7 @@
       </div>
 
       <div id="eod-change">
-        <p>VFEX equities price - 1 day change</p>
+        <p>Equities 1 day price change</p>
         <div class="chart">
           <div class="tooltip__heat-map">
             <p class="name"></p>
@@ -77,13 +87,8 @@
       </div>
 
       <div id="no-of-equities">
-        <p>Listed equities</p>
+        <p>No. of listed companies</p>
         <p><%= numberOfListedEquities %></p>
-        </p>
-      </div>
-      <div id="listing-timeline">
-        <p>Timeline of listings on the VFEX</p>
-        <%- timeline %>
       </div>
     </div>
   </aside>
@@ -144,9 +149,15 @@
                     <p class="price-change">
                       <%= item.priceChange %>
                     </p>
-                    <p class="text-divider">
-                      /
-                    </p>
+                    <div class="text-divider">
+                      <% if (item.priceChange > 0) { %> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-up"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+                        <% } else if (item.priceChange < 0) { %> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-down"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+                        <% } else { %> 
+                        /
+                        <% } %> 
+                    </div>
                     <p class="percentage-change">
                       <%= item.pricePercentageChange %>
                     </p>

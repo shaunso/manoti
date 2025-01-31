@@ -1,6 +1,6 @@
 import { median } from 'd3-array';
 
-import { priceVolumeData, indicesData, summaryData, vfexSummaryData } from '../../model/db_results.js';
+import { priceVolumeData, indicesData, summaryData, vfexSummaryData, turnover50dayData } from '../../model/db_results.js';
 import svgChartElement from '../../model/charts/lineChart.js';
 import pieChartSVG from '../../model/charts/pieChart.js';
 import heatMapSVG from '../../model/charts/heatMap.js';
@@ -11,8 +11,9 @@ const priceVolumeDataQueryResult = await priceVolumeData();
 const indicesDataQueryResult = await indicesData();
 const summaryDataQueryResult = await summaryData();
 const vfexSummaryDataQueryResult = await vfexSummaryData();
+const turnover50dayDataQueryResult = await turnover50dayData();
 
-// console.log(summaryDataQueryResult)
+// console.log(lastTradingDayClosingPriceDataObject)
 
 // the names & tickers of equities actively traded on the VFEX stored in environment variables as an array of strings
 const equityNames = JSON.parse(process.env.EQUITY_NAMES);
@@ -111,6 +112,7 @@ const dateData30DaysArray = closingPriceDataArray[0];
 const equityData = [];
 const tooltipData = [];
 const heatMapData = [];
+let sumOfAveragesMarketTurnover50day = 0;
 
 let m = 0, r = 1;
 
@@ -191,8 +193,11 @@ for ( let x in lastTradingDayClosingPriceDataObject ) {
     t: twoDimensionalTradingVolumeData.toReversed(),
   });
 
+  sumOfAveragesMarketTurnover50day += +turnover50dayDataQueryResult[0][x];
+
   m++, r++;
 }
+
 
 // INDICES
 const [ currentAllShareIndex, previousAllShareIndex ] = indicesDataQueryResult;
@@ -209,6 +214,7 @@ const alsi = {
 const marketCapData = [];
 const peRatioData = [];
 const listingDate = [];
+let turnover;
 
 let p = 0;
 summaryDataQueryResult.forEach( d => {
@@ -230,6 +236,7 @@ summaryDataQueryResult.forEach( d => {
     date: d.date_of_listing,
   });
 
+  turnover += +d.turnover;
   p++;
 });
 
@@ -243,5 +250,8 @@ const heatMap = heatMapSVG(heatMapData);
 const medianPEratio = oneDecimalPointNumberFormatterObject.format( median(peRatioData, d => d.peRatio) );
 // TIMELINE
 const timeline = timelineSVG(listingDate);
+// TURNOVER
+const marketTurnover1day = currencyZeroDecimalPointsNumberFormatterObject.format(turnover);
+const marketTurnover50dayAverage = currencyZeroDecimalPointsNumberFormatterObject.format( sumOfAveragesMarketTurnover50day / numberOfListedEquities );
 
-export { equityData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, year, tooltipData, alsi, marketCapData, vfexMarketCap, pieChart, heatMap, heatMapData, numberOfListedEquities, timeline, medianPEratio };
+export { equityData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, year, tooltipData, alsi, marketCapData, vfexMarketCap, pieChart, heatMap, heatMapData, numberOfListedEquities, marketTurnover1day, marketTurnover50dayAverage, timeline, medianPEratio };

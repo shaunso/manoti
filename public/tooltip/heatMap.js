@@ -14,7 +14,6 @@ function heatMap(data) {
       const heatMapContainerYposition = document.querySelector('svg#heat-map').getBoundingClientRect().top;
       const pointerPosition = e.clientY;
       const tooltipYaxisPosition = pointerPosition - heatMapContainerYposition;
-      console.log(e)
 
       tooltip.style.display = 'block';
       tooltip.style.top = ( tooltipYaxisPosition - 50 ) + 'px';

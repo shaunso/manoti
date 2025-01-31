@@ -1,7 +1,15 @@
 :root {
   --bg-color: #F2F1F0;
+  --bg-color__slides: #f9f9f9de;
+  --prim-color: #0F0F0F;
   --sec-color: #204134;
+  --sec-color_60_perc: #20413499;
+  --sec-color_80_perc: #204134cc;
+  --sec-color_98_perc:#204134fb;
+  --sec-color_border: #204134e6;
   --ter-color: #F2F1F0;
+  --alt-ter-color: #fdf9f588;
+  --tooltip-bg-color: #f7f2f2f7;
 
   --font-family: "Lato", Helvetica;
   --font-size-xxxx_large: 5rem;
@@ -18,10 +26,17 @@
   --font-size-x_small: 0.75rem;
   --font-size-xx_small: 0.625rem;
 
+  --border-radius__xx_small: 2px;
+  --border-radius__x_small: 4px;
+  --border-radius__small: 6px;
+  --border-radius__medium: 10px;
+
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
   --font-weight-black: 900;
+  --font-style-italic_regular: italic;
+
 }
 
 * {
@@ -68,16 +83,16 @@ body > div > div > p:last-child {
   left: 8px;
 }
 
-a {
+div#container a {
   color: var(--sec-color);
   transition: all 100ms ease-in;
 }
 
-a:visited {
+div#container :visited {
   text-decoration: solid var(--sec-color) 4px;
 } 
 
-a:hover {
+div#container a:hover {
   opacity: 0.6;
   text-decoration: none;
 }

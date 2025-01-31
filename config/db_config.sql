@@ -516,3 +516,7 @@ BEGIN
   CALL indices();
 END //
 delimiter ;
+
+-- TURNOVER 50 DAY MOVING AVERAGE
+WITH turnoverCTE AS (SELECT p.date as date, (p.ASUN * v.ASUN) as ASUN, (p.AXIA * v.AXIA) as AXIA, (p.CMCL * v.CMCL) as CMCL, (p.EDGR * v.EDGR) as EDGR, (p.FCA * v.FCA) as FCA, (p.INN * v.INN) as INN, (p.INV * v.INV) as INV, (p.NTFD * v.NTFD) as NTFD, (p.NED * v.NED) as NED, (p.PHL * v.PHL) as PHL, (p.SCIL * v.SCIL) as SCIL, (p.SIM * v.SIM) as SIM, (p.WPHL * v.WPHL) as WPHL, (p.ZIMW * v.ZIMW) as ZIMW FROM price p JOIN volume v USING (id) ORDER BY id DESC LIMIT 50)
+SELECT SUM(ASUN) as ASUN,SUM(AXIA) as AXIA,SUM(CMCL) as CMCL,SUM(EDGR) as EDGR,SUM(FCA) as FCA,SUM(INN) as INN,SUM(INV) as INV,SUM(NTFD) as NTFD,SUM(NED) as NED,SUM(PHL) as PHL,SUM(SCIL) as SCIL,SUM(SIM) as SIM,SUM(WPHL) as WPHL,SUM(ZIMW)  as ZIMW FROM turnoverCTE;

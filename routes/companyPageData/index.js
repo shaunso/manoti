@@ -1,14 +1,14 @@
 import express from 'express';
 const router = express.Router();
 
-const listedEquitiesTicker = JSON.parse( process.env.EQUITY_TICKER );
+const currentEquitiesTickerList = JSON.parse( process.env.EQUITY_TICKER );
 
 router.get( '/:ticker', async ( req, res ) => {
   try {
-    const ticker = ((req.params.ticker).toUpperCase()) + '.VX';
-    const tickerIndex = listedEquitiesTicker.indexOf(ticker);
+    const ticker = (req.params.ticker).toUpperCase();
+    const tickerIndex = currentEquitiesTickerList.indexOf(ticker);
 
-    if ( !listedEquitiesTicker.includes( ticker ) ) {
+    if ( !currentEquitiesTickerList.includes( ticker ) ) {
       // error page returned if param value not in array
       res.status(404).render('404');    
     } else {
