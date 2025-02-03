@@ -142,21 +142,31 @@ for ( let x in lastTradingDayClosingPriceDataObject ) {
 
   // store market & financial statement data for each equity
   const marketStatistics = [
-    { metric: 'Turnover', value: currencyZeroDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].turnover) },
-    { metric: 'Volume (30 day avg.)', value: thousandsSeparandCompactNumberFormatterObject.format(summaryDataQueryResult[m].volume_30_day_avg) },
-    { metric: 'P/E ratio', value: `${oneDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].pe_ratio)}x` },
-    { metric: 'P/B ratio', value: `${oneDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].pb_ratio)}x` },
-    { metric: 'EPS', value: cuurencyTwoSignificantFiguresNumberFormatterObject.format(summaryDataQueryResult[m].curr_eps) },
-    { metric: 'Dividend yield', value: percentageTwoDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].dividend_yield) },
+    { metric: 'Turnover', rawValue: summaryDataQueryResult[m].turnover, value: currencyZeroDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].turnover) },
+
+    { metric: 'Volume (30 day avg.)', rawValue: summaryDataQueryResult[m].volume_30_day_avg, value: thousandsSeparandCompactNumberFormatterObject.format(summaryDataQueryResult[m].volume_30_day_avg) },
+
+    { metric: 'P/E ratio', rawValue: summaryDataQueryResult[m].pe_ratio, value: (!summaryDataQueryResult[m].pe_ratio) ? '-' : `${oneDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].pe_ratio)}x` },
+
+    { metric: 'P/B ratio', rawValue: summaryDataQueryResult[m].pb_ratio, value: (!summaryDataQueryResult[m].pb_ratio) ? '-' : `${oneDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].pb_ratio)}x` },
+
+    { metric: 'EPS', rawValue: summaryDataQueryResult[m].curr_eps, value: (!summaryDataQueryResult[m].curr_eps) ? '-' : cuurencyTwoSignificantFiguresNumberFormatterObject.format(summaryDataQueryResult[m].curr_eps) },
+
+    { metric: 'Dividend yield', rawValue: summaryDataQueryResult[m].dividend_yield, value: (!summaryDataQueryResult[m].dividend_yield) ? '-' : percentageTwoDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].dividend_yield) },
   ];
 
   const financialStatementSummary = [
-    { metric: 'Revenue', value: currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_revenue), change: zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].revenue_yoy) },
-    { metric: 'Net income', value: currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_net_income), change: zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].net_income_yoy) },
-    { metric: 'Total assets', value: currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_total_assets), change: zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].total_assets_yoy) },
-    { metric: 'Total liabilities', value: currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_total_liabilities), change: zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].total_liabilities_yoy) },
-    { metric: 'Free cash flow', value: currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_fcf), change: zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].fcf_yoy) },
-    { metric: 'ROE', value: percentageTwoDecimalPointNumberFormatterObject.format(currentROE), change: returnOnEquityYoY },
+    { metric: 'Revenue', rawValue: summaryDataQueryResult[m].curr_revenue, value: (!summaryDataQueryResult[m].curr_revenue) ? '-' : currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_revenue), change: (!summaryDataQueryResult[m].revenue_yoy) ? '' : zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].revenue_yoy) },
+
+    { metric: 'Net income', rawValue: summaryDataQueryResult[m].curr_net_income, value: (!summaryDataQueryResult[m].curr_net_income) ? '-' : currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_net_income), change: (!summaryDataQueryResult[m].net_income_yoy) ? '' : zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].net_income_yoy) },
+
+    { metric: 'Total assets', rawValue: summaryDataQueryResult[m].curr_total_assets, value: (!summaryDataQueryResult[m].curr_total_assets) ? '-' : currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_total_assets), change: (!summaryDataQueryResult[m].total_assets_yoy) ? '' : zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].total_assets_yoy) },
+
+    { metric: 'Total liabilities', rawValue: summaryDataQueryResult[m].curr_total_liabilities, value: (!summaryDataQueryResult[m].curr_total_liabilities) ? '-' : currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_total_liabilities), change: (!summaryDataQueryResult[m].total_liabilities_yoy) ? '' : zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].total_liabilities_yoy) },
+
+    { metric: 'Free cash flow', rawValue: summaryDataQueryResult[m].curr_fcf, value: (!summaryDataQueryResult[m].curr_fcf) ? '-' : currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].curr_fcf), change: (!summaryDataQueryResult[m].fcf_yoy) ? '' : zeroDecimalPointSignedNumberFormatterObject.format(summaryDataQueryResult[m].fcf_yoy) },
+
+    { metric: 'ROE', rawValue: currentROE, value: (!currentROE) ? '-' : percentageTwoDecimalPointNumberFormatterObject.format(currentROE), change: (!currentROE) ? '' : returnOnEquityYoY },
   ];
 
   // using the array 'map' method to make a new 2 dimensional array in which each array element is the closing price for each day for the previous 30 days. For each array element, [0] is the date and [1] is the closing price for that particular equity
@@ -168,13 +178,13 @@ for ( let x in lastTradingDayClosingPriceDataObject ) {
 
   // create a new object for the equity with the neccessary data stored in key value pairs in order to be render by ejs
   // an array of objects is used to store the closing price data for each equity as an element item
-  equityData.push( 
+  equityData.push(
     {
-    name: equityNames[m], 
+    name: equityNames[m],
     ticker: equityTickers[m],
     marketCap: currencyOneDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[m].market_cap),
     price: closingPriceNumberFormatterObject.format(lastTradingDayClosingPriceDataObject[x]),
-    priceChange: (priceChange) ? closingPriceChangeNumberFormatterObject.format(priceChange) : '---', 
+    priceChange: (priceChange) ? closingPriceChangeNumberFormatterObject.format(priceChange) : '---',
     pricePercentageChange: (pricePercentageChange) ? percentageTwoSignificantDigitsNumberFormatterObject.format(pricePercentageChange) : '---',
     volume: thousandsSeparandNumberFormatterObject.format(lastTradingDayTradingVolumeDataObject[x]),
     volumeChange: (volumeChange) ? tradingVolumeChangeNumberFormatterObject.format(volumeChange) : '---',
@@ -184,7 +194,7 @@ for ( let x in lastTradingDayClosingPriceDataObject ) {
     tradingVolumeData: twoDimensionalTradingVolumeData.toReversed(),
     marketStatistics: marketStatistics,
     financialStatementSummary: financialStatementSummary,
-    FY: summaryDataQueryResult[m].fy,      
+    FY: summaryDataQueryResult[m].fy,
     }
   );
 

@@ -199,7 +199,7 @@
                   <div class="sub-grid__metrics">
                     <p><%= d.metric %></p>
                     <p><%= d.value %></p>
-                    <p><%= d.change %> YoY</p>
+                    <p><%= d.change %> <%= (!d.rawValue) ? '' : 'YoY' %></p>
                   </div>
                 <% }) %>
               </div>     
