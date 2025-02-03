@@ -1,14 +1,15 @@
 :root {
   --bg-color: #F2F1F0;
-  --bg-color__slides: rgba(249, 249, 249, 0.871);
+  --bg-color__slides: #f9f9f9de;
   --prim-color: #0F0F0F;
   --sec-color: #204134;
   --sec-color_60_perc: #20413499;
-  --sec-color_80_perc: rgba(32, 65, 52, 0.8);
-  --sec-color_border: rgba(32, 65, 52, 0.9);
+  --sec-color_80_perc: #204134cc;
+  --sec-color_98_perc:#204134fb;
+  --sec-color_border: #204134e6;
   --ter-color: #F2F1F0;
   --alt-ter-color: #fdf9f588;
-  --tooltip-bg-color: #f7f2f2cf;
+  --tooltip-bg-color: #f7f2f2f7;
 
   --border-radius__xx_small: 2px;
   --border-radius__x_small: 4px;
@@ -54,7 +55,7 @@ body > section > *, body > main {
   padding: 0 1rem;
 }
 
-header > h1 > a {
+header h1 > a {
   pointer-events: none;
 }
 
@@ -69,7 +70,6 @@ body > section {
 
 body > header {
   position: sticky;
-  position: -webkit-sticky;
   top: 0;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
@@ -112,6 +112,7 @@ aside > div#aside-container {
   position: -webkit-sticky;
   top: 80px;
   width: 100%;
+  z-index: 50;
 }
 
 aside  > * {
@@ -192,7 +193,6 @@ aside > div#aside > div:last-child {
 
 /* MAIN */
 main li {
-  list-style-type: none;
   margin-bottom: 2.5rem;
 }
 
@@ -221,15 +221,17 @@ button.carousel__button {
 
 button.carousel__button > svg {
   stroke: var(--sec-color);
-  stroke-width: 1.75;
 }
 
 button.carousel__button--left {
   grid-area: button-left;
+  position: relative;
 }
 
 button.carousel__button--right {
   grid-area: button-right;
+  position: relative;
+  right: 50%;
 }
 
 /* sub-grid */
@@ -334,7 +336,6 @@ svg {
 text.chart-sub-title {
   stroke: var(--prim-color);
   stroke-width: 0.015;
-  /* fixed font */
   font-size: 0.5rem;
   letter-spacing: 0.1px;
   opacity: 60%;
@@ -349,9 +350,8 @@ text.chart-sub-title {
   border-radius: 2px;
   pointer-events: none;
   text-align: left;
-  vertical-align: baseline;
   width: 145px;
-  z-index: 100;
+  z-index: 500;
 }
 
 .tooltip__pie-chart, .tooltip__heat-map {
@@ -459,6 +459,10 @@ svg.lucide-triangle {
 
 .no-change {
   color: var(--prim-color);
+}
+
+li {
+  list-style-type: none;
 }
 
 /* MEDIA QUERIES */
@@ -695,6 +699,15 @@ svg.lucide-triangle {
     display: none;
   }
 
+  button.carousel__button--left {
+    left: -25%;
+  }
+  
+  button.carousel__button--right {
+    right: 10%;
+  }
+  
+
   div.carousel__sub-grid--1 > div:first-child {
     font-size: 0.8rem;
   }
@@ -795,11 +808,6 @@ svg.lucide-triangle {
 
   button.carousel__button > svg {
     stroke-width: 1.3;
-  }
-
-  button.carousel__button--right {
-    grid-area: button-right;
-    position: static;
   }
 
   button.carousel__indicator {
