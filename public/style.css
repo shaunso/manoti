@@ -187,8 +187,8 @@ svg#timeline text {
   fill: var(--sec-color);
 }
 
-aside > div#aside > div:last-child {
-  margin-bottom: 1.75rem;
+aside > div#aside-container > div:last-child {
+  margin-bottom: 3rem;
 }
 
 /* MAIN */
