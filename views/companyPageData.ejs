@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+  <meta name="description" content="Get the latest <%= longName %> (<%= ticker %>) analysis, historical charts, and other financial data to help you make savvier investment and trading decisions on the VFEX.">
+  <meta name="keywords" content="manoti, <%= shortName %>, <%= longName %>, vfex, victoria falls stock exchange, zimbabwe stocks, zimbabwe shares, <%= shortName %> share price, <%= shortName %> analysis, buy <%= shortName %> shares, <%= shortName %> vfex, <%= shortName %> victoria falls stock exchange">
+  <link rel="stylesheet" href="/stylesheets/companyPageData.css">
+  <title><%= ticker %> - <%= longName %> Analysis | Manoti</title>
+</head>
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <article id="profile">
+      <img src="/img/<%= ticker %>.webp" alt="<%= shortName %> company logo">
+      <h2><%= longName %> (<%= ticker %>)</h2>
+
+      <div>
+        <p>Sector</p>
+        <p><%= sector.replaceAll(',', ', ') %></p>
+      </div>
+
+      <div>
+        <p>Description</p>
+        <p><%= description %></p>
+      </div>
+
+      <div>
+        <p>Shares in issue</p>
+        <p><%= sharesIssued %></p>
+      </div>
+
+      <div>
+        <p>CEO</p>
+        <p><%= ceo %></p>
+      </div>
+
+      <div>
+        <p>No. of employees</p>
+        <p><%= employees ?? '---' %></p>
+      </div>
+
+      <div>
+        <p>Founded</p>
+        <p><%= founded %></p>
+      </div>
+
+      <div>
+        <p>External auditors</p>
+        <p><%= auditors %></p>
+      </div>
+
+      <div>
+        <p>Website</p>
+        <a href="http://<%= website %>" target="_blank"><%= website %></a>
+      </div>
+
+      <div>
+        <p>Address</p>
+        <p><%= address %></p>
+      </div>
+
+      <div>
+        <p>Financial year end</p>
+        <p><%= yearEnd %></p>
+      </div>
+
+      <div>
+        <p>Date of listing</p>
+        <p><%= listingDate %></p>
+      </div>
+
+      <div>
+        <p>Board size</p>
+        <p><%= boardSize %></p>
+      </div>
+
+    </article>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+</html>

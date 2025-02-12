@@ -24,7 +24,7 @@ app.use(logger);
 app.use('/', homeRoute);
 
 // entity data page route
-app.use('/data/ticker', tickerPage);
+app.use('/data/vfex/equities', tickerPage);
 
 // contact page
 app.get('/contact', async(req, res) => {

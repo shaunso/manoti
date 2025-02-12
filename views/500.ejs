@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Page not found.">
   <%- include('partials/head') %>
-  <link rel="stylesheet" href="/styles/error.css">
-  <title>Manoti: Page Not Found!</title>
+  <meta name="description" content="Servor error.">
+  <link rel="stylesheet" href="/stylesheets/error.css">
+  <title>Manoti: Server Error.</title>
 </head>
 <body>
   <%- include('partials/header') %>
   <div>
-    <p>Server error!</p>
+    <p>Server error.</p>
     <p>please <a href="<%= requestedLink %>" target="_self">try again</a></p>
   </div>
   

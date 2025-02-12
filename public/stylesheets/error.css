@@ -11,9 +11,12 @@
   --alt-ter-color: #fdf9f588;
   --tooltip-bg-color: #f7f2f2f7;
 
+  --border-radius__xx_small: 2px;
+  --border-radius__x_small: 4px;
+  --border-radius__small: 6px;
+  --border-radius__medium: 10px;
+
   --font-family: "Lato", Helvetica;
-  --font-size-xxxx_large: 5rem;
-  --font-size-xxx_large: 3.5rem;
   --font-size-xx_large: 3rem;
   --font-size-x_large: 2.75rem;
   --font-size-large: 2.25rem;
@@ -26,15 +29,9 @@
   --font-size-x_small: 0.75rem;
   --font-size-xx_small: 0.625rem;
 
-  --border-radius__xx_small: 2px;
-  --border-radius__x_small: 4px;
-  --border-radius__small: 6px;
-  --border-radius__medium: 10px;
-
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
-  --font-weight-black: 900;
   --font-style-italic_regular: italic;
 
 }
@@ -54,47 +51,49 @@ body {
   overflow: hidden;
 }
 
-body > div  {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  height: 60vh;
-}
-
-div#container {
+body > div {
   display: flex;
   flex-direction: column;
-  /* align-items: start; */
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 60vh;
+  row-gap: 0.65rem;
 }
 
-body > div > div > p {
-  width: fit-content;
-}
-
-body > div > div > p:first-child {
-  font-size: var(--font-size-xxxx_large);
+body > div > p:first-child {
+  font-size: 4rem;
   font-weight: var(--font-weight-bold);
 }
 
-body > div > div > p:last-child {
+body > div > p:last-child {
   font-size: var(--font-size-medium);
+}
+
+p > a {
   position: relative;
-  left: 8px;
-}
-
-div#container a {
   color: var(--sec-color);
-  transition: all 100ms ease-in;
-}
+  transition: all 175ms ease-in;
+  text-decoration: none;
+ }
 
-div#container :visited {
+p > a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 0.05rem;
+  background-color: var(--sec-color);
+  border-radius: 8px;
+}
+  
+p > a:visited {
   text-decoration: solid var(--sec-color) 4px;
 } 
 
-div#container a:hover {
+p > a:hover, p > a:active {
   opacity: 0.6;
-  text-decoration: none;
 }
 
 body > footer {
@@ -102,27 +101,22 @@ body > footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  letter-spacing: 0.5px;
   font-weight: var(--font-weight-bold);
 }
 
 @media (max-width:600px) {
-  body > div > div > p:first-child {
-    font-size: var(--font-size-xxx_large);
+  body > div > p:first-child {
+    font-size: 3rem;
   }
 }
 
 @media (max-width: 397px) {
-  body > div > div {
-    align-items: start;
-  }
-
-  body > div > div > p:first-child {
+  body > div > p:first-child {
     font-size: 2.5rem;
   }
 
-  body > div > div > p:last-child {
-    left: 4px;
+  body > div > p:last-child {
+    margin-left: 0.25ch;
   }
 }
 

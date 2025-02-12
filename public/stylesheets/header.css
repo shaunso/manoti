@@ -58,10 +58,12 @@ div#header-container svg:hover {
 }
 
 div#header-container svg.lucide-x {
-  top: 1.5%;
+  /* top: 1.5%;
   position: fixed;
-  right: 3rem;
+  right: 3rem; */
   stroke: var(--sec-color);
+  z-index: 450;
+  display: none;
 }
 
 div#search-box {

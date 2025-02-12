@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="author" content="Manoti">
+  <head>
+  <%- include('partials/head') %>
   <meta name="description" content="Manoti provides you with free, up-to-date financial data & interactive charts on companies listed on the Victoria Falls Stock Exchange (VFEX) - empowering your investment strategies.">
   <meta name="keywords" content="manoti, vfex, victoria falls stock exchange, zimbabwe stocks, zimbabwe shares, vfex stock prices, victoria falls stock exchange share prices, zimbabwe stock market analysis, how to invest in victoria falls stock exchange, free stock charts zimbabwe, best vfex shares to buy, vfex direct, zse, zimbabwe stock exchange">
-  <%- include('partials/head') %>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/stylesheets/home.css">
   <title>Manoti: Free Stock Price, Market & Financial Data for the Victoria Falls Stock Exchange - VFEX</title>
 </head>
 <body>
@@ -107,7 +105,7 @@
         <li>
           <article class="carousel-grid-container">
             <button class="carousel__button carousel__button--left is-hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 15" fill="none" stroke="#000020" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#000020" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
             </button>
 
             <div class="carousel__track-grid-container">
@@ -198,7 +196,7 @@
                   <div class="sub-grid__metrics">
                     <p><%= d.metric %></p>
                     <p><%= d.value %></p>
-                    <p><%= d.change %> YoY</p>
+                    <p><%= d.change %> <%= (!d.rawValue) ? '' : 'YoY' %></p>
                   </div>
                 <% }) %>
               </div>     
@@ -206,7 +204,7 @@
             </div>
 
             <button class="carousel__button carousel__button--right">
-              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 15" fill="none" stroke="#000020" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="#000020" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
             </button>
 
             <div class="carousel__nav">

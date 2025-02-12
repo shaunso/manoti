@@ -187,8 +187,8 @@ svg#timeline text {
   fill: var(--sec-color);
 }
 
-aside > div#aside > div:last-child {
-  margin-bottom: 1.75rem;
+aside > div#aside-container > div:last-child {
+  margin-bottom: 3rem;
 }
 
 /* MAIN */
@@ -221,15 +221,17 @@ button.carousel__button {
 
 button.carousel__button > svg {
   stroke: var(--sec-color);
-  stroke-width: 1.75;
 }
 
 button.carousel__button--left {
   grid-area: button-left;
+  position: relative;
 }
 
 button.carousel__button--right {
   grid-area: button-right;
+  position: relative;
+  right: 50%;
 }
 
 /* sub-grid */
@@ -697,6 +699,15 @@ li {
     display: none;
   }
 
+  button.carousel__button--left {
+    left: -25%;
+  }
+  
+  button.carousel__button--right {
+    right: 10%;
+  }
+  
+
   div.carousel__sub-grid--1 > div:first-child {
     font-size: 0.8rem;
   }
@@ -799,11 +810,6 @@ li {
     stroke-width: 1.3;
   }
 
-  button.carousel__button--right {
-    grid-area: button-right;
-    position: static;
-  }
-
   button.carousel__indicator {
     width: 0.6rem;
     height: 0.6rem;
@@ -895,4 +901,3 @@ li {
     font-size: var(--font-size-normal_small);
   }
 }
-
