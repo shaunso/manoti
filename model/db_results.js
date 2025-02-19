@@ -68,4 +68,4 @@ const turnover50dayData = () => {
   });
 };
 
-export { priceVolumeData, indicesData, summaryData, vfexSummaryData, turnover50dayData };
+export { indicesData, priceVolumeData, summaryData, turnover50dayData, vfexSummaryData };

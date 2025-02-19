@@ -17,9 +17,6 @@ router.get( '/:ticker', async ( req, res ) => {
       // error page returned if param value not in array
       res.status(404).render('404');
     } else {
-        // send the data to ejs to populate res page
-        // res.status(200).send(`'ROOOUUTTEESS': ${ticker}`); 
-        // res.status(200).render( `${ companyPageData }`, { ticker: summaryData[tickerIndex].ticker, shortName: summaryData[tickerIndex].short_name, longName: summaryData[tickerIndex].long_name, summary: [tickerIndex], soci: [tickerIndex], sofp: [tickerIndex], socf: [tickerIndex], soce: [tickerIndex],} )
         res.status(200).render( 'companyPageData', 
           { 
             address: summaryDataQueryResult[tickerIndex].address,

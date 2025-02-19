@@ -137,8 +137,22 @@ div#aside-container > div > p:nth-child(1), div#aside-container > div#alsi > div
   font-size: var(--font-size-normal_small);
 }
 
+div#aside-container > div > p:nth-child(1) {
+  color: var(--sec-color_80_perc);
+  letter-spacing: 0.35px;
+}
+
 div#aside-container > div > p:nth-child(2) {
   font-size: var(--font-size-normal_medium);
+}
+
+.treemap-label {
+  font-size: 0.07rem;
+  fill:rgba(32, 32, 68, 0.901)
+}
+
+.label--hidden {
+  display: none;
 }
 
 #pie-chart {
@@ -341,7 +355,7 @@ text.chart-sub-title {
   opacity: 60%;
 }
 
-.tooltip, .tooltip__pie-chart, .tooltip__heat-map {
+.tooltip, .tooltip__pie-chart, .tooltip__heat-map, .tooltip__treemap {
   border: 1px solid var(--sec-color);
   position: absolute;
   padding: 2px 5px;
@@ -354,7 +368,7 @@ text.chart-sub-title {
   z-index: 500;
 }
 
-.tooltip__pie-chart, .tooltip__heat-map {
+.tooltip__pie-chart, .tooltip__heat-map, .tooltip__treemap {
   width: max-content;
   padding-right: 2rem;
   letter-spacing: 0.6px;

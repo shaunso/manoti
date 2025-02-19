@@ -50,21 +50,31 @@
         </div>
       </div>
       
-      <div id="total-turnover">
-        <p>Turnover (50 day avg.)</p>
-        <p><%= marketTurnover50dayAverage %></p>
-      </div>
-
       <div id="market-cap">
         <p>Market cap</p>
-        <p id="vfexMarketCap"><%= vfexMarketCap %></p>
+        <p><%= vfexMarketCap %></p>
         <div class="chart">
+          <div class="tooltip__treemap">
+            <p class="date"></p>
+            <p class="ticker"></p>
+            <p class="market-cap"></p>
+            <p class="pe-ratio"></p>
+            <p class="trade-volume-30-days"></p>
+          </div>
+          <%- treemap %>
+        </div>  
+      </div>
+      
+      <div id="total-turnover">
+        <p>Turnover (50 day avg.)</p>
+        <p><%= turnover50dayValue %></p>
+        <!-- <div class="chart">
           <div class="tooltip__pie-chart">
             <p class="equity"></p>
             <p class="value"></p>
           </div>
           <%- pieChart %>
-        </div>  
+        </div>   -->
       </div>
 
       <div id="eod-change">
@@ -226,6 +236,7 @@
   <script src="tooltip/lineChart.js"></script>
   <script src="tooltip/pieChart.js"></script>
   <script src="tooltip/heatMap.js"></script>
+  <script src="tooltip/treemap.js"></script>
   <script src="gridCarousel.js"></script>
   <script>
     const { bisector, extent, max, scaleLinear, scaleTime, pointer, select, isoParse, timeFormat } = v;
@@ -233,6 +244,7 @@
     tooltipFunction(<%-  JSON.stringify(equityData) %>)
     pieChart(<%- JSON.stringify(marketCapData) %>)
     heatMap(<%- JSON.stringify(heatMapData) %>)
+    treemap(<%- JSON.stringify(vfexEquitiesEndOfDayData)%>, <%= lastTradingDayDateFormattedReversed %> )
   </script>
 </body>
 </html>

@@ -1,28 +1,50 @@
+// import modules
 import { median } from 'd3-array';
-
-import { priceVolumeData, indicesData, summaryData, vfexSummaryData, turnover50dayData } from '../../model/db_results.js';
+// import sql queries
+import { indicesData, priceVolumeData, summaryData, turnover50dayData, vfexSummaryData } from '../../model/db_results.js';
+//import chart functions
 import svgChartElement from '../../model/charts/lineChart.js';
 import pieChartSVG from '../../model/charts/pieChart.js';
 import heatMapSVG from '../../model/charts/heatMap.js';
 import timelineSVG from '../../model/charts/timeline.js';
+import treemapSVG from '../../model/charts/treemap.js';
 
-// wait for the data from the db to be returned
+// variabloe declerations
 const priceVolumeDataQueryResult = await priceVolumeData();
 const indicesDataQueryResult = await indicesData();
 const summaryDataQueryResult = await summaryData();
 const vfexSummaryDataQueryResult = await vfexSummaryData();
 const turnover50dayDataQueryResult = await turnover50dayData();
 
-// console.log(summaryDataQueryResult)
-
-// the names & tickers of equities actively traded on the VFEX stored in environment variables as an array of strings
+const months = JSON.parse(process.env.MONTHS);
 const equityNames = JSON.parse(process.env.EQUITY_NAMES);
 const equityTickers = JSON.parse(process.env.EQUITY_TICKERS);
-const numberOfListedEquities = equityNames.length;
+const numberOfListedEquities = equityTickers.length;
 
-// the months of the year abbreviated to the first three letters stored in environment variables as an array of strings
-const months = JSON.parse(process.env.MONTHS);
+//function declarations
+function sum(previousDay, currentDay) {
+  return +previousDay + +currentDay
+}
 
+// number formatters
+const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4});
+const closingPriceChangeNumberFormatterObject = new Intl.NumberFormat('en-GB', {signDisplay: 'exceptZero', maximumFractionDigits: 4});
+const percentageTwoSignificantDigitsNumberFormatterObject = new Intl.NumberFormat('en-GB', {style: 'percent', signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2});
+const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
+const thousandsSeparandCompactNumberFormatterObject = new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short"});
+const tradingVolumeChangeNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'always', maximumFractionDigits: 0});
+const currencyZeroDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 0});
+const currencyOneDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 1});
+const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
+const zeroDecimalPointSignedNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: 'exceptZero',  maximumFractionDigits: 0 });
+const oneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const twoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const twoDecimalPointNumberNoSignFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const cuurencyTwoSignificantFiguresNumberFormatterObject = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 2 });
+const percentageOneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const percentageTwoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', maximumSignificantDigits: 2 });
+
+//
 // destructure data into current & following 29 trading days
 const [ lastTradingDay, ...remainingTradingDays ] = priceVolumeDataQueryResult;
 
@@ -44,24 +66,6 @@ const lastTradingDayDate = priceVolumeDataQueryResult[0].date;
 const [ month, day, year ] = lastTradingDayDate.toLocaleDateString().split("/");
 const lastTradingDayDateFormatted = `${day}-${months[month-1]}-${year.slice(-2)}`;
 const lastTradingDayDateFormattedReversed = `${year}-${month}-${day}`;
-
-// number format objects
-const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4});
-const closingPriceChangeNumberFormatterObject = new Intl.NumberFormat('en-GB', {signDisplay: 'exceptZero', maximumFractionDigits: 4});
-const percentageTwoSignificantDigitsNumberFormatterObject = new Intl.NumberFormat('en-GB', {style: 'percent', signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2});
-const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
-const thousandsSeparandCompactNumberFormatterObject = new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short"});
-const tradingVolumeChangeNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'always', maximumFractionDigits: 0});
-const currencyZeroDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 0});
-const currencyOneDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 1});
-const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "long", maximumFractionDigits: 2});
-const zeroDecimalPointSignedNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: 'exceptZero',  maximumFractionDigits: 0 });
-const oneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const twoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const twoDecimalPointNumberNoSignFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const cuurencyTwoSignificantFiguresNumberFormatterObject = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 2 });
-const percentageOneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const percentageTwoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', maximumSignificantDigits: 2 });
 
 // add data from last trading day to array & object
 for ( let dataPoint in lastTradingDay ) {
@@ -112,7 +116,6 @@ const dateData30DaysArray = closingPriceDataArray[0];
 const equityData = [];
 const tooltipData = [];
 const heatMapData = [];
-let sumOfAveragesMarketTurnover50day = 0;
 
 let m = 0, r = 1;
 
@@ -203,11 +206,8 @@ for ( let x in lastTradingDayClosingPriceDataObject ) {
     t: twoDimensionalTradingVolumeData.toReversed(),
   });
 
-  sumOfAveragesMarketTurnover50day += +turnover50dayDataQueryResult[0][x];
-
   m++, r++;
 }
-
 
 // INDICES
 const [ currentAllShareIndex, previousAllShareIndex ] = indicesDataQueryResult;
@@ -250,18 +250,34 @@ summaryDataQueryResult.forEach( d => {
   p++;
 });
 
-// VFEX SUMMARY
-const vfexMarketCap = currencyTwoDecimalPointsNumberFormatterObject.format(vfexSummaryDataQueryResult[0].market_cap);
-// PIE CHART 
-const pieChart = pieChartSVG(marketCapData, vfexMarketCap );
-// HEATMAP
-const heatMap = heatMapSVG(heatMapData);
-// MEDIAN P/E RATIO
-const medianPEratio = oneDecimalPointNumberFormatterObject.format( median(peRatioData, d => d.peRatio) );
-// TIMELINE
-const timeline = timelineSVG(listingDate);
-// TURNOVER
-const marketTurnover1day = currencyZeroDecimalPointsNumberFormatterObject.format(turnover);
-const marketTurnover50dayAverage = currencyZeroDecimalPointsNumberFormatterObject.format( sumOfAveragesMarketTurnover50day / numberOfListedEquities );
+//
+// VFEX SUMMARY QUERY DATA
+const vfexEquitiesEndOfDayData = vfexSummaryDataQueryResult.slice(0, numberOfListedEquities)
+const vfexAggregatedData = vfexSummaryDataQueryResult.slice(-2);
 
-export { equityData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, year, tooltipData, alsi, marketCapData, vfexMarketCap, pieChart, heatMap, heatMapData, numberOfListedEquities, marketTurnover1day, marketTurnover50dayAverage, timeline, medianPEratio };
+// alsi index
+const vfexMarketCap = currencyTwoDecimalPointsNumberFormatterObject.format(vfexAggregatedData[0].market_cap);
+// heatmap
+const heatMap = heatMapSVG(heatMapData);
+// pie chart 
+const pieChart = pieChartSVG(marketCapData, vfexMarketCap );
+// median p/e ratio
+const medianPEratio = oneDecimalPointNumberFormatterObject.format( median(peRatioData, d => d.peRatio) );
+// timeline
+const timeline = timelineSVG(listingDate);
+// treemap
+const treemap = treemapSVG( vfexEquitiesEndOfDayData );
+// turnover
+const turnover50dayValueMultiDimensionalArray = [];
+turnover50dayDataQueryResult.forEach( d => {
+  turnover50dayValueMultiDimensionalArray.push(Object.values(d));
+});
+const turnover50dayValueArray = turnover50dayValueMultiDimensionalArray.flat();
+const sumOfAllEquities50dayTradeVolume = turnover50dayValueArray.reduce(sum, 0);
+// null counter variable takes into account the null values from equities that have listed or delisted within the window
+const nullCounter = turnover50dayValueArray.filter( d => d === null ).length;
+const turnover50dayValue = currencyOneDecimalPointsNumberFormatterObject.format( 
+  sumOfAllEquities50dayTradeVolume / ( turnover50dayValueArray.length - nullCounter )
+);
+
+export { alsi, equityData, heatMap, heatMapData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, marketCapData, turnover50dayValue, medianPEratio, numberOfListedEquities, pieChart, timeline, tooltipData, treemap, vfexEquitiesEndOfDayData, vfexMarketCap, year };
