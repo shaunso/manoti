@@ -55,8 +55,7 @@
         <p><%= vfexMarketCap %></p>
         <div class="chart">
           <div class="tooltip__treemap">
-            <p class="date"></p>
-            <p class="ticker"></p>
+            <p class="name"></p>
             <p class="market-cap"></p>
             <p class="pe-ratio"></p>
             <p class="trade-volume-30-days"></p>
@@ -66,15 +65,8 @@
       </div>
       
       <div id="total-turnover">
-        <p>Turnover (50 day avg.)</p>
-        <p><%= turnover50dayValue %></p>
-        <!-- <div class="chart">
-          <div class="tooltip__pie-chart">
-            <p class="equity"></p>
-            <p class="value"></p>
-          </div>
-          <%- pieChart %>
-        </div>   -->
+        <p>Turnover (30 day avg.)</p>
+        <p><%= turnover30dayValue %></p>
       </div>
 
       <div id="eod-change">
@@ -244,7 +236,7 @@
     tooltipFunction(<%-  JSON.stringify(equityData) %>)
     pieChart(<%- JSON.stringify(marketCapData) %>)
     heatMap(<%- JSON.stringify(heatMapData) %>)
-    treemap(<%- JSON.stringify(vfexEquitiesEndOfDayData)%>, <%= lastTradingDayDateFormattedReversed %> )
+    treemap(<%- JSON.stringify(vfexEquitiesEndOfDayData)%>)
   </script>
 </body>
 </html>

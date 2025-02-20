@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { alsi, equityData, heatMap, heatMapData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, marketCapData, turnover50dayValue, medianPEratio, numberOfListedEquities, pieChart, timeline, tooltipData, treemap, vfexEquitiesEndOfDayData, vfexMarketCap, year } from './app.js'
+import { alsi, equityData, heatMap, heatMapData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, marketCapData, turnover30dayValue, medianPEratio, numberOfListedEquities, pieChart, timeline, tooltipData, treemap, vfexEquitiesEndOfDayData, vfexMarketCap, year } from './app.js'
 
 router.get( '/', async ( req, res ) => {
   try {
@@ -19,7 +19,7 @@ router.get( '/', async ( req, res ) => {
       pieChart,
       timeline,
       tooltipData,
-      turnover50dayValue,
+      turnover30dayValue,
       treemap,
       vfexEquitiesEndOfDayData,
       vfexMarketCap,

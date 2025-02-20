@@ -1,7 +1,7 @@
 // import modules
 import { median } from 'd3-array';
 // import sql queries
-import { indicesData, priceVolumeData, summaryData, turnover50dayData, vfexSummaryData } from '../../model/db_results.js';
+import { indicesData, priceVolumeData, summaryData, turnover30dayData, vfexSummaryData } from '../../model/db_results.js';
 //import chart functions
 import svgChartElement from '../../model/charts/lineChart.js';
 import pieChartSVG from '../../model/charts/pieChart.js';
@@ -14,7 +14,7 @@ const priceVolumeDataQueryResult = await priceVolumeData();
 const indicesDataQueryResult = await indicesData();
 const summaryDataQueryResult = await summaryData();
 const vfexSummaryDataQueryResult = await vfexSummaryData();
-const turnover50dayDataQueryResult = await turnover50dayData();
+const turnover30dayDataQueryResult = await turnover30dayData();
 
 const months = JSON.parse(process.env.MONTHS);
 const equityNames = JSON.parse(process.env.EQUITY_NAMES);
@@ -268,16 +268,16 @@ const timeline = timelineSVG(listingDate);
 // treemap
 const treemap = treemapSVG( vfexEquitiesEndOfDayData );
 // turnover
-const turnover50dayValueMultiDimensionalArray = [];
-turnover50dayDataQueryResult.forEach( d => {
-  turnover50dayValueMultiDimensionalArray.push(Object.values(d));
+const turnover30dayValueMultiDimensionalArray = [];
+turnover30dayDataQueryResult.forEach( d => {
+  turnover30dayValueMultiDimensionalArray.push(Object.values(d));
 });
-const turnover50dayValueArray = turnover50dayValueMultiDimensionalArray.flat();
-const sumOfAllEquities50dayTradeVolume = turnover50dayValueArray.reduce(sum, 0);
+const turnover30dayValueArray = turnover30dayValueMultiDimensionalArray.flat();
+const sumOfAllEquities50dayTradeVolume = turnover30dayValueArray.reduce(sum, 0);
 // null counter variable takes into account the null values from equities that have listed or delisted within the window
-const nullCounter = turnover50dayValueArray.filter( d => d === null ).length;
-const turnover50dayValue = currencyOneDecimalPointsNumberFormatterObject.format( 
-  sumOfAllEquities50dayTradeVolume / ( turnover50dayValueArray.length - nullCounter )
+const nullCounter = turnover30dayValueArray.filter( d => d === null ).length;
+const turnover30dayValue = currencyOneDecimalPointsNumberFormatterObject.format( 
+  sumOfAllEquities50dayTradeVolume / ( turnover30dayValueArray.length - nullCounter )
 );
 
-export { alsi, equityData, heatMap, heatMapData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, marketCapData, turnover50dayValue, medianPEratio, numberOfListedEquities, pieChart, timeline, tooltipData, treemap, vfexEquitiesEndOfDayData, vfexMarketCap, year };
+export { alsi, equityData, heatMap, heatMapData, lastTradingDayDateFormatted, lastTradingDayDateFormattedReversed, marketCapData, turnover30dayValue, medianPEratio, numberOfListedEquities, pieChart, timeline, tooltipData, treemap, vfexEquitiesEndOfDayData, vfexMarketCap, year };

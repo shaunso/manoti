@@ -75,9 +75,9 @@ const svgChartElement = ( closingPriceDataArray, tradingVolumeDataArray, priceCh
   // drawing the tooltip
   const tooltipDot = chart.append("circle")
     .attr("r", 2)
-    .attr("fill", "var(--ter-color)")
-    .attr("stroke", "var(--sec-color)")
-    .attr("stroke-width", 1.5)
+    .attr("fill", "#204134a7")
+    .attr("stroke", "#204134a7")
+    .attr("stroke-width", 0.75)
     .style("opacity", 0)
     .style('pointer-events', 'none')
     .raise();

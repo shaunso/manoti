@@ -19,7 +19,7 @@ function heatMap(data) {
       tooltip.style.top = ( tooltipYaxisPosition - 50 ) + 'px';
       tooltip.style.left = ( e.clientX + 7.5 )  + 'px';
       tooltip.querySelector('.name').textContent = equity;
-      tooltip.querySelector('.price-change').textContent = numberFormatterObject.format(value);
+      tooltip.querySelector('.price-change').textContent = !value ? '---' : numberFormatterObject.format(value);
       tooltip.querySelector('.heatmap-price').textContent = price;
     });
 

@@ -4,7 +4,8 @@
   --prim-color: #0F0F0F;
   --sec-color: #204134;
   --sec-color_60_perc: #20413499;
-  --sec-color_80_perc: #204134cc;
+  --sec-color_70_perc: hsla(156, 34%, 19%, 0.651);
+  --sec-color_80_perc: #204134ce;
   --sec-color_98_perc:#204134fb;
   --sec-color_border: #204134e6;
   --ter-color: #F2F1F0;
@@ -49,6 +50,8 @@ body {
   display: grid;
   grid-template-columns: 20% 1fr;
   grid-template-rows: auto 1fr auto; 
+  letter-spacing: -0.125px;
+  word-spacing: 3px;
 }
 
 body > section > *, body > main {
@@ -138,21 +141,11 @@ div#aside-container > div > p:nth-child(1), div#aside-container > div#alsi > div
 }
 
 div#aside-container > div > p:nth-child(1) {
-  color: var(--sec-color_80_perc);
-  letter-spacing: 0.35px;
+  color: var(--sec-color_70_perc);
 }
 
 div#aside-container > div > p:nth-child(2) {
   font-size: var(--font-size-normal_medium);
-}
-
-.treemap-label {
-  font-size: 0.07rem;
-  fill:rgba(32, 32, 68, 0.901)
-}
-
-.label--hidden {
-  display: none;
 }
 
 #pie-chart {
@@ -184,16 +177,38 @@ div#aside-container > div > p:nth-child(2) {
   display: none;
 }
 
+.treemap-label {
+  font-size: 0.07rem;
+  fill:rgba(32, 32, 68, 0.901)
+}
+
+.label--hidden {
+  display: none;
+}
+
+div#market-cap p.market-cap {
+  margin-bottom: 0.3rem;
+}
+
 svg#heat-map rect {
   transition: ease-in all 75ms;
 }
-svg#heat-map rect:hover {
+svg#heat-map rect:hover, svg#treemap rect:hover  {
   cursor: pointer;
   stroke: var(--alt-ter-color);
   stroke-width: 0.2;
   transform: scale(1.001);
   opacity: 70%;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+svg#treemap rect:hover {
+  opacity: 50%;
+}
+ 
+div.tooltip__treemap p.pe-ratio, div.tooltip__treemap p.trade-volume-30-days {
+  font-size: smaller;
+  color: var(--sec-color_70_perc);
 }
 
 svg#timeline text {
@@ -285,7 +300,6 @@ div.carousel__sub-grid--1 {
 
 div.carousel__sub-grid--1 > :not(div:last-child) {
   width: 30%;
-  letter-spacing: 0.35px;
   row-gap: 0.1rem;
 }
 
@@ -351,7 +365,6 @@ text.chart-sub-title {
   stroke: var(--prim-color);
   stroke-width: 0.015;
   font-size: 0.5rem;
-  letter-spacing: 0.1px;
   opacity: 60%;
 }
 
@@ -361,24 +374,27 @@ text.chart-sub-title {
   padding: 2px 5px;
   background-color: var(--tooltip-bg-color);
   display: none;
-  border-radius: 2px;
+  border-radius: 2.5px;
   pointer-events: none;
   text-align: left;
   width: 145px;
   z-index: 500;
+  word-spacing: 1.75px;
 }
 
 .tooltip__pie-chart, .tooltip__heat-map, .tooltip__treemap {
   width: max-content;
   padding-right: 2rem;
-  letter-spacing: 0.6px;
 }
 
+.price {
+  font-size: var(--font-size-normal_small);
+}
 .price, .equity, .name {
   font-weight: var(--font-weight-bold);
 }
 
-.date, p.date+p, .value, .price-change {
+.date, p.date+p, .value {
   font-size: var(--font-size-small);
   font-weight: var(--font-weight-light);
 }

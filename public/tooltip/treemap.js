@@ -1,4 +1,4 @@
-function treemap(data, date) {
+function treemap(data) {
   // sort data by market cap
   data.sort( (a,b) => a.market_cap - b.market_cap ).reverse()
   const currencyOneDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 1});
@@ -8,6 +8,7 @@ function treemap(data, date) {
   const tooltip =document.querySelector('.tooltip__treemap');
 
   leaves.forEach( (d,i) => {
+    const name = data[i].short_name;
     const ticker = data[i].ticker;
     const marketCap = data[i].market_cap;
     const peRatio = data[i].pe_ratio;
@@ -20,13 +21,12 @@ function treemap(data, date) {
       const tooltipYaxisPosition = pointerPosition - pieChartContainerYposition;
 
       tooltip.style.display = 'block';
-      tooltip.style.top = ( tooltipYaxisPosition - 37.5 ) + 'px';
+      tooltip.style.top = ( tooltipYaxisPosition - 82.5 ) + 'px';
       tooltip.style.left = ( e.clientX + 7.5 )  + 'px';
-      tooltip.querySelector('.date').textContent = date;
-      tooltip.querySelector('.ticker').textContent = ticker;
-      tooltip.querySelector('.market-cap').textContent = currencyOneDecimalPointsNumberFormatterObject.format(marketCap);
-      tooltip.querySelector('.pe-ratio').textContent = peRatio;
-      tooltip.querySelector('.trade-volume-30-days').textContent = thousandsSeparandNumberFormatterObject.format(tradeVolume30days);
+      tooltip.querySelector('.name').textContent = `${name}  (${ticker})`;
+      tooltip.querySelector('.market-cap').textContent = 'market cap: ' + currencyOneDecimalPointsNumberFormatterObject.format(marketCap);
+      tooltip.querySelector('.pe-ratio').textContent = 'p/e-ratio: ' +  ( !peRatio ? '---' : `${peRatio}x` );
+      tooltip.querySelector('.trade-volume-30-days').textContent = '30 day avg volume: ' + thousandsSeparandNumberFormatterObject.format(tradeVolume30days);
     })
 
     d.addEventListener('pointerleave', () => {
