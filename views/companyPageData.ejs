@@ -10,72 +10,84 @@
 <body>
   <%- include('partials/header') %>
   <main>
-    <article id="profile">
-      <img src="/img/<%= ticker %>.webp" alt="<%= shortName %> company logo">
-      <h2><%= longName %></h2>
-      <h3><%= ticker %></h3>
-
-      <div>
-        <p>Sector</p>
-        <p><%= sector.replaceAll(',', ', ') %></p>
+    <div id="container">
+      <div id="company-name">
+        <img src="/img/<%= ticker %>.webp" alt="<%= shortName %> company logo">
+        <div id="name-ticker-price">
+          <p class="name"><%= longName %></p>
+          <p class="ticker"><%= ticker %></p>
+          <p class="sector"><%= sector.replaceAll(',', ', ') %></p>
+          <p class="price-change"></p>
+        </div>
       </div>
 
-      <div>
-        <p>Description</p>
-        <p><%= description %></p>
+      <div id="company-details">
+        <div id="company-description">
+          <p>Description</p>
+          <p><%= description %></p>
+        </div>
+  
+        <div id="company-ceo">
+          <p>CEO</p>
+          <p><%= ceo %></p>
+        </div>
+
+        <div id="company-board-size">
+          <p>Board size</p>
+          <p><%= boardSize %></p>
+        </div>
+  
+        <div id="company-employees">
+          <p>No. of employees</p>
+          <p><%= employees ?? '---' %></p>
+        </div>
+  
+        <div id="company-shares-in=issue">
+          <p>Shares in issue</p>
+          <p><%= sharesIssued %></p>
+        </div>
+  
+        <div id="company-founded">
+          <p>Founded</p>
+          <p><%= founded %></p>
+        </div>
+  
+        <div id="company-year-end">
+          <p>Financial year end</p>
+          <p><%= yearEnd %></p>
+        </div>
+
+        <div id="company-auditors">
+          <p>External auditors</p>
+          <p><%= auditors %></p>
+        </div>
+  
+        <div id="company-website">
+          <p>Website</p>
+          <a href="http://<%= website %>" target="_blank"><%= website %></a>
+        </div>
+      
+        <div id="company-lsiting-date">
+          <p>Date of listing</p>
+          <p><%= listingDate %></p>
+        </div>
+          
+        <div id="address">
+          <p>Address</p>
+          <p><%= address %></p>
+        </div>
+  
       </div>
 
-      <div>
-        <p>Shares in issue</p>
-        <p><%= sharesIssued %></p>
+      <div id="charts-1">
+        <div id="box-plot"></div>
+        <div id="bar-chart"></div>
       </div>
 
-      <div>
-        <p>CEO</p>
-        <p><%= ceo %></p>
+      <div id="income-statement">
+        <tbody></tbody>
       </div>
-
-      <div>
-        <p>No. of employees</p>
-        <p><%= employees ?? '---' %></p>
-      </div>
-
-      <div>
-        <p>Founded</p>
-        <p><%= founded %></p>
-      </div>
-
-      <div>
-        <p>External auditors</p>
-        <p><%= auditors %></p>
-      </div>
-
-      <div>
-        <p>Website</p>
-        <a href="http://<%= website %>" target="_blank"><%= website %></a>
-      </div>
-
-      <div>
-        <p>Address</p>
-        <p><%= address %></p>
-      </div>
-
-      <div>
-        <p>Financial year end</p>
-        <p><%= yearEnd %></p>
-      </div>
-
-      <div>
-        <p>Date of listing</p>
-        <p><%= listingDate %></p>
-      </div>
-
-      <div>
-        <p>Board size</p>
-        <p><%= boardSize %></p>
-      </div>
-
-    </article>
+    </div>
   </main>
   <%- include('partials/footer') %>
 </body>

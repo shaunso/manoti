@@ -48,12 +48,41 @@ body {
   color: var(--sec-color);
 }
 
-body > section > *, body > main {
+body > main {
   padding: 0 1rem;
+}
+
+div#container {
+  display: flex;
+  flex-direction: column;
+}
+
+div#container > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+div#company-name {
+ align-items: center;
+}
+div#name-ticker-price {
+ flex-direction: column; 
 }
 
 img {
   width: 150px;
   height: 150px;
   object-fit: contain;
+}
+
+div#company-details{
+  row-gap: 0.75rem;
+}
+div#company-details > div {
+  flex-basis: 33%;
+}
+
+div#company-details > div#company-description, div#company-details > div#address {
+  flex-basis: 100%;
 }
