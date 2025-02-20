@@ -53,7 +53,6 @@ function displaySearchResults(data) {
     a.textContent = searchListReturnedResultArray[arrayPosition];
     a.href = `/data/vfex/equities${ linksList[arrayPosition] }`;
     listElement.classList.add('search-result-item');
-    listElement.addEventListener( 'click', () => console.log('clicked') );
 
     listElement.appendChild(a);
     searchResultsArray.push(listElement);
