@@ -4,7 +4,8 @@
   --prim-color: #0F0F0F;
   --sec-color: #204134;
   --sec-color_60_perc: #20413499;
-  --sec-color_80_perc: #204134cc;
+  --sec-color_70_perc: #204134a6;
+  --sec-color_80_perc: #204134ce;
   --sec-color_98_perc:#204134fb;
   --sec-color_border: #204134e6;
   --ter-color: #F2F1F0;
@@ -82,7 +83,14 @@ div#company-details{
 div#company-details > div {
   flex-basis: 33%;
 }
-
 div#company-details > div#company-description, div#company-details > div#address {
   flex-basis: 100%;
+}
+div#company-details > div#company-description > p:nth-child(2)::first-letter {
+  text-transform: uppercase;
+}
+div#company-details > div > p:nth-child(1) {
+  text-transform: lowercase;
+  font-weight: var(--font-weight-bold);
+  color: var(--sec-color_70_perc);
 }
