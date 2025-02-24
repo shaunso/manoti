@@ -1,5 +1,4 @@
 import express from 'express';
-import { equityData } from '../home/app.js';
 const router = express.Router();
 
 import { summaryData } from '../../model/db_results.js';

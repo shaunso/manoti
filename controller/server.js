@@ -3,8 +3,10 @@ import 'dotenv/config';
 
 import logger from '../model/logger.js';
 import homeRoute from '../routes/home/index.js';
-import tickerPage from '../routes/companyPageData/index.js'
+import tickerPage from '../routes/companyPageData/index.js';
+import { dfhf } from '../model/rootStyleSheetFunction.js';
 
+dfhf()
 
 const app = express();
 const PORT = process.env.PORT || 6410;
