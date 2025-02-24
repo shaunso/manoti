@@ -1,23 +1,23 @@
 import fs from 'fs';
 
-const dfhf = () => {
+const contactCSS = () => {
   const reader = fs.createReadStream('public/stylesheets/header.css', {
     flag: 'r',
-    encoding: 'UTF-8',
+    encoding: 'utf8',
   });
-  const reader2 = fs.createReadStream('public/stylesheets/home.css', {
+  const reader2 = fs.createReadStream('public/stylesheets/contact.css', {
     flag: 'r',
-    encoding: 'UTF-8',
+    encoding: 'utf8',
   });
   const reader3 = fs.createReadStream('public/stylesheets/footer.css', {
     flag: 'r',
-    encoding: 'UTF-8',
+    encoding: 'utf8',
   });
 
-  const writeStream1 = fs.createWriteStream('public/stylesheets/root/style.css', {
+  const writeStream1 = fs.createWriteStream('public/stylesheets/contact/style.css', {
     flags: 'w'
   });
-  const writeStream2 = fs.createWriteStream('public/stylesheets/root/style.css', {
+  const writeStream2 = fs.createWriteStream('public/stylesheets/contact/style.css', {
     flags: 'a'
   });
 
@@ -35,4 +35,4 @@ const dfhf = () => {
 
  }
  
- export { dfhf }
+ export default contactCSS

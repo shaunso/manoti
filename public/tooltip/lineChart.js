@@ -95,3 +95,4 @@ function tooltipFunction(data) {
   })
 }
 
+export default tooltipFunction

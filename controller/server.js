@@ -4,9 +4,15 @@ import 'dotenv/config';
 import logger from '../model/logger.js';
 import homeRoute from '../routes/home/index.js';
 import tickerPage from '../routes/companyPageData/index.js';
-import { dfhf } from '../model/rootStyleSheetFunction.js';
+import rootCSS from '../model/fileBundling/rootStyle.js';
+import equitiesCSS from '../model/fileBundling/data/vfex/equities/equitiesStyle.js';
+import contactCSS from '../model/fileBundling/contact/contactStyle.js';
+import errorCSS from '../model/fileBundling/error/errorStyle.js';
 
-dfhf()
+rootCSS();
+equitiesCSS();
+contactCSS();
+errorCSS();
 
 const app = express();
 const PORT = process.env.PORT || 6410;
