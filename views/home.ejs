@@ -224,14 +224,9 @@
   
   <%- include('partials/footer') %>
   
-  <script src="lineChartFunctions.min.js"></script>
-  <script src="tooltip/lineChart.js"></script>
-  <script src="tooltip/pieChart.js"></script>
-  <script src="tooltip/heatMap.js"></script>
-  <script src="tooltip/treemap.js"></script>
-  <script src="gridCarousel.js"></script>
+  <script src="script.js"></script>
   <script>
-    const { bisector, extent, max, scaleLinear, scaleTime, pointer, select, isoParse, timeFormat } = v;
+    const { bisector, extent, max, scaleLinear, scaleTime, pointer, select, isoParse, timeFormat } = d3;
 
     tooltipFunction(<%-  JSON.stringify(equityData) %>)
     pieChart(<%- JSON.stringify(marketCapData) %>)

@@ -1,3 +1,4 @@
+//  treemap
 function treemap(data) {
   // sort data by market cap
   data.sort( (a,b) => a.market_cap - b.market_cap ).reverse()

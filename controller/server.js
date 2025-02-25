@@ -8,11 +8,13 @@ import rootCSS from '../model/fileBundling/css/rootStyleCSS.js';
 import equitiesCSS from '../model/fileBundling/css/data/vfex/equities/equitiesStyleCSS.js';
 import contactCSS from '../model/fileBundling/css/contact/contactStyleCSS.js';
 import errorCSS from '../model/fileBundling/css/error/errorStyleCSS.js';
+import buildScript from '../model/fileBundling/js/buildScript.js';
 
 rootCSS();
 equitiesCSS();
 contactCSS();
 errorCSS();
+buildScript();
 
 const app = express();
 const PORT = process.env.PORT || 6410;

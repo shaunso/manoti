@@ -8,7 +8,7 @@ export default {
     file: 'public/lineChartFunctions.min.js',
     format: 'umd',
     compact: false,
-    name: 'v'
+    name: 'd3'
   },
   plugins: [
     resolve(),

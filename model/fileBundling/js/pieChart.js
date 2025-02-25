@@ -1,3 +1,4 @@
+// pie chart
 function pieChart(data) {
   const numberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', maximumFractionDigits:0});
 

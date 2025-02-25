@@ -1,4 +1,3 @@
-// heatmap
 function heatMap(data) {
   const numberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 

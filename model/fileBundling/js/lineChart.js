@@ -1,3 +1,4 @@
+// line chart
 function tooltipFunction(data) {
   const tooltipRectangles = document.querySelectorAll('.tooltip-listening-rectangle');
 
@@ -94,4 +95,3 @@ function tooltipFunction(data) {
     n++;
   })
 }
-
