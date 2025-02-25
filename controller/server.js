@@ -4,10 +4,10 @@ import 'dotenv/config';
 import logger from '../model/logger.js';
 import homeRoute from '../routes/home/index.js';
 import tickerPage from '../routes/companyPageData/index.js';
-import rootCSS from '../model/fileBundling/rootStyle.js';
-import equitiesCSS from '../model/fileBundling/data/vfex/equities/equitiesStyle.js';
-import contactCSS from '../model/fileBundling/contact/contactStyle.js';
-import errorCSS from '../model/fileBundling/error/errorStyle.js';
+import rootCSS from '../model/fileBundling/css/rootStyleCSS.js';
+import equitiesCSS from '../model/fileBundling/css/data/vfex/equities/equitiesStyleCSS.js';
+import contactCSS from '../model/fileBundling/css/contact/contactStyleCSS.js';
+import errorCSS from '../model/fileBundling/css/error/errorStyleCSS.js';
 
 rootCSS();
 equitiesCSS();

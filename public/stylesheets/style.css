@@ -18,6 +18,8 @@
   --border-radius__medium: 10px;
 
   --font-family: "Lato", Helvetica;
+  --font-size-xxxx_large: 5rem;
+  --font-size-xxx_large: 3.5rem;
   --font-size-xx_large: 3rem;
   --font-size-x_large: 2.75rem;
   --font-size-large: 2.25rem;
@@ -36,13 +38,12 @@
   --font-style-italic_regular: italic;
 
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
+/* header */
 body > header {
   width: 100%;
   background-color: var(--sec-color);
@@ -214,6 +215,7 @@ ul#search-results > li:hover a  {
     height: 0.1rem;
   }
 }
+/* body */
 body {
   background-color: var(--bg-color);
   font-family: var(--font-family);
@@ -571,7 +573,7 @@ text.chart-sub-title {
 }
 
 div.tooltip__heat-map p.heatmap-price {
-  font-size: smaller;
+  font-size: small;
 }
 
 .tooltip-line {
@@ -1101,7 +1103,9 @@ li {
   .tick {
     font-size: var(--font-size-normal_small);
   }
-}footer {
+}
+/* footer */
+footer {
   background-color: var(--sec-color);
   padding: 1.5rem 1.75rem;
   color: var(--ter-color);

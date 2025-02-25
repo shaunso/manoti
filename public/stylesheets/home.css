@@ -1,3 +1,4 @@
+/* body */
 body {
   background-color: var(--bg-color);
   font-family: var(--font-family);
@@ -355,7 +356,7 @@ text.chart-sub-title {
 }
 
 div.tooltip__heat-map p.heatmap-price {
-  font-size: smaller;
+  font-size: small;
 }
 
 .tooltip-line {
