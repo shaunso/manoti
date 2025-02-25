@@ -1,23 +1,23 @@
 import fs from 'fs';
 
 const rootCSS = () => {
-  const variables = fs.readFileSync('public/stylesheets/variables.css', {
+  const variables = fs.readFileSync('model/css/variables.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const universalStyles = fs.readFileSync('public/stylesheets/universal-styles.css', {
+  const universalStyles = fs.readFileSync('model/css/universal-styles.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const header = fs.readFileSync('public/stylesheets/header.css', {
+  const header = fs.readFileSync('model/css/header.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const body = fs.readFileSync('public/stylesheets/home.css', {
+  const body = fs.readFileSync('model/css/home.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const footer = fs.readFileSync('public/stylesheets/footer.css', {
+  const footer = fs.readFileSync('model/css/footer.css', {
     encoding: 'utf8',
     flag: 'r',
   });

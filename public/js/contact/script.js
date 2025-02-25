@@ -1,3 +1,4 @@
+// search function
 const body = document.querySelector('body');
 const icon = document.querySelector('#search-icon');
 const searchBox = document.querySelector('#search-box');
@@ -18,6 +19,7 @@ icon.addEventListener('click', () => {
   closeSearchBox.style.display = 'block';
   icon.style.display = 'none';
   searchBoxTextBox.value = '';
+  searchBoxTextBox.focus();
 })
 
 searchBoxTextBox.addEventListener('input', (e) => {

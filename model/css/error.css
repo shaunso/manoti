@@ -30,7 +30,7 @@ body > div > p:last-child {
 p > a {
   position: relative;
   color: var(--sec-color);
-  transition: all 175ms ease-in;
+  transition: all 100ms ease-in;
   text-decoration: none;
  }
 
@@ -51,6 +51,10 @@ p > a:visited {
 
 p > a:hover, p > a:active {
   opacity: 0.6;
+}
+
+p > a:hover::after {
+  height: 0;
 }
 
 body > footer {

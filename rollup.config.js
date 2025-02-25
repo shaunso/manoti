@@ -5,7 +5,7 @@ import terser from '@rollup/plugin-terser';
 export default {
   input: ['model/d3/LineChartTooltipBundle.js'],
   output: {
-    file: 'public/lineChartFunctions.min.js',
+    file: 'model/fileBundling/js/d3.min.js',
     format: 'umd',
     compact: false,
     name: 'd3'

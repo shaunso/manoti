@@ -19,6 +19,7 @@ icon.addEventListener('click', () => {
   closeSearchBox.style.display = 'block';
   icon.style.display = 'none';
   searchBoxTextBox.value = '';
+  searchBoxTextBox.focus();
 })
 
 searchBoxTextBox.addEventListener('input', (e) => {

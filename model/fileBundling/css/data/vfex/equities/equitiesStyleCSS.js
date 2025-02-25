@@ -1,23 +1,23 @@
 import fs from 'fs';
 
 const equitiesCSS = () => {
-  const variables = fs.readFileSync('public/stylesheets/variables.css', {
+  const variables = fs.readFileSync('model/css/variables.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const universalStyles = fs.readFileSync('public/stylesheets/universal-styles.css', {
+  const universalStyles = fs.readFileSync('model/css/universal-styles.css', {
     encoding: 'utf8',
     flag: 'r',
   });  
-  const header = fs.readFileSync('public/stylesheets/header.css', {
+  const header = fs.readFileSync('model/css/header.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const body = fs.readFileSync('public/stylesheets/companyPageData.css', {
+  const body = fs.readFileSync('model/css/companyPageData.css', {
     encoding: 'utf8',
     flag: 'r',
   });
-  const footer = fs.readFileSync('public/stylesheets/footer.css', {
+  const footer = fs.readFileSync('model/css/footer.css', {
     encoding: 'utf8',
     flag: 'r',
   });
