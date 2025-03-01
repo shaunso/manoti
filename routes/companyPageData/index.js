@@ -2,6 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 import { summaryData } from '../../model/db_results.js';
+import { equityData } from '../home/app.js';
 
 const currentEquitiesTickerList = JSON.parse( process.env.EQUITY_TICKERS );
 const summaryDataQueryResult = await summaryData();
@@ -27,8 +28,10 @@ router.get( '/:ticker', async ( req, res ) => {
             employees: summaryDataQueryResult[tickerIndex].no_of_employees ? thousandsSeparandNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].no_of_employees) : null,
             founded: summaryDataQueryResult[tickerIndex].founded,
             listingDate: `${summaryDataQueryResult[tickerIndex].date_of_listing.toLocaleString('default', {month: 'long'})} ${summaryDataQueryResult[tickerIndex].date_of_listing.getUTCFullYear()}`,
-            longName: summaryDataQueryResult[tickerIndex].long_name, 
-            sector: summaryDataQueryResult[tickerIndex].sector,
+            longName: summaryDataQueryResult[tickerIndex].long_name,
+            priceChange: (equityData[tickerIndex].priceChange),
+            pricePercentageChange: (equityData[tickerIndex].pricePercentageChange),
+            sector: summaryDataQueryResult[tickerIndex].sector.split(','),
             sharesIssued: thousandsSeparandNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].shares_in_issue),
             shortName: summaryDataQueryResult[tickerIndex].short_name, 
             ticker: summaryDataQueryResult[tickerIndex].ticker, 

@@ -111,7 +111,6 @@ icon.addEventListener('click', () => {
   closeSearchBox.style.display = 'block';
   icon.style.display = 'none';
   searchBoxTextBox.value = '';
-  searchBoxTextBox.focus();
 })
 
 searchBoxTextBox.addEventListener('input', (e) => {
@@ -203,7 +202,7 @@ function heatMap(data) {
   })
 }
 // line chart
-function lineChart(data) {
+function tooltipFunction(data) {
   const tooltipRectangles = document.querySelectorAll('.tooltip-listening-rectangle');
 
   const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits:4});
@@ -211,7 +210,8 @@ function lineChart(data) {
 
   const dateFormatter = date => { return timeFormat("%d-%b-%Y")( (new Date().getTimezoneOffset() < 0) ? date : utcDay.offset(date, 1) )};
 
-  tooltipRectangles.forEach( (rectangle, n) => {
+  let n = 0;
+  tooltipRectangles.forEach( (rectangle) => {
     const price = data[n].closingPriceData;
     const volume = data[n].tradingVolumeData;
 
@@ -295,6 +295,7 @@ function lineChart(data) {
     rectangle.addEventListener('touchstart', (e) => {
       e.preventDefault();
     });
+    n++;
   })
 }
 // pie chart

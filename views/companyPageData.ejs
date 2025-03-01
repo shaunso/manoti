@@ -16,8 +16,19 @@
         <div id="name-ticker-price">
           <p class="name"><%= longName %></p>
           <p class="ticker"><%= ticker %></p>
-          <p class="sector"><%= sector.replaceAll(',', ', ') %></p>
-          <p class="price-change"></p>
+        <% if (priceChange > 0) { %>
+          <p class="price-change positive_price-change"><%= priceChange %> <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-up"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg></span> <%= pricePercentageChange %></p>
+        <% } else if (priceChange < 0) { %>
+          <p class="price-change negative_price-change"><%= priceChange %> <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-down"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg></span> <%= pricePercentageChange %></p>
+        <% } else { %>
+          <p class="price-change no_price-change"><%= priceChange %> <span>/</span> <%= pricePercentageChange %></p>
+        <% } %>
+          <p class="sector__heading-text">sector</p>
+          <div class="sectors-container">
+        <% sector.forEach( d => { %>
+            <p><%= d %></p>
+        <% }) %>
+          </div>
         </div>
       </div>
 
@@ -90,6 +101,6 @@
     </div>
   </main>
   <%- include('partials/footer') %>
-  <script src="js/data/vfex/equities/script.js"></script>
+  <script src="/js/data/vfex/equities/script.js"></script>
 </body>
 </html>

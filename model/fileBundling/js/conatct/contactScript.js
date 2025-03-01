@@ -9,7 +9,7 @@ const buildContactScript = () => {
   const bundle = searchFunction ;
 
   fs.writeFileSync('public/js/contact/script.js', bundle, (err) => {
-    if (err) throw 'an error occured while writing the script bundle'
+    if (err) throw 'an error occured while writing the contact script bundle'
   });
 }
 

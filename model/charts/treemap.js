@@ -23,7 +23,7 @@ marketCapData.forEach( d => {
 
  const dimensions = {
   width: 50,
-  height: 55,
+  height: 50,
   margin: {
     top: 10,
     right: 10,
@@ -75,8 +75,8 @@ marketCapData.forEach( d => {
     .attr('y', d => d.y0)
     .attr('width', d => d.x1 - d.x0)
     .attr('height', d => d.y1 - d.y0)
-    .attr('rx', 0.5)
-    .attr('ry', 0.5);
+    .attr('rx', 0.25)
+    .attr('ry', 0.25);
 
   // treemap labels
   const labels = chart.append('g')

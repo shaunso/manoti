@@ -15,7 +15,7 @@ const heatMapSVG = (dataset) => {
 
   const margin = {top: 20, right: 20, bottom: 20, left: 20};
   const width = 100 - margin.left - margin.right;
-  const height = 75 - margin.top - margin.bottom;
+  const height = 69 - margin.top - margin.bottom;
 
   const svg = select(body).append('svg')
     .attr('id', 'heat-map')

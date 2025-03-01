@@ -135,7 +135,8 @@ div#aside-container > div > p:nth-child(2) {
 
 .treemap-label {
   font-size: 0.07rem;
-  fill:rgba(32, 32, 68, 0.901)
+  fill:rgba(32, 32, 68, 0.901);
+  letter-spacing: 0.05px;
 }
 
 .label--hidden {
@@ -156,6 +157,11 @@ svg#heat-map rect:hover, svg#treemap rect:hover  {
   transform: scale(1.001);
   opacity: 70%;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+svg#treemap rect {
+  stroke: whitesmoke;
+  stroke-width: 0.095px;
 }
 
 svg#treemap rect:hover {
@@ -226,6 +232,28 @@ div.carousel__track-grid-container {
   align-content: center;
 }
 
+div.carousel__track-grid-container a {
+  color: var(--sec-color);
+  position: relative;
+  transition: all 150ms ease;
+  text-decoration: none;
+}
+
+div.carousel__track-grid-container a::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0.15rem;
+  border-radius: 10px;
+  bottom: -0.5px;
+  left: 0;
+  background-color: var(--sec-color);
+}
+
+div.carousel__track-grid-container a:hover, div.carousel__track-grid-container a:active {
+  opacity: 0.6;
+}
+
 /* nav indicator icons */
 div.carousel__nav {
   grid-area: indicator;
@@ -256,7 +284,7 @@ div.carousel__sub-grid--1 {
 
 div.carousel__sub-grid--1 > :not(div:last-child) {
   width: 30%;
-  row-gap: 0.1rem;
+  row-gap: 0.375rem;
 }
 
 div.carousel__sub-grid--1 > div:first-child, div.carousel__sub-grid--1 > div:nth-child(2), div.carousel__sub-grid--1 > div:nth-child(3) {
@@ -573,6 +601,7 @@ li {
 
   div.carousel__sub-grid--1 > :not(div:last-child) {
     width: 40%;
+    row-gap: 0.175rem;
   }
 
   h6.sub-grid__title {
@@ -756,6 +785,15 @@ li {
 @media (max-width: 520px) {
   article.carousel-grid-container {
     height: 150px;
+  }
+
+  div.carousel__track-grid-container a::after {
+    height: 0.1rem;
+    border-radius: 10px;
+    bottom: -0.4px;
+    left: 0;
+    background-color: var(--sec-color);
+    z-index: -1;
   }
 }
 

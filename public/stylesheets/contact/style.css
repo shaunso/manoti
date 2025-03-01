@@ -359,7 +359,6 @@ footer > p > a {
   font-weight: var(--font-weight-bold);
   text-decoration: none;
   transition: all 300ms ease;
-  border-radius: 4px;
   position: relative;
 }
 
@@ -372,10 +371,6 @@ footer > p > a::after {
   bottom: -0.5px;
   left: 0;
   background-color: var(--ter-color);
-}
-
-footer > p > a:visited {
-  text-decoration: none;
 }
 
 footer > p > a:hover, footer > p > a:active {

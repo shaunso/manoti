@@ -33,7 +33,7 @@ const buildRootScript = () => {
   const bundle = d3 + gridCarouselFunction + searchFunction + heatMap + lineChart + pieChart + treemap;
 
   fs.writeFileSync('public/js/script.js', bundle, (err) => {
-    if (err) throw 'an error occured while writing the script bundle'
+    if (err) throw 'an error occured while writing the root page script bundle'
   });
 }
 

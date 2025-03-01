@@ -11,15 +11,19 @@ import errorCSS from '../model/fileBundling/css/error/errorStyleCSS.js';
 import buildRootScript from '../model/fileBundling/js/rootScript.js';
 import buildErrorScript from '../model/fileBundling/js/error/errorScript.js';
 import buildContactScript from '../model/fileBundling/js/conatct/contactScript.js';
+import buildEquitiesScript from '../model/fileBundling/js/data/vfex/equities/equitiesScript.js';
+import { equityData, heatMapData, marketCapData, vfexEquitiesEndOfDayData } from '../routes/home/app.js';
 
+// build css files
 rootCSS();
 equitiesCSS();
 contactCSS();
 errorCSS();
+// build js files
 buildRootScript();
 buildErrorScript();
 buildContactScript();
-
+buildEquitiesScript();
 
 const app = express();
 const PORT = process.env.PORT || 6410;
@@ -54,11 +58,6 @@ app.get('/robots.txt', async(req, res) => {
 // sitemap file
 app.get('/sitemap.xml', async(req, res) => {
   res.status(200).sendFile('sitemap.xml');
-});
-
-// test endpoit
-app.get('/test', async(req, res) => {
-  res.status(200).json('sitemap.xml');
 });
 
 // 404 page

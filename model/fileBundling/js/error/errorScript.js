@@ -9,7 +9,7 @@ const buildErrorScript = () => {
   const bundle = searchFunction ;
 
   fs.writeFileSync('public/js/error/script.js', bundle, (err) => {
-    if (err) throw 'an error occured while writing the script bundle'
+    if (err) throw 'an error occured while writing the error script bundle'
   });
 }
 

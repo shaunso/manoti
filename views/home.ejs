@@ -114,10 +114,10 @@
               <div class="carousel__sub-grid carousel__sub-grid--1 current-slide">
                 <div>
                   <p>
-                    <%= item.name %>
+                    <a href="/data/vfex/equities/<%= item.ticker %>"><%= item.name %></a>
                   </p>
                   <p>
-                    <%= item.ticker %>
+                   <%= item.ticker %>
                   </p>
                 </div>
 
@@ -228,7 +228,7 @@
   <script>
     const { bisector, extent, max, scaleLinear, scaleTime, pointer, select, isoParse, timeFormat } = d3;
 
-    tooltipFunction(<%-  JSON.stringify(equityData) %>)
+    lineChart(<%-  JSON.stringify(equityData) %>)
     pieChart(<%- JSON.stringify(marketCapData) %>)
     heatMap(<%- JSON.stringify(heatMapData) %>)
     treemap(<%- JSON.stringify(vfexEquitiesEndOfDayData)%>)

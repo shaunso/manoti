@@ -1,5 +1,5 @@
 // line chart
-function tooltipFunction(data) {
+function lineChart(data) {
   const tooltipRectangles = document.querySelectorAll('.tooltip-listening-rectangle');
 
   const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits:4});
@@ -7,8 +7,7 @@ function tooltipFunction(data) {
 
   const dateFormatter = date => { return timeFormat("%d-%b-%Y")( (new Date().getTimezoneOffset() < 0) ? date : utcDay.offset(date, 1) )};
 
-  let n = 0;
-  tooltipRectangles.forEach( (rectangle) => {
+  tooltipRectangles.forEach( (rectangle, n) => {
     const price = data[n].closingPriceData;
     const volume = data[n].tradingVolumeData;
 
@@ -92,6 +91,5 @@ function tooltipFunction(data) {
     rectangle.addEventListener('touchstart', (e) => {
       e.preventDefault();
     });
-    n++;
   })
 }
