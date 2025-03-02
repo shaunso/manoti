@@ -11,6 +11,7 @@
   --ter-color: #F2F1F0;
   --alt-ter-color: #fdf9f588;
   --tooltip-bg-color: #f7f2f2f7;
+  --white: #fafaf9;
 
   --border-radius__xx_small: 2px;
   --border-radius__x_small: 4px;
@@ -48,6 +49,8 @@ body > header {
   width: 100%;
   background-color: var(--sec-color);
   color: var(--ter-color);
+  position: relative;
+  padding-bottom: 0.25rem;
 }
 
 header  h1 {
@@ -63,7 +66,8 @@ header::after{
   width: 100%;
   height: 0.15rem;
   background-color: var(--ter-color);
-  margin-bottom: 0.5rem;
+  position: absolute;
+  bottom: 5px;
 }
 
 div#header-container {
@@ -104,9 +108,6 @@ div#header-container svg:hover {
 }
 
 div#header-container svg.lucide-x {
-  /* top: 1.5%;
-  position: fixed;
-  right: 3rem; */
   stroke: var(--sec-color);
   z-index: 450;
   display: none;
@@ -120,6 +121,7 @@ div#search-box {
   margin-right: 2rem;
   width: 25%;
   box-shadow: rgba(219, 219, 225, 0.15) 0px 2px 5px 0px, rgba(229, 224, 224, 0.05) 0px 1px 1px 0px;
+  z-index: 101;
 }
 
 input {
@@ -188,7 +190,12 @@ ul#search-results > li:hover a  {
 
 @media (max-width: 1150px) {
   div#search-box {
-    width: 30%;
+    width: 35%;
+    margin-right: 1rem;
+  }
+
+  div#header-container svg {
+    right: 1.2rem;
   }
 }
 
@@ -201,14 +208,13 @@ ul#search-results > li:hover a  {
 }
 
 @media (max-width: 700px) {
-  div#search-box {
-    width: 90%;
-  }
+
 }
 
 @media (max-width: 520px) {
   div#header-container svg {
     margin-right: 0;
+    right: 1.25rem;
   }
 
   header::after{
@@ -382,6 +388,7 @@ footer > p > a:hover, footer > p > a:active {
   padding-left: 0.25rem;
   display: block;
   position: static;
+  border-radius: 5px;
 }
 
 footer > p:nth-child(2) {
@@ -422,7 +429,13 @@ footer > p > span.disclaimer {
 
   footer > p:nth-child(2) {
     font-size: var(--font-size-normal_small);
-    word-spacing: 1.75px;
+    letter-spacing: -0.125px;
+    word-spacing: 0.75px;
     margin-top: 0.15rem;
+  }
+
+  footer > p:nth-child(3) {
+    letter-spacing: -0.125px;
+    word-spacing: 0.275px;
   }
 }

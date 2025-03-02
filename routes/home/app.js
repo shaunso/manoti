@@ -1,7 +1,7 @@
 // import modules
 import { median } from 'd3-array';
 // import sql queries
-import { indicesData, priceVolumeData, summaryData, turnover30dayData, vfexSummaryData } from '../../model/db_results.js';
+import { indicesData, priceVolumeData, summaryData, turnover30dayData, vfexSummaryData } from '../../model/vfex_db_results.js';
 //import chart functions
 import svgChartElement from '../../model/charts/lineChart.js';
 import pieChartSVG from '../../model/charts/pieChart.js';
@@ -29,20 +29,20 @@ function sum(previousDay, currentDay) {
 // number formatters
 const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4});
 const closingPriceChangeNumberFormatterObject = new Intl.NumberFormat('en-GB', {signDisplay: 'exceptZero', maximumFractionDigits: 4});
+const currencyZeroDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 0});
+const currencyOneDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 1});
+const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
+const curencyTwoSignificantFiguresNumberFormatterObject = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 2 });
+const percentageOneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const percentageTwoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', maximumSignificantDigits: 2 });
 const percentageTwoSignificantDigitsNumberFormatterObject = new Intl.NumberFormat('en-GB', {style: 'percent', signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2});
 const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
 const thousandsSeparandCompactNumberFormatterObject = new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short"});
 const tradingVolumeChangeNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'always', maximumFractionDigits: 0});
-const currencyZeroDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 0});
-const currencyOneDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 1});
-const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
 const zeroDecimalPointSignedNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: 'exceptZero',  maximumFractionDigits: 0 });
 const oneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 const twoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const twoDecimalPointNumberNoSignFormatterObject = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const cuurencyTwoSignificantFiguresNumberFormatterObject = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumSignificantDigits: 2 });
-const percentageOneDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
-const percentageTwoDecimalPointNumberFormatterObject = new Intl.NumberFormat('en-GB', { style: 'percent', maximumSignificantDigits: 2 });
 
 //
 // destructure data into current & following 29 trading days
@@ -153,7 +153,7 @@ for ( let x in lastTradingDayClosingPriceDataObject ) {
 
     { metric: 'P/B ratio', rawValue: summaryDataQueryResult[m].pb_ratio, value: (!summaryDataQueryResult[m].pb_ratio) ? '-' : `${oneDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].pb_ratio)}x` },
 
-    { metric: 'EPS', rawValue: summaryDataQueryResult[m].curr_eps, value: (!summaryDataQueryResult[m].curr_eps) ? '-' : cuurencyTwoSignificantFiguresNumberFormatterObject.format(summaryDataQueryResult[m].curr_eps) },
+    { metric: 'EPS', rawValue: summaryDataQueryResult[m].curr_eps, value: (!summaryDataQueryResult[m].curr_eps) ? '-' : curencyTwoSignificantFiguresNumberFormatterObject.format(summaryDataQueryResult[m].curr_eps) },
 
     { metric: 'Dividend yield', rawValue: summaryDataQueryResult[m].dividend_yield, value: (!summaryDataQueryResult[m].dividend_yield) ? '-' : percentageTwoDecimalPointNumberFormatterObject.format(summaryDataQueryResult[m].dividend_yield) },
   ];

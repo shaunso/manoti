@@ -234,20 +234,11 @@ div.carousel__track-grid-container {
 
 div.carousel__track-grid-container a {
   color: var(--sec-color);
-  position: relative;
   transition: all 150ms ease;
-  text-decoration: none;
-}
-
-div.carousel__track-grid-container a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 0.15rem;
-  border-radius: 10px;
-  bottom: -0.5px;
-  left: 0;
-  background-color: var(--sec-color);
+  text-decoration: underline solid;
+  text-underline-offset: 1px;
+  text-decoration-skip-ink: none; 
+  word-spacing: 0px;
 }
 
 div.carousel__track-grid-container a:hover, div.carousel__track-grid-container a:active {
@@ -785,15 +776,6 @@ li {
 @media (max-width: 520px) {
   article.carousel-grid-container {
     height: 150px;
-  }
-
-  div.carousel__track-grid-container a::after {
-    height: 0.1rem;
-    border-radius: 10px;
-    bottom: -0.4px;
-    left: 0;
-    background-color: var(--sec-color);
-    z-index: -1;
   }
 }
 

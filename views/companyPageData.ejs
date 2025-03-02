@@ -32,62 +32,94 @@
         </div>
       </div>
 
-      <div id="company-details">
-        <div id="company-description">
-          <p>Description</p>
-          <p><%= description %></p>
-        </div>
+      <div id="overview-container">
+        <p id="overview-heading">Overview</p>
+        <div id="company-details">
+          <div id="company-description">
+            <p>Description</p>
+            <p><%= description %></p>
+          </div>
+  
+          <div id="maket-cap">
+            <p>Market Cap</p>
+            <p><%= marketCap %></p>
+          </div>
 
-        <div id="company-shares-in=issue">
-          <p>Shares in issue</p>
-          <p><%= sharesIssued %></p>
-        </div>
-  
-        <div id="company-board-size">
-          <p>Board size</p>
-          <p><%= boardSize %></p>
-        </div>
-  
-        <div id="company-employees">
-          <p>No. of employees</p>
-          <p><%= employees ?? '---' %></p>
-        </div>
-        
-        <div id="company-founded">
-          <p>Founded</p>
-          <p><%= founded %></p>
-        </div>
+          <div id="avg-turnover">
+            <p>avg. turnover - 90 day</p>
+            <p><%= averageTurnover90Day %></p>
+          </div>
+
+          <div id="ebitda">
+            <p>EBITDA</p>
+            <p><%= ebitda %></p>
+          </div>
+
+          <div id="company-shares-in=issue">
+            <p>Shares in issue</p>
+            <p><%= sharesIssued %></p>
+          </div>
     
-        <div id="company-ceo">
-          <p>CEO</p>
-          <p><%= ceo %></p>
-        </div>
-  
-        <div id="company-year-end">
-          <p>Financial year end</p>
-          <p><%= yearEnd %></p>
-        </div>
-      
-        <div id="company-lsiting-date">
-          <p>Date of listing</p>
-          <p><%= listingDate %></p>
-        </div>
-
-        <div id="company-auditors">
-          <p>External auditors</p>
-          <p><%= auditors %></p>
-        </div>
-  
-        <div id="company-website">
-          <p>Website</p>
-          <a href="http://<%= website %>" target="_blank"><%= website %></a>
-        </div>
+          <div id="company-board-size">
+            <p>Board size</p>
+            <p><%= boardSize %></p>
+          </div>
+    
+          <div id="company-employees">
+            <p>No. of employees</p>
+            <p><%= employees ?? '---' %></p>
+          </div>
           
-        <div id="address">
-          <p>Address</p>
-          <p><%= address %></p>
-        </div>
+          <div id="company-founded">
+            <p>Founded</p>
+            <p><%= founded %></p>
+          </div>
+      
+          <div id="company-ceo">
+            <p>CEO</p>
+            <p><%= ceo %></p>
+          </div>
+    
+          <div id="company-year-end">
+            <p>Financial year end</p>
+            <p><%= yearEnd %></p>
+          </div>
+        
+          <div id="company-lsiting-date">
+            <p>Date of listing</p>
+            <p><%= listingDate %></p>
+          </div>
   
+          <div id="company-auditors">
+            <p>External auditors</p>
+            <p><%= auditors %></p>
+          </div>
+    
+          <div id="company-website">
+            <p>Website</p>
+            <a href="http://<%= website %>" target="_blank"><%= website %></a>
+          </div>
+            
+          <div id="address">
+            <p>Address</p>
+            <p><%= address %></p>
+          </div>
+
+          <div id="daily-returns-chart">
+            <p>daily price return - 90 day</p>
+            <p><%=  %></p>
+          </div>
+
+          <div id="trade-volume-chart">
+            <p>trade volume - 90 day</p>
+            <p><%=  %></p>
+          </div>
+        </div>
+      </div>
+
+      <div id="income-statement">
+        <p id="income-statement-heading">Income Statement Summary</p>
+        <tbody></tbody>
       </div>
 
       <div id="charts-1">
@@ -95,9 +127,7 @@
         <div id="bar-chart"></div>
       </div>
 
-      <div id="income-statement">
-        <tbody></tbody>
-      </div>
+
     </div>
   </main>
   <%- include('partials/footer') %>

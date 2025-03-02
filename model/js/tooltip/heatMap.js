@@ -12,6 +12,7 @@ function heatMap(data) {
     const price = data[m].price;
     
     square.addEventListener('pointermove', (e) => {
+      e.preventDefault();
       const heatMapContainerYposition = document.querySelector('svg#heat-map').getBoundingClientRect().top;
       const pointerPosition = e.clientY;
       const tooltipYaxisPosition = pointerPosition - heatMapContainerYposition;

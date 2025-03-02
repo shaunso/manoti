@@ -13,19 +13,19 @@ const buildRootScript = () => {
     encoding: 'utf-8',
     flag: 'r',
   });
-  const heatMap =fs.readFileSync('model/js/heatMap.js', {
+  const heatMap =fs.readFileSync('model/js/tooltip/heatMap.js', {
     encoding: 'utf-8',
     flag: 'r',
   });
-  const lineChart = fs.readFileSync('model/js/lineChart.js', {
+  const lineChart = fs.readFileSync('model/js/tooltip/lineChart.js', {
     encoding: 'utf-8',
     flag: 'r',
   });
-  const pieChart = fs.readFileSync('model/js/pieChart.js', {
+  const pieChart = fs.readFileSync('model/js/tooltip/pieChart.js', {
     encoding: 'utf-8',
     flag: 'r',
   });
-  const treemap = fs.readFileSync('model/js/treemap.js', {
+  const treemap = fs.readFileSync('model/js/tooltip/treemap.js', {
     encoding: 'utf-8',
     flag: 'r',
   });

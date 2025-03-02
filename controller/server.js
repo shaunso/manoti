@@ -12,7 +12,6 @@ import buildRootScript from '../model/fileBundling/js/rootScript.js';
 import buildErrorScript from '../model/fileBundling/js/error/errorScript.js';
 import buildContactScript from '../model/fileBundling/js/conatct/contactScript.js';
 import buildEquitiesScript from '../model/fileBundling/js/data/vfex/equities/equitiesScript.js';
-import { equityData, heatMapData, marketCapData, vfexEquitiesEndOfDayData } from '../routes/home/app.js';
 
 // build css files
 rootCSS();

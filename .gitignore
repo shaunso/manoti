@@ -1,4 +1,4 @@
 .env
 node_modules/
-utils/logs2.txt
 public/lineChartFunctions_backup.min.js
+utils/logs2.txt
