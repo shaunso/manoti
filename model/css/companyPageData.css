@@ -157,6 +157,11 @@ div#company-details div#company-website a {
   font-size: var(--font-size-normal);
 }
 
+/* BAR CHART */
+.bar-chart__xAxis .tick text {
+  display: none;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 1200px) {
   :root {
