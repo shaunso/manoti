@@ -1,4 +1,4 @@
-import { axisBottom, axisLeft, extent, isoParse, max, min, scaleLinear, scaleBand, select } from 'd3';
+import { axisBottom, axisLeft, isoParse, max, min, scaleLinear, scaleBand, select, timeFormat } from 'd3';
 import jsdom from 'jsdom';
 
 const { JSDOM } = jsdom;
@@ -12,6 +12,8 @@ const barChartSvg = (dataset, dates) => {
   // accessor functions
   const dateAccessor = d => isoParse(d.date);
   const valueAccessor = d => d.value;
+
+  const dateFormatter = timeFormat("%e-%b-%y");
 
   // console.log(dateAccessor('2025-01-02T22:00:00.000Z'))
 
@@ -40,9 +42,12 @@ const barChartSvg = (dataset, dates) => {
     .domain( [0, max(dataset)] )
     .range( [ height - margin.bottom, margin.top ] );
 
-  svg.append('g').attr('transform', `translate(0,${height - margin.bottom })`).attr('class', 'bar-chart__xAxis').call(axisBottom(xScale).tickSizeInner(0).tickSizeOuter(0))
-  svg.append('g').attr('transform', `translate(${margin.left * 4}, 0)`).attr('class', 'bar-chart__yAxis').call(axisLeft(yScale).tickSize(4).tickValues([min(dataset), max(dataset) / 2, max(dataset)]))
-console.log(dataset[22])
+  // append & call x-axis
+  svg.append('g').attr('transform', `translate(0,${height - margin.bottom })`).attr('class', 'bar-chart__xAxis').call(axisBottom(xScale).tickFormat( d => dateFormatter(d)).tickSizeInner(5).tickSizeOuter(0).tickValues([min(dates), (dates[parseInt(dates.length * 0.25)]), (dates[parseInt(dates.length * 0.5)]), (dates[parseInt(dates.length * 0.75)]), max(dates)]));
+
+  // append & call y-axis
+  svg.append('g').attr('transform', `translate(${margin.left * 4}, 0)`).attr('class', 'bar-chart__yAxis').call(axisLeft(yScale).tickSize(4).tickValues([min(dataset), parseInt(max(dataset) * 0.25), parseInt(max(dataset) * 0.5), parseInt(max(dataset) * 0.75), max(dataset)]))
+
   svg.append('g').attr('class', 'bars')
     .selectAll('rect')
     .data(data)

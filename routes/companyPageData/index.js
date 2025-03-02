@@ -11,6 +11,7 @@ const currentEquitiesTickerList = JSON.parse( process.env.EQUITY_TICKERS );
 const summaryDataQueryResult = await summaryData();
 const averageTurnover90Day = await turnover90dayAverage();
 const vfexSOCIData = await vfexSOCI();
+const clone = structuredClone(vfexSOCIData);
 const tradeVolume90Days = tradeVolume90DayDataArray;
 
 // NUMBER FORMATTER
@@ -20,9 +21,19 @@ const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
 router.get( '/:ticker', async ( req, res ) => {
   try {
     const ticker = (req.params.ticker).toUpperCase();
+    const tL = (req.params.ticker).toLowerCase();
     const tickerIndex = currentEquitiesTickerList.indexOf(ticker);
 
     const barChart = barChartSvg(tradeVolume90Days[tickerIndex + 2], tradeVolume90Days[1]);
+
+    clone[tickerIndex].forEach( d => {
+      delete d[`${tL}`];
+      delete d.date;
+      delete d.depreciation_and_ammortisation;
+      delete d.ebitda;
+    });
+
+    console.log(clone[tickerIndex].at(-1));
 
     if ( !currentEquitiesTickerList.includes( ticker ) ) {
       // error page returned if param value not in array
@@ -52,6 +63,7 @@ router.get( '/:ticker', async ( req, res ) => {
             sharesIssued: thousandsSeparandNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].shares_in_issue),
             shortName: summaryDataQueryResult[tickerIndex].short_name, 
             ticker: summaryDataQueryResult[tickerIndex].ticker,
+            tableData: clone[tickerIndex].at(-1),
             website: summaryDataQueryResult[tickerIndex].website,
             yearEnd: summaryDataQueryResult[tickerIndex].year_end,
           })

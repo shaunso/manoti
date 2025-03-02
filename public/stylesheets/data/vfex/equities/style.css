@@ -381,9 +381,9 @@ div#company-details div#company-website a {
 }
 
 /* BAR CHART */
-.bar-chart__xAxis .tick text {
+/* .bar-chart__xAxis .tick text {
   display: none;
-}
+} */
 
 /* MEDIA QUERIES */
 @media (max-width: 1200px) {

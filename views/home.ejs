@@ -114,7 +114,7 @@
               <div class="carousel__sub-grid carousel__sub-grid--1 current-slide">
                 <div>
                   <p>
-                    <a href="/data/vfex/equities/<%= item.ticker %>"><%= item.name %></a>
+                    <a href="/data/vfex/equities/<%= (item.ticker).toLowerCase() %>"><%= item.name %></a>
                   </p>
                   <p>
                    <%= item.ticker %>

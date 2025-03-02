@@ -381,7 +381,7 @@ BEGIN
         SIM AS SIM_c, LEAD(SIM) OVER (ORDER BY id DESC ) AS SIM_p,
         WPHL AS WPHL_c, LEAD(WPHL) OVER (ORDER BY id DESC ) AS WPHL_p,
         ZIMW AS ZIMW_c, LEAD(ZIMW) OVER (ORDER BY id DESC ) AS ZIMW_p
-      FROM price
+      FROM price order by date desc limit 30
     ),
     vol_change AS (
       SELECT 
@@ -514,3 +514,148 @@ delimiter ;
 -- TURNOVER 50 DAY MOVING AVERAGE
 WITH turnoverCTE AS (SELECT p.date as date, (p.ASUN * v.ASUN) as ASUN, (p.AXIA * v.AXIA) as AXIA, (p.CMCL * v.CMCL) as CMCL, (p.EDGR * v.EDGR) as EDGR, (p.FCA * v.FCA) as FCA, (p.INN * v.INN) as INN, (p.INV * v.INV) as INV, (p.NTFD * v.NTFD) as NTFD, (p.NED * v.NED) as NED, (p.PHL * v.PHL) as PHL, (p.SCIL * v.SCIL) as SCIL, (p.SIM * v.SIM) as SIM, (p.WPHL * v.WPHL) as WPHL, (p.ZIMW * v.ZIMW) as ZIMW FROM price p JOIN volume v USING (id) ORDER BY id DESC LIMIT 50)
 SELECT SUM(ASUN) as ASUN,SUM(AXIA) as AXIA,SUM(CMCL) as CMCL,SUM(EDGR) as EDGR,SUM(FCA) as FCA,SUM(INN) as INN,SUM(INV) as INV,SUM(NTFD) as NTFD,SUM(NED) as NED,SUM(PHL) as PHL,SUM(SCIL) as SCIL,SUM(SIM) as SIM,SUM(WPHL) as WPHL,SUM(ZIMW)  as ZIMW FROM turnoverCTE;
+
+-- daily returns 30 days
+  WITH cte AS (
+    SELECT 
+      date, 
+      (ASUN  - LEAD(ASUN) OVER (ORDER BY id DESC )) / LEAD(ASUN) OVER (ORDER BY id DESC ) AS ASUN,
+      (AXIA  - LEAD(AXIA) OVER (ORDER BY id DESC )) / LEAD(AXIA) OVER (ORDER BY id DESC ) AS AXIA,
+      (CMCL  - LEAD(CMCL) OVER (ORDER BY id DESC )) / LEAD(CMCL) OVER (ORDER BY id DESC ) AS CMCL,
+      (EDGR  - LEAD(EDGR) OVER (ORDER BY id DESC )) / LEAD(EDGR) OVER (ORDER BY id DESC ) AS EDGR,
+      (FCA  - LEAD(FCA) OVER (ORDER BY id DESC )) / LEAD(FCA) OVER (ORDER BY id DESC ) AS FCA,
+      (INN  - LEAD(INN) OVER (ORDER BY id DESC )) / LEAD(INN) OVER (ORDER BY id DESC ) AS INN,
+      (INV  - LEAD(INV) OVER (ORDER BY id DESC )) / LEAD(INV) OVER (ORDER BY id DESC ) AS INV,
+      (NED  - LEAD(NED) OVER (ORDER BY id DESC )) / LEAD(NED) OVER (ORDER BY id DESC ) AS NED,
+      (PHL  - LEAD(PHL) OVER (ORDER BY id DESC )) / LEAD(PHL) OVER (ORDER BY id DESC ) AS PHL,
+      (SCIL  - LEAD(SCIL) OVER (ORDER BY id DESC )) / LEAD(SCIL) OVER (ORDER BY id DESC ) AS SCIL,
+      (SIM  - LEAD(SIM) OVER (ORDER BY id DESC )) / LEAD(SIM) OVER (ORDER BY id DESC ) AS SIM,
+      (WPHL  - LEAD(WPHL) OVER (ORDER BY id DESC )) / LEAD(WPHL) OVER (ORDER BY id DESC ) AS WPHL,
+      (ZIMW  - LEAD(ZIMW) OVER (ORDER BY id DESC )) / LEAD(ZIMW) OVER (ORDER BY id DESC ) AS ZIMW,
+      ROW_NUMBER() OVER() AS row_num
+    FROM price limit 30
+  ) SELECT * FROM cte
+UNION
+  SELECT 
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ''
+UNION
+  SELECT
+    'five_no_summary',
+    'ASUN',
+    'AXIA',
+    'CMCL',
+    'EDGR',
+    'FCA',
+    'INN',
+    'INV',
+    'NED',
+    'PHL',
+    'SCIL',
+    'SIM',
+    'WPHL',
+    'ZIMW',
+    ''
+UNION
+  SELECT 
+    'min',
+    MIN(ASUN),
+    MIN(AXIA),
+    MIN(CMCL),
+    MIN(EDGR),
+    MIN(FCA),
+    MIN(INN),
+    MIN(INV),
+    MIN(NED),
+    MIN(PHL),
+    MIN(SCIL),
+    MIN(SIM),
+    MIN(WPHL),
+    MIN(ZIMW),
+    '' 
+  FROM cte
+UNION
+  SELECT 
+    'first_quartile',
+    (SELECT ASUN FROM cte WHERE row_num=8),
+    (SELECT AXIA FROM cte WHERE row_num=8),
+    (SELECT CMCL FROM cte WHERE row_num=8),
+    (SELECT EDGR FROM cte WHERE row_num=8),
+    (SELECT FCA FROM cte WHERE row_num=8),
+    (SELECT INN FROM cte WHERE row_num=8),
+    (SELECT INV FROM cte WHERE row_num=8),
+    (SELECT NED FROM cte WHERE row_num=8),
+    (SELECT PHL FROM cte WHERE row_num=8),
+    (SELECT SCIL FROM cte WHERE row_num=8),
+    (SELECT SIM FROM cte WHERE row_num=8),
+    (SELECT WPHL FROM cte WHERE row_num=8),
+    (SELECT ZIMW FROM cte WHERE row_num=8),
+    '' 
+  FROM cte
+UNION
+  SELECT 
+    'median',
+    ( (SELECT ASUN FROM cte WHERE row_num=15) + (SELECT ASUN FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT AXIA FROM cte WHERE row_num=15) + (SELECT AXIA FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT CMCL FROM cte WHERE row_num=15) + (SELECT CMCL FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT EDGR FROM cte WHERE row_num=15) + (SELECT EDGR FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT FCA FROM cte WHERE row_num=15) + (SELECT FCA FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT INN FROM cte WHERE row_num=15) + (SELECT INN FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT INV FROM cte WHERE row_num=15) + (SELECT INV FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT NED FROM cte WHERE row_num=15) + (SELECT NED FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT PHL FROM cte WHERE row_num=15) + (SELECT PHL FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT SCIL FROM cte WHERE row_num=15) + (SELECT SCIL FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT SIM FROM cte WHERE row_num=15) + (SELECT SIM FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT WPHL FROM cte WHERE row_num=15) + (SELECT WPHL FROM cte WHERE row_num=16) ) / 2,
+    ( (SELECT ZIMW FROM cte WHERE row_num=15) + (SELECT ZIMW FROM cte WHERE row_num=16) ) / 2,
+     '' 
+  FROM cte
+UNION
+  SELECT
+    'third_quartile',
+    (SELECT ASUN FROM cte WHERE row_num=23) as ASUN,
+    (SELECT AXIA FROM cte WHERE row_num=23) as AXIA,
+    (SELECT CMCL FROM cte WHERE row_num=23) as CMCL,
+    (SELECT EDGR FROM cte WHERE row_num=23) as EDGR,
+    (SELECT FCA FROM cte WHERE row_num=23) as FCA,
+    (SELECT INN FROM cte WHERE row_num=23) as INN,
+    (SELECT INV FROM cte WHERE row_num=23) as INV,
+    (SELECT NED FROM cte WHERE row_num=23) as NED,
+    (SELECT PHL FROM cte WHERE row_num=23) as PHL,
+    (SELECT SCIL FROM cte WHERE row_num=23) as SCIL,
+    (SELECT SIM FROM cte WHERE row_num=23) as SIM,
+    (SELECT WPHL FROM cte WHERE row_num=23) as WPHL,
+    (SELECT ZIMW FROM cte WHERE row_num=23) as ZIMW,
+    '' 
+  FROM cte
+UNION
+  SELECT
+    'max',
+    MAX(ASUN),
+    MAX(AXIA),
+    MAX(CMCL),
+    MAX(EDGR),
+    MAX(FCA),
+    MAX(INN),
+    MAX(INV),
+    MAX(NED),
+    MAX(PHL),
+    MAX(SCIL),
+    MAX(SIM),
+    MAX(WPHL),
+    MAX(ZIMW),
+    ''
+  FROM cte;
