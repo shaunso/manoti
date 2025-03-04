@@ -21,8 +21,8 @@ div#container > div {
 }
 
 img {
-  width: 150px;
-  height: 150px;
+  width: 175px;
+  height: 175px;
   object-fit: contain;
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
   padding: 0.5rem;
@@ -36,7 +36,7 @@ div#company-name div#name-ticker-price > p:nth-child(-n+2) {
   margin-bottom: 0.175rem;
 }
 
-div#company-name div#name-ticker-price p.price-change {
+div#company-name p.price-change {
   margin-bottom: 0.75rem;
 }
 
@@ -81,19 +81,23 @@ div#company-name div.sectors-container p {
   border-radius: 8px;
 }
 
+div#company-name p.closing-price {
+  font-size: var(--font-size-normal_medium);
+}
+
 div#company-name p.price-change {
   font-size: var(--font-size-normal_small);
 }
 
-div#company-name p.positive_price-change {
+div#company-name p.positive_price-change, td.positive_percentage-change {
   color: green;
 }
 
-div#company-name p.negative_price-change {
+div#company-name p.negative_price-change, td.negative_percentage-change {
   color: crimson;
 }
 
-div#company-name p.negative_price-change svg {
+div#company-name p.negative_price-change svg, td.negative_percentage-change svg {
   transform: rotate(180deg);
 }
 
@@ -158,9 +162,86 @@ div#company-details div#company-website a {
 }
 
 /* BAR CHART */
-/* .bar-chart__xAxis .tick text {
-  display: none;
+
+/* TABLE */
+table {
+  width: 98%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: var(--font-size-normal);
+  line-height: 2.275ch;
+}
+
+tbody tr th.table-heading {
+  text-align: start;
+  color: var(--sec-color_80_perc);
+}
+
+table caption {
+  display: table-caption;
+  font-size: var(--font-size-normal_small);
+  margin-bottom: 0.5rem;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.125px;
+  word-spacing: 1.5px;
+  text-transform: none;
+  color: var(--sec-color_80_perc);
+  text-align: start;
+}
+
+/* tr td:nth-child(2) {
+  border-right: 1px solid grey;
 } */
+
+tr.fy {
+  border-bottom: 3px solid var(--sec-color_90_perc);
+  color: var(--sec-color_70_perc);
+  font-size: smaller;
+  vertical-align: bottom;
+}
+tr.fy td:nth-child(1), tr.fy td:not(:nth-child(1)) {
+  text-transform: uppercase;
+  letter-spacing: -0.275px;
+  font-weight: var(--font-weight-bold);
+}
+tr.fy > td:nth-child(4) {
+  text-transform: none;
+}
+tr td:nth-child(1) {
+  letter-spacing: -0.5px;
+  word-spacing: 3px;
+}
+tr td:nth-child(1)::first-letter {
+  text-transform: capitalize;
+}
+tr :not(td:nth-child(1)) {
+  text-align: end;
+  letter-spacing: 0.375px;
+  width: 20%;
+}
+tr.revenue, tr.gross_profit, tr.operating_profit, tr.profit_before_interest_and_tax, tr.net_income_from_continuing_operations, tr.net_income {
+  font-weight: var(--font-weight-bold);
+}
+tr.cost_of_sales, tr.operating_expenses, tr.non_operating_income_or_expenses, tr.tax_expense, tr.loss_from_discountinued_operations {
+  border-bottom: 2px solid var(--sec-color_70_perc);
+}
+tr.net_income {
+  border-bottom: 4px double var(--sec-color_70_perc);
+}
+
+td.percentage-change {
+  font-weight: normal;
+}
+td:not(tr.fy td) {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 3px;
+}
+
+tr.fy td:nth-last-child(1), tr td.percentage-change {
+  width: 10%;
+  font-size: var(--font-size-small);
+}
 
 /* MEDIA QUERIES */
 @media (max-width: 1200px) {
@@ -197,6 +278,14 @@ div#company-details div#company-website a {
   div#company-details div#company-auditors p:nth-child(2) {
     padding-right: 0;
   }
+
+  tr td:nth-child(2) {
+    padding-right: 1.25rem;
+  }
+
+  tr td:nth-child(3) {
+    padding-right: 0.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -221,12 +310,21 @@ div#company-details div#company-website a {
 }
 
 @media (max-width: 700px) {
+  img {
+    width: 150px;
+    height: 150px;
+  }
   div#company-name {
     column-gap: 2rem;
   }
 }
 
 @media (max-width: 570px) {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
   div#company-name p.sector__heading-text {
     letter-spacing: 0.125px;
   }
@@ -242,10 +340,12 @@ div#company-details div#company-website a {
 
   div#company-name div#name-ticker-price p.ticker {
     font-size: var(--font-size-normal);
+    margin-bottom: 0.25rem;
   }
 
   div#company-name p.price-change {
     font-size: var(--font-size-normal);
+    margin-bottom: 0.5rem;
   }
 
   div#company-name div.sectors-container p {
@@ -268,6 +368,36 @@ div#company-details div#company-website a {
   div#company-details div#company-auditors, div#company-details div#daily-returns-chart, div#company-details div#trade-volume-chart {
     flex-basis: 100%;
   }
+
+  table {
+    font-size: var(--font-size-normal_small);
+    width: 98%;
+  }
+
+  table caption {
+    margin-bottom: 0.125rem;
+  }  
+  tr td:nth-child(1) {
+    letter-spacing: -0.175px;
+    word-spacing: 0.375px;
+  }
+  tr.fy {
+    border-bottom: 1.5px solid var(--sec-color_90_perc);
+    font-size: var(--font-size-normal_small);
+  }
+  tr.cost_of_sales, tr.operating_expenses, tr.non_operating_income_or_expenses, tr.tax_expense, tr.loss_from_discountinued_operations {
+    border-bottom: 1.275px solid var(--sec-color_70_perc);
+  }
+  tr.net_income {
+    border-bottom: 3px double var(--sec-color_70_perc);
+  }
+
+  td:not(tr.fy td) {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 0;
+  }
+  
 }
 
 @media (max-width: 520px) {

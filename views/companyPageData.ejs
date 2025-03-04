@@ -16,6 +16,7 @@
         <div id="name-ticker-price">
           <p class="name"><%= longName %></p>
           <p class="ticker"><%= ticker %></p>
+          <p class="closing-price"><%= price %></p>
         <% if (priceChange > 0) { %>
           <p class="price-change positive_price-change"><%= priceChange %> <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle lucide-up"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg></span> <%= pricePercentageChange %></p>
         <% } else if (priceChange < 0) { %>
@@ -46,7 +47,7 @@
           </div>
 
           <div id="avg-turnover">
-            <p>avg. turnover - 90 day</p>
+            <p>avg. turnover (90 day)</p>
             <p><%= averageTurnover90Day %></p>
           </div>
 
@@ -106,34 +107,52 @@
           </div>
 
           <div id="daily-returns-chart">
-            <p>daily price return - 90 day</p>
+            <p>daily price return (90 day)</p>
             <p><%=  %></p>
           </div>
 
           <div id="trade-volume-chart">
-            <p>trade volume - 90 day</p>
+            <p>trade volume (90 day)</p>
             <div class="chart-container"><%- charts.tradeVolume %></div>
           </div>
         </div>
       </div>
 
       <div id="income-statement">
-        <p id="income-statement-heading">Income Statement Summary</p>
+        <p id="income-statement-heading">Income Statement</p>
         <table>
-          <tr>
-            <th>SOCI</th>
-          </tr>
-          <tr>
-            <td></td>
-          </tr>
+          <caption>FY <%= fyCurrent %>/<%= fyPrevious %> income statement analysis with financial year ending <%= yearOfLatestFinancialStatements %></caption>
+        <% tableData.forEach( (d,i) => { %>
+          <tr class="<%= d[0] %>">
+            <% if ( i === 0 ) { %>
+              <% d.forEach( (d,i) => { %>
+                <% if ( i === 0 ) { %>
+                    <td><%= d.replace('fy', 'US$') %></td>
+                <% } else { %>
+                    <td><%= (d === 1) ? 'YoY % change' : '20'+d %></td>
+                <% } %>
+              <% }) %>
+            <% } else { %>
+              <% d.forEach( (d,i) => { %>
+                <% if ( i === 0 ) { %>
+                    <td><%= d.replaceAll('_', ' ').replace('non operating', 'non-operating').replace(' or expenses', '/(expenses)').replace('and', '&') %></td>
+                <% } else if (i ===  3) { %>
+                      <% if (d > 0) { %>
+                        <td class="percentage-change positive_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumFractionDigits: 1 }).format(d) %></td>
+                      <% } else if (d < 0) { %>
+                        <td class="percentage-change negative_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumFractionDigits: 1 }).format(d) %></td>
+                      <% } else { %>
+                        <td class="percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumFractionDigits: 1 }).format(d) %></td>
+                      <% } %>            
+                <% } else { %>
+                  <td><%= new Intl.NumberFormat("GB", { style: "currency", currency: "USD", currencySign: "accounting", maximumFractionDigits: 0}).format(d).replace('US$','') %></td>
+              <% } %> 
+              <% }) %>
+            </tr>
+          <% } %>
+        <% }) %>
         </table>
       </div>
-
-      <div id="charts-1">
-        <div id="box-plot"></div>
-        <div id="bar-chart"></div>
-      </div>
-
 
     </div>
   </main>

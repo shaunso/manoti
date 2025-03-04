@@ -6,6 +6,7 @@
   --sec-color_60_perc: #20413499;
   --sec-color_70_perc: #204134a6;
   --sec-color_80_perc: #204134ce;
+  --sec-color_90_perc:#214034e6;
   --sec-color_98_perc:#204134fb;
   --sec-color_border: #204134e6;
   --ter-color: #F2F1F0;
@@ -524,6 +525,10 @@ div.carousel__sub-grid--1 > div:nth-child(3) {
   justify-content: center;
 }
 
+div.carousel__sub-grid--1 > div:nth-child(3) > p:nth-child(1) {
+  word-spacing: 0.75px;
+}
+
 div.daily-change-overview {
   display: flex;
 }
@@ -564,6 +569,7 @@ text.chart-sub-title {
   stroke-width: 0.015;
   font-size: 0.5rem;
   opacity: 60%;
+  word-spacing: 0.75px;
 }
 
 .tooltip, .tooltip__pie-chart, .tooltip__heat-map, .tooltip__treemap {

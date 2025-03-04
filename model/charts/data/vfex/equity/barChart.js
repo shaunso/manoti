@@ -4,8 +4,8 @@ import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 
 const barChartSvg = (dataset, dates) => {
-  dataset.reverse()
-  dates.reverse()
+  dataset.reverse();
+  dates.reverse();
 
   const data = dataset.map( (d,i) => ( {date: dates[i], value: +d} ));
 

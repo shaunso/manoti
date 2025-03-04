@@ -301,6 +301,10 @@ div.carousel__sub-grid--1 > div:nth-child(3) {
   justify-content: center;
 }
 
+div.carousel__sub-grid--1 > div:nth-child(3) > p:nth-child(1) {
+  word-spacing: 0.75px;
+}
+
 div.daily-change-overview {
   display: flex;
 }
@@ -341,6 +345,7 @@ text.chart-sub-title {
   stroke-width: 0.015;
   font-size: 0.5rem;
   opacity: 60%;
+  word-spacing: 0.75px;
 }
 
 .tooltip, .tooltip__pie-chart, .tooltip__heat-map, .tooltip__treemap {

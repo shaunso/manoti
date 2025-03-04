@@ -1,13 +1,14 @@
 import express from 'express';
 const router = express.Router();
 
-import { summaryData, turnover90dayAverage, volume90DaysData } from '../../model/vfex_db_results.js';
+import { summaryData, turnover90dayAverage } from '../../model/vfex_db_results.js';
 import { vfexSOCI } from '../../model/vfex_soci_db_result.js';
 import { equityData } from '../home/app.js';
 import tradeVolume90DayDataArray from './tradeVolumeData90Days.js';
 import barChartSvg from '../../model/charts/data/vfex/equity/barChart.js';
 
 const currentEquitiesTickerList = JSON.parse( process.env.EQUITY_TICKERS );
+const month = JSON.parse(process.env.MONTHS_LONG);
 const summaryDataQueryResult = await summaryData();
 const averageTurnover90Day = await turnover90dayAverage();
 const vfexSOCIData = await vfexSOCI();
@@ -15,33 +16,54 @@ const clone = structuredClone(vfexSOCIData);
 const tradeVolume90Days = tradeVolume90DayDataArray;
 
 // NUMBER FORMATTER
-const currencyZeroDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', maximumFractionDigits: 0});
+const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4});
+const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
 const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
+const thousandsSeparandTwoDecimalPlacesNumberFormatterObject = new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
 
 router.get( '/:ticker', async ( req, res ) => {
   try {
-    const ticker = (req.params.ticker).toUpperCase();
-    const tL = (req.params.ticker).toLowerCase();
-    const tickerIndex = currentEquitiesTickerList.indexOf(ticker);
+    const tickerUpperCase = (req.params.ticker).toUpperCase();
+    const tickerLowerCase = (req.params.ticker).toLowerCase();
+    const tickerIndex = currentEquitiesTickerList.indexOf(tickerUpperCase);
+    
+    const dataset = structuredClone(tradeVolume90Days[tickerIndex + 2]);
+    const dates = structuredClone(tradeVolume90Days[1]);
+    const barChart = barChartSvg(dataset,dates);
 
-    const barChart = barChartSvg(tradeVolume90Days[tickerIndex + 2], tradeVolume90Days[1]);
+    const yearEndOfLatestFinancialStatement = vfexSOCIData[tickerIndex].at(-1).date;
 
+    // remove unwanted properties from objects in array
     clone[tickerIndex].forEach( d => {
-      delete d[`${tL}`];
+      delete d[`${tickerLowerCase}`];
       delete d.date;
       delete d.depreciation_and_ammortisation;
       delete d.ebitda;
     });
 
-    console.log(clone[tickerIndex].at(-1));
+    // structure the table data
+    const currentFY = clone[tickerIndex].at(-1);
+    const previousFY = clone[tickerIndex].at(-2);
+    // const previousFY = clone[tickerIndex].slice(0,-1).reverse();
+    const incomeStatementTableData = Object.entries( currentFY );
+    Object.values(previousFY).forEach( (d,i) => {
+      incomeStatementTableData[i].push(d);  
+      incomeStatementTableData[i].push( (incomeStatementTableData[i][1] - d) / d );
+    });
+    incomeStatementTableData[0][incomeStatementTableData[0].length -1] = 1;
+    // DISPLAYS ALL AVAILABLE DATA
+    // previousFY.forEach( (d) => {
+    //   Object.values(d).forEach( (d,i) => incomeStatementTableData[i].push(d) )
+    // });
 
-    if ( !currentEquitiesTickerList.includes( ticker ) ) {
+    // send response to client
+    if ( !currentEquitiesTickerList.includes( tickerUpperCase ) ) {
       // error page returned if param value not in array
       res.status(404).render('404');
     } else {
         res.status(200).render( 'companyPageData', 
           { 
-            averageTurnover90Day: currencyZeroDecimalPointsNumberFormatterObject.format(averageTurnover90Day[0][ticker]),
+            averageTurnover90Day: currencyTwoDecimalPointsNumberFormatterObject.format(averageTurnover90Day[0][tickerUpperCase]),
             address: summaryDataQueryResult[tickerIndex].address,
             auditors: summaryDataQueryResult[tickerIndex].external_auditors,
             boardSize: summaryDataQueryResult[tickerIndex].board_size,
@@ -51,21 +73,25 @@ router.get( '/:ticker', async ( req, res ) => {
               // dailyReturns = ,
             },
             description: summaryDataQueryResult[tickerIndex].company_description,
-            ebitda: (!vfexSOCIData[tickerIndex].at(-1).ebitda) ? '---' : currencyZeroDecimalPointsNumberFormatterObject.format(vfexSOCIData[tickerIndex].at(-1).ebitda),
+            ebitda: (!vfexSOCIData[tickerIndex].at(-1).ebitda) ? '---' : currencyTwoDecimalPointsNumberFormatterObject.format(vfexSOCIData[tickerIndex].at(-1).ebitda),
             employees: summaryDataQueryResult[tickerIndex].no_of_employees ? thousandsSeparandNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].no_of_employees) : null,
+            fyCurrent: incomeStatementTableData[0][1],
+            fyPrevious: incomeStatementTableData[0][2],
             founded: summaryDataQueryResult[tickerIndex].founded,
             listingDate: `${summaryDataQueryResult[tickerIndex].date_of_listing.toLocaleString('default', {month: 'long'})} ${summaryDataQueryResult[tickerIndex].date_of_listing.getUTCFullYear()}`,
             longName: summaryDataQueryResult[tickerIndex].long_name,
-            marketCap: equityData[tickerIndex].marketCap,
+            marketCap: currencyTwoDecimalPointsNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].market_cap),
+            price: closingPriceNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].close),
             priceChange: equityData[tickerIndex].priceChange,
             pricePercentageChange: equityData[tickerIndex].pricePercentageChange,
             sector: summaryDataQueryResult[tickerIndex].sector.split(','),
-            sharesIssued: thousandsSeparandNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].shares_in_issue),
+            sharesIssued: thousandsSeparandTwoDecimalPlacesNumberFormatterObject.format(summaryDataQueryResult[tickerIndex].shares_in_issue),
             shortName: summaryDataQueryResult[tickerIndex].short_name, 
             ticker: summaryDataQueryResult[tickerIndex].ticker,
-            tableData: clone[tickerIndex].at(-1),
+            tableData: incomeStatementTableData,
             website: summaryDataQueryResult[tickerIndex].website,
             yearEnd: summaryDataQueryResult[tickerIndex].year_end,
+            yearOfLatestFinancialStatements: month[yearEndOfLatestFinancialStatement.getMonth()] + ' ' + yearEndOfLatestFinancialStatement.getDate(),
           })
     }
   } 
