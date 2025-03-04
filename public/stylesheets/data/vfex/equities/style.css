@@ -265,7 +265,7 @@ div#company-name p.price-change {
 }
 
 div#company-name div#name-ticker-price p.name {
-text-transform: uppercase;
+text-transform: capitalize;
 font-size: var(--font-size-medium_large);
 font-weight: var(--font-weight-bold);
 letter-spacing: -0.125px;
@@ -560,6 +560,7 @@ tr.fy td:nth-last-child(1), tr td.percentage-change {
 
   div#company-name div#name-ticker-price p.name {
     font-size: var(--font-size-normal_medium);
+    word-spacing: 2px;
   }
 
   div#company-name div#name-ticker-price p.ticker {
