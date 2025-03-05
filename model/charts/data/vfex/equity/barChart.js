@@ -24,6 +24,7 @@ const barChartSvg = (dataset, dates) => {
   // scales
   const svg = select(body)
     .append('svg')
+    .attr('id', 'bar-chart')
     .attr("width", width + margin.left )
     .attr("height", height)
     .attr("viewBox", [0, 0, width + margin.left + margin.right, height])
@@ -32,7 +33,7 @@ const barChartSvg = (dataset, dates) => {
   const xScale = scaleBand()
     .domain( dates )
     .range( [ (margin.left * 4), 815 ] )
-    .padding(0.5);
+    .padding(0.3);
 
   const yScale = scaleLog()
     .domain( [max(dataset), 1] )

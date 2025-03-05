@@ -16,12 +16,13 @@ const clone = structuredClone(vfexSOCIData);
 const price90Days = price90DayDataArray;
 const tradeVolume90Days = tradeVolume90DayDataArray;
 
-// NUMBER FORMATTER
+// NUMBER FORMATTERS
 const closingPriceNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: 4, maximumFractionDigits: 4});
 const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
 const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
 const thousandsSeparandTwoDecimalPlacesNumberFormatterObject = new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
 
+// HANDLING THE REQUEST
 router.get( '/:ticker', async ( req, res ) => {
   try {
     const tickerUpperCase = req.params.ticker.toUpperCase();

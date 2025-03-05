@@ -390,6 +390,36 @@ g.bar-chart__yAxis .tick , g.bar-chart__xAxis .tick {
   font-size: 1rem;
 }
 
+rect {
+  transition: 50ms all ease-in-out;
+}
+
+rect:hover {
+  opacity: 0.45;
+  cursor: pointer;
+}
+
+.tooltip {
+  border: 1px solid var(--sec-color);
+  position: absolute;
+  padding: 2px 5px;
+  background-color: var(--tooltip-bg-color);
+  display: none;
+  border-radius: 2.5px;
+  pointer-events: none;
+  text-align: left;
+  width: 150px;
+  z-index: 500;
+  word-spacing: 1.75px;
+  font-size: var(--font-size-normal_small);
+  overflow-x: hidden;
+}
+
+.tooltip .volume {
+  font-weight: var(--font-weight-bold);
+}
+
+
 /* TABLE */
 table {
   width: 98%;
@@ -529,6 +559,11 @@ tr.fy td:nth-last-child(1), tr td.percentage-change {
   body > main {
     padding: 0 2rem;
     margin-top: 1.5rem;
+  }
+
+  .tooltip {
+    font-size: var(--font-size-small);
+    width: 98px;
   }
 }
 

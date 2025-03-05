@@ -352,9 +352,9 @@ function treemap(data) {
 
     d.addEventListener('pointermove', (e) => {
       e.preventDefault();
-      const pieChartContainerYposition = document.querySelector('svg#treemap').getBoundingClientRect().top;
+      const treemapContainerYposition = document.querySelector('svg#treemap').getBoundingClientRect().top;
       const pointerPosition = e.clientY;
-      const tooltipYaxisPosition = pointerPosition - pieChartContainerYposition;
+      const tooltipYaxisPosition = pointerPosition - treemapContainerYposition;
 
       tooltip.style.display = 'block';
       tooltip.style.top = ( tooltipYaxisPosition - 82.5 ) + 'px';
