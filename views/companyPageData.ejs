@@ -113,7 +113,12 @@
 
           <div id="trade-volume-chart">
             <p>trade volume (90 day)</p>
-            <div class="chart-container"><%- charts.tradeVolume %></div>
+            <div class="tooltip">
+              <p class="volume"></p>
+              <p class="date"></p>
+              <p class="price"></p>
+            </div>
+            <%- charts.tradeVolume %>
           </div>
         </div>
       </div>
@@ -158,5 +163,10 @@
   </main>
   <%- include('partials/footer') %>
   <script src="/js/data/vfex/equities/script.js"></script>
+  <script>
+    const { bisector, extent, max, scaleLinear, scaleTime, pointer, select, isoParse, timeFormat } = d3;
+
+    barChart(<%- JSON.stringify(charts.priceData) %>, <%- JSON.stringify(charts.volumeData) %>, <%- JSON.stringify(charts.scaleDates) %>)
+  </script>
 </body>
 </html>
