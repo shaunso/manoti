@@ -32,7 +32,7 @@ const barChartSvg = (dataset, dates) => {
   // scales
   const xScale = scaleBand()
     .domain( dates )
-    .range( [ (margin.left * 4), 815 ] )
+    .range( [ (margin.left * 2.5), 815 ] )
     .padding(0.3);
 
   const yScale = scaleLog()
@@ -46,7 +46,7 @@ const barChartSvg = (dataset, dates) => {
   svg.append('g').attr('transform', `translate(0,${height - margin.bottom })`).attr('class', 'bar-chart__xAxis').call(axisBottom(xScale).tickFormat( d => dateFormatter(d)).tickSizeInner(5).tickSizeOuter(0).tickValues([min(dates), (dates[parseInt(dates.length * 0.25)]), (dates[parseInt(dates.length * 0.5)]), (dates[parseInt(dates.length * 0.75)]), max(dates)]).tickPadding(8));
 
   // append & call y-axis
-  svg.append('g').attr('transform', `translate(${margin.left * 4}, 0)`).attr('class', 'bar-chart__yAxis').call(axisLeft(yScale).ticks(10, d => (d === 1) ? 0 : new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short", maximumFractionDigits: 0}).format(d)).tickSize(0).tickPadding(10));
+  svg.append('g').attr('transform', `translate(${margin.left * 2.5}, 0)`).attr('class', 'bar-chart__yAxis').call(axisLeft(yScale).ticks(10, d => (d === 1) ? 0 : new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short", maximumFractionDigits: 0}).format(d)).tickSize(0).tickPadding(6));
 
   svg.append('g').attr('class', 'bars')
     .selectAll('rect')

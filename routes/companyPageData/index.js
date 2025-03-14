@@ -54,10 +54,10 @@ router.get( '/:ticker', async ( req, res ) => {
         const incomeStatementTableData = Object.entries( currentFY );
         Object.values(previousFY).forEach( (d,i) => {
           incomeStatementTableData[i].push(d);  
-          incomeStatementTableData[i].push( (incomeStatementTableData[i][1] - d) / d );
+          incomeStatementTableData[i].push( ( !((incomeStatementTableData[i][1] - d) / d) ) ? null : ((incomeStatementTableData[i][1] - d) / d) );
         });
         incomeStatementTableData[0][incomeStatementTableData[0].length -1] = 1;
-        // DISPLAYS ALL AVAILABLE DATA
+        // DISPLAYS ALL AVAILABLE FINANCIAL YEAR DATA
         // previousFY.forEach( (d) => {
         //   Object.values(d).forEach( (d,i) => incomeStatementTableData[i].push(d) )
         // });

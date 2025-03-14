@@ -47,7 +47,7 @@ font-weight: var(--font-weight-bold);
 letter-spacing: -0.125px;
 word-spacing: 5px;
 position: relative;
-left: -3px;
+left: -2px;
 }
 
 div#company-name div#name-ticker-price p.ticker {
@@ -99,6 +99,10 @@ div#company-name p.negative_price-change, td.negative_percentage-change {
 
 div#company-name p.negative_price-change svg, td.negative_percentage-change svg {
   transform: rotate(180deg);
+}
+
+td.no_percentage-change {
+  color: gray;
 }
 
 div#company-name svg {
@@ -164,10 +168,12 @@ div#company-details div#company-website a {
 /* BAR CHART */
 g.bar-chart__yAxis .tick , g.bar-chart__xAxis .tick {
   font-size: 1rem;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 rect {
-  transition: 50ms all ease-in-out;
+  transition: 150ms all ease-in-out;
 }
 
 rect:hover {
@@ -198,6 +204,7 @@ rect:hover {
 
 /* TABLE */
 table {
+  table-layout: fixed;
   width: 98%;
   margin: 0 auto;
   border-collapse: collapse;
@@ -222,18 +229,18 @@ table caption {
   text-align: start;
 }
 
-tr.fy {
+tr.currency {
   border-bottom: 3px solid var(--sec-color_90_perc);
   color: var(--sec-color_70_perc);
   font-size: smaller;
   vertical-align: bottom;
 }
-tr.fy td:nth-child(1), tr.fy td:not(:nth-child(1)) {
+tr.currency td:nth-child(1), tr.currency td:not(:nth-child(1)) {
   text-transform: uppercase;
   letter-spacing: -0.275px;
   font-weight: var(--font-weight-bold);
 }
-tr.fy > td:nth-child(4) {
+tr.currency > td:nth-child(4) {
   text-transform: none;
 }
 tr td:nth-child(1) {
@@ -261,13 +268,13 @@ tr.net_income {
 td.percentage-change {
   font-weight: normal;
 }
-td:not(tr.fy td) {
+td:not(tr.currency td) {
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 3px;
 }
 
-tr.fy td:nth-last-child(1), tr td.percentage-change {
+tr.currency td:nth-last-child(1), tr td.percentage-change {
   width: 10%;
   font-size: var(--font-size-small);
 }
@@ -416,7 +423,7 @@ tr.fy td:nth-last-child(1), tr td.percentage-change {
     letter-spacing: -0.175px;
     word-spacing: 0.375px;
   }
-  tr.fy {
+  tr.currency {
     border-bottom: 1.5px solid var(--sec-color_90_perc);
     font-size: var(--font-size-normal_small);
   }
@@ -427,7 +434,7 @@ tr.fy td:nth-last-child(1), tr td.percentage-change {
     border-bottom: 3px double var(--sec-color_70_perc);
   }
 
-  td:not(tr.fy td) {
+  td:not(tr.currency td) {
     padding-top: 1px;
     padding-bottom: 1px;
     padding-left: 0;

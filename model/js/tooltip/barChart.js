@@ -1,5 +1,6 @@
 // bar chart tooltip
 function barChart(price, volume, dates) {
+  const body = document.querySelector('body');
   const tooltipRectangles = Array.from(document.querySelectorAll('rect'));
   const tooltip = document.querySelector('#trade-volume-chart .tooltip');
   
@@ -17,7 +18,7 @@ function barChart(price, volume, dates) {
     const priceData = price[i];
     const volumeData = volume[i];
 
-    d.addEventListener('pointermove', (e) => {
+    d.addEventListener('mousemove', (e) => {
       e.preventDefault();
 
       const rectYposition = document.querySelector('svg#bar-chart').getBoundingClientRect().top;
@@ -32,13 +33,24 @@ function barChart(price, volume, dates) {
       tooltip.querySelector('.price span').textContent = closingPriceNumberFormatterObject.format(priceData);
     });
 
-    d.addEventListener('pointerleave', () => {
+    d.addEventListener('mouseleave', () => {
       tooltip.style.display = 'none';
     });
 
     d.addEventListener('touchstart', (e) => {
       e.preventDefault();
-      
+      d.style.opacity = 0.45;
+      tooltip.style.display = 'block';
+      tooltip.style.left = ( e.clientX - ( tooltip.getBoundingClientRect().width / 2 ) )  + 'px';
+      tooltip.querySelector('.volume span').textContent = thousandsSeparandNumberFormatterObject.format(volumeData);
+      tooltip.querySelector('.date').textContent = dateFormatter(isoParse(dateData));
+      tooltip.querySelector('.price span').textContent = closingPriceNumberFormatterObject.format(priceData);
+      e.stopPropagation()
+    });
+
+    body.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      tooltip.style.display = 'none';
     });
   })
 }

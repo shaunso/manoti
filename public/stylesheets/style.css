@@ -460,7 +460,8 @@ div.carousel__track-grid-container a {
   color: var(--sec-color);
   transition: all 150ms ease;
   text-decoration: underline solid;
-  text-underline-offset: 1px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.5px;
   text-decoration-skip-ink: none; 
   word-spacing: 0px;
 }
