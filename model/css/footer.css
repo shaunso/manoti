@@ -80,9 +80,13 @@ footer > p > span.disclaimer {
     word-spacing: 0.75px;
     margin-top: 0.15rem;
   }
+<<<<<<< HEAD:model/css/footer.css
 
   footer > p:nth-child(3) {
     letter-spacing: -0.125px;
     word-spacing: 0.275px;
   }
 }
+=======
+}
+>>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/styles/footer.css

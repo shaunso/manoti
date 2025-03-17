@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://www.manoti.co</loc>
+<<<<<<< HEAD
     <lastmod>2025-01-28</lastmod>
+=======
+    <lastmod>2025-03-17</lastmod>
+>>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
