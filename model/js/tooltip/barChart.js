@@ -1,7 +1,7 @@
 // bar chart tooltip
 function barChart(price, volume, dates) {
   const body = document.querySelector('body');
-  const tooltipRectangles = Array.from(document.querySelectorAll('rect'));
+  const tooltipRectangles = Array.from(document.querySelectorAll('div#trade-volume-chart rect'));
   const tooltip = document.querySelector('#trade-volume-chart .tooltip');
   
   price.reverse();

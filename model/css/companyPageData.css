@@ -165,18 +165,26 @@ div#company-details div#company-website a {
   font-size: var(--font-size-normal);
 }
 
+/* BOX PLOT */
+#box-plot .tick {
+  font-size: 1rem;
+  user-select: none;
+  -webkit-user-select: none;
+  transform: rotate(90);
+}
+
 /* BAR CHART */
-g.bar-chart__yAxis .tick , g.bar-chart__xAxis .tick {
+g.bar-chart__yAxis .tick , g.bar-chart__xAxis .tick, #box-plot .tick {
   font-size: 1rem;
   user-select: none;
   -webkit-user-select: none;
 }
 
-rect {
+div#trade-volume-chart rect {
   transition: 150ms all ease-in-out;
 }
 
-rect:hover {
+div#trade-volume-chart rect:hover {
   opacity: 0.45;
   cursor: pointer;
 }

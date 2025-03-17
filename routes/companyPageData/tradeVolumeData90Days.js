@@ -1,6 +1,7 @@
-import { price90daysData, volume90DaysData } from '../../model/vfex_db_results.js';
+import { price90daysData, price90dayReturnsData, volume90DaysData } from '../../model/vfex_db_results.js';
 const tradeVolume90Days = await volume90DaysData();
 const price90Days = await price90daysData();
+const price90DayReturns = await price90dayReturnsData();
 
 const price90DayDataArray = [];
 const tradeVolume90DayDataArray = [];
@@ -24,4 +25,4 @@ volumePreviousTradingDays.forEach( d => {
   });
 });
 
-export { price90DayDataArray, tradeVolume90DayDataArray };
+export { price90DayDataArray, price90DayReturns, tradeVolume90DayDataArray };

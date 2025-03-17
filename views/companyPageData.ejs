@@ -107,8 +107,8 @@
           </div>
 
           <div id="daily-returns-chart">
-            <p>daily price return (90 day)</p>
-            <p><%=  %></p>
+            <p>daily price returns (90 day) - five no. summary</p>
+            <%- charts.dailyReturns %>
           </div>
 
           <div id="trade-volume-chart">
@@ -143,9 +143,9 @@
                     <td><%= d.replaceAll('_', ' ').replace('non operating', 'non-operating').replace(' or expenses', '/(expenses)').replace('and', '&') %></td>
                 <% } else if (i ===  3) { %>
                       <% if (d > 0) { %>
-                        <td class="percentage-change positive_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumFractionDigits: 1 }).format(d) %></td>
+                        <td class="percentage-change positive_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(d) %></td>
                       <% } else if (d < 0) { %>
-                        <td class="percentage-change negative_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumFractionDigits: 1 }).format(d) %></td>
+                        <td class="percentage-change negative_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(d) %></td>
                       <% } else { %>
                         <td class="percentage-change no_percentage-change"><%= (d === null) ? 'n/a' : '0%' %></td>
                       <% } %>            

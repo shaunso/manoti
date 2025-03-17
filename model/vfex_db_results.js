@@ -5,6 +5,7 @@ import { pool } from './db.js';
 const indices = process.env.INDICES_QUERY;
 const priceVolumeData30DaysJoined = process.env.PRICE_VOLUME_DATA_QUERY;
 const price90days = process.env.PRICE_90_DAY_QUERY;
+const price90dayReturns = process.env.PRICE_90_DAY_PRICE_RETURN_QUERY;
 const summary = process.env.SUMMARY_QUERY;
 const turnover = process.env.TURNOVER_30_DAY;
 const turnover90dayAverageData = process.env.AVG_TRADE_VOLUME_90_DAY_DATA_QUERY;
@@ -41,7 +42,19 @@ const price90daysData = () => {
     pool.execute(price90days,  (error, result) => {
       if(error){
         console.error(error)
-        return reject('An error occured while executing the [ -- 30 day priceVolumeData -- ] query on the database');
+        return reject('An error occured while executing the [ -- 90 day closing price -- ] query on the database');
+      }
+      return resolve(result);
+      });
+  });
+};
+
+const price90dayReturnsData = () => {
+  return new Promise( (resolve, reject)=>{
+    pool.execute(price90dayReturns,  (error, result) => {
+      if(error){
+        console.error(error)
+        return reject('An error occured while executing the [ -- 30 day daily price returns -- ] query on the database');
       }
       return resolve(result);
       });
@@ -108,4 +121,4 @@ const volume90DaysData = () => {
   });
 };
 
-export { indicesData, priceVolumeData, price90daysData, summaryData, turnover30dayData, turnover90dayAverage, vfexSummaryData, volume90DaysData };
+export { indicesData, priceVolumeData, price90daysData, price90dayReturnsData, summaryData, turnover30dayData, turnover90dayAverage, vfexSummaryData, volume90DaysData };

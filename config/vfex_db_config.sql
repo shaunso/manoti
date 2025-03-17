@@ -511,11 +511,14 @@ BEGIN
 END //
 delimiter ;
 
--- TURNOVER 50 DAY MOVING AVERAGE
-WITH turnoverCTE AS (SELECT p.date as date, (p.ASUN * v.ASUN) as ASUN, (p.AXIA * v.AXIA) as AXIA, (p.CMCL * v.CMCL) as CMCL, (p.EDGR * v.EDGR) as EDGR, (p.FCA * v.FCA) as FCA, (p.INN * v.INN) as INN, (p.INV * v.INV) as INV, (p.NTFD * v.NTFD) as NTFD, (p.NED * v.NED) as NED, (p.PHL * v.PHL) as PHL, (p.SCIL * v.SCIL) as SCIL, (p.SIM * v.SIM) as SIM, (p.WPHL * v.WPHL) as WPHL, (p.ZIMW * v.ZIMW) as ZIMW FROM price p JOIN volume v USING (id) ORDER BY id DESC LIMIT 50)
-SELECT SUM(ASUN) as ASUN,SUM(AXIA) as AXIA,SUM(CMCL) as CMCL,SUM(EDGR) as EDGR,SUM(FCA) as FCA,SUM(INN) as INN,SUM(INV) as INV,SUM(NTFD) as NTFD,SUM(NED) as NED,SUM(PHL) as PHL,SUM(SCIL) as SCIL,SUM(SIM) as SIM,SUM(WPHL) as WPHL,SUM(ZIMW)  as ZIMW FROM turnoverCTE;
+-- TURNOVER 90 DAY MOVING AVERAGE
+WITH turnoverCTE AS (SELECT p.date as date, (p.ASUN * v.ASUN) as ASUN, (p.AXIA * v.AXIA) as AXIA, (p.CMCL * v.CMCL) as CMCL, (p.EDGR * v.EDGR) as EDGR, (p.FCA * v.FCA) as FCA, (p.INN * v.INN) as INN, (p.INV * v.INV) as INV, (p.NTFD * v.NTFD) as NTFD, (p.NED * v.NED) as NED, (p.PHL * v.PHL) as PHL, (p.SCIL * v.SCIL) as SCIL, (p.SIM * v.SIM) as SIM, (p.WPHL * v.WPHL) as WPHL, (p.ZIMW * v.ZIMW) as ZIMW FROM price p JOIN volume v USING (id) ORDER BY id DESC LIMIT 90)
+SELECT AVG(ASUN) as ASUN,AVG(AXIA) as AXIA,AVG(CMCL) as CMCL,AVG(EDGR) as EDGR,AVG(FCA) as FCA,AVG(INN) as INN,AVG(INV) as INV,AVG(NTFD) as NTFD,AVG(NED) as NED,AVG(PHL) as PHL,AVG(SCIL) as SCIL,AVG(SIM) as SIM,AVG(WPHL) as WPHL,AVG(ZIMW)  as ZIMW FROM turnoverCTE;
 
--- daily returns 30 days
+-- daily returns 90 days
+delimiter //
+CREATE PROCEDURE returns_30_days()
+BEGIN
   WITH cte AS (
     SELECT 
       date, 
@@ -535,127 +538,316 @@ SELECT SUM(ASUN) as ASUN,SUM(AXIA) as AXIA,SUM(CMCL) as CMCL,SUM(EDGR) as EDGR,S
       ROW_NUMBER() OVER() AS row_num
     FROM price limit 30
   ) SELECT * FROM cte
-UNION
-  SELECT 
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    ''
-UNION
-  SELECT
-    'five_no_summary',
-    'ASUN',
-    'AXIA',
-    'CMCL',
-    'EDGR',
-    'FCA',
-    'INN',
-    'INV',
-    'NED',
-    'PHL',
-    'SCIL',
-    'SIM',
-    'WPHL',
-    'ZIMW',
-    ''
-UNION
-  SELECT 
-    'min',
-    MIN(ASUN),
-    MIN(AXIA),
-    MIN(CMCL),
-    MIN(EDGR),
-    MIN(FCA),
-    MIN(INN),
-    MIN(INV),
-    MIN(NED),
-    MIN(PHL),
-    MIN(SCIL),
-    MIN(SIM),
-    MIN(WPHL),
-    MIN(ZIMW),
-    '' 
-  FROM cte
-UNION
-  SELECT 
-    'first_quartile',
-    (SELECT ASUN FROM cte WHERE row_num=8),
-    (SELECT AXIA FROM cte WHERE row_num=8),
-    (SELECT CMCL FROM cte WHERE row_num=8),
-    (SELECT EDGR FROM cte WHERE row_num=8),
-    (SELECT FCA FROM cte WHERE row_num=8),
-    (SELECT INN FROM cte WHERE row_num=8),
-    (SELECT INV FROM cte WHERE row_num=8),
-    (SELECT NED FROM cte WHERE row_num=8),
-    (SELECT PHL FROM cte WHERE row_num=8),
-    (SELECT SCIL FROM cte WHERE row_num=8),
-    (SELECT SIM FROM cte WHERE row_num=8),
-    (SELECT WPHL FROM cte WHERE row_num=8),
-    (SELECT ZIMW FROM cte WHERE row_num=8),
-    '' 
-  FROM cte
-UNION
-  SELECT 
-    'median',
-    ( (SELECT ASUN FROM cte WHERE row_num=15) + (SELECT ASUN FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT AXIA FROM cte WHERE row_num=15) + (SELECT AXIA FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT CMCL FROM cte WHERE row_num=15) + (SELECT CMCL FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT EDGR FROM cte WHERE row_num=15) + (SELECT EDGR FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT FCA FROM cte WHERE row_num=15) + (SELECT FCA FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT INN FROM cte WHERE row_num=15) + (SELECT INN FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT INV FROM cte WHERE row_num=15) + (SELECT INV FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT NED FROM cte WHERE row_num=15) + (SELECT NED FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT PHL FROM cte WHERE row_num=15) + (SELECT PHL FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT SCIL FROM cte WHERE row_num=15) + (SELECT SCIL FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT SIM FROM cte WHERE row_num=15) + (SELECT SIM FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT WPHL FROM cte WHERE row_num=15) + (SELECT WPHL FROM cte WHERE row_num=16) ) / 2,
-    ( (SELECT ZIMW FROM cte WHERE row_num=15) + (SELECT ZIMW FROM cte WHERE row_num=16) ) / 2,
-     '' 
-  FROM cte
-UNION
-  SELECT
-    'third_quartile',
-    (SELECT ASUN FROM cte WHERE row_num=23) as ASUN,
-    (SELECT AXIA FROM cte WHERE row_num=23) as AXIA,
-    (SELECT CMCL FROM cte WHERE row_num=23) as CMCL,
-    (SELECT EDGR FROM cte WHERE row_num=23) as EDGR,
-    (SELECT FCA FROM cte WHERE row_num=23) as FCA,
-    (SELECT INN FROM cte WHERE row_num=23) as INN,
-    (SELECT INV FROM cte WHERE row_num=23) as INV,
-    (SELECT NED FROM cte WHERE row_num=23) as NED,
-    (SELECT PHL FROM cte WHERE row_num=23) as PHL,
-    (SELECT SCIL FROM cte WHERE row_num=23) as SCIL,
-    (SELECT SIM FROM cte WHERE row_num=23) as SIM,
-    (SELECT WPHL FROM cte WHERE row_num=23) as WPHL,
-    (SELECT ZIMW FROM cte WHERE row_num=23) as ZIMW,
-    '' 
-  FROM cte
-UNION
-  SELECT
-    'max',
-    MAX(ASUN),
-    MAX(AXIA),
-    MAX(CMCL),
-    MAX(EDGR),
-    MAX(FCA),
-    MAX(INN),
-    MAX(INV),
-    MAX(NED),
-    MAX(PHL),
-    MAX(SCIL),
-    MAX(SIM),
-    MAX(WPHL),
-    MAX(ZIMW),
-    ''
-  FROM cte;
+  UNION
+    SELECT 
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''
+  UNION
+    SELECT
+      'five_no_summary',
+      'ASUN',
+      'AXIA',
+      'CMCL',
+      'EDGR',
+      'FCA',
+      'INN',
+      'INV',
+      'NED',
+      'PHL',
+      'SCIL',
+      'SIM',
+      'WPHL',
+      'ZIMW',
+      ''
+  UNION
+    SELECT 
+      'min',
+      MIN(ASUN),
+      MIN(AXIA),
+      MIN(CMCL),
+      MIN(EDGR),
+      MIN(FCA),
+      MIN(INN),
+      MIN(INV),
+      MIN(NED),
+      MIN(PHL),
+      MIN(SCIL),
+      MIN(SIM),
+      MIN(WPHL),
+      MIN(ZIMW),
+      '' 
+    FROM cte
+  UNION
+    SELECT 
+      'first_quartile',
+      (SELECT ASUN FROM cte WHERE row_num=8),
+      (SELECT AXIA FROM cte WHERE row_num=8),
+      (SELECT CMCL FROM cte WHERE row_num=8),
+      (SELECT EDGR FROM cte WHERE row_num=8),
+      (SELECT FCA FROM cte WHERE row_num=8),
+      (SELECT INN FROM cte WHERE row_num=8),
+      (SELECT INV FROM cte WHERE row_num=8),
+      (SELECT NED FROM cte WHERE row_num=8),
+      (SELECT PHL FROM cte WHERE row_num=8),
+      (SELECT SCIL FROM cte WHERE row_num=8),
+      (SELECT SIM FROM cte WHERE row_num=8),
+      (SELECT WPHL FROM cte WHERE row_num=8),
+      (SELECT ZIMW FROM cte WHERE row_num=8),
+      '' 
+    FROM cte
+  UNION
+    SELECT 
+      'median',
+      ( (SELECT ASUN FROM cte WHERE row_num=15) + (SELECT ASUN FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT AXIA FROM cte WHERE row_num=15) + (SELECT AXIA FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT CMCL FROM cte WHERE row_num=15) + (SELECT CMCL FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT EDGR FROM cte WHERE row_num=15) + (SELECT EDGR FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT FCA FROM cte WHERE row_num=15) + (SELECT FCA FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT INN FROM cte WHERE row_num=15) + (SELECT INN FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT INV FROM cte WHERE row_num=15) + (SELECT INV FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT NED FROM cte WHERE row_num=15) + (SELECT NED FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT PHL FROM cte WHERE row_num=15) + (SELECT PHL FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT SCIL FROM cte WHERE row_num=15) + (SELECT SCIL FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT SIM FROM cte WHERE row_num=15) + (SELECT SIM FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT WPHL FROM cte WHERE row_num=15) + (SELECT WPHL FROM cte WHERE row_num=16) ) / 2,
+      ( (SELECT ZIMW FROM cte WHERE row_num=15) + (SELECT ZIMW FROM cte WHERE row_num=16) ) / 2,
+      '' 
+    FROM cte
+  UNION
+    SELECT
+      'third_quartile',
+      (SELECT ASUN FROM cte WHERE row_num=23) as ASUN,
+      (SELECT AXIA FROM cte WHERE row_num=23) as AXIA,
+      (SELECT CMCL FROM cte WHERE row_num=23) as CMCL,
+      (SELECT EDGR FROM cte WHERE row_num=23) as EDGR,
+      (SELECT FCA FROM cte WHERE row_num=23) as FCA,
+      (SELECT INN FROM cte WHERE row_num=23) as INN,
+      (SELECT INV FROM cte WHERE row_num=23) as INV,
+      (SELECT NED FROM cte WHERE row_num=23) as NED,
+      (SELECT PHL FROM cte WHERE row_num=23) as PHL,
+      (SELECT SCIL FROM cte WHERE row_num=23) as SCIL,
+      (SELECT SIM FROM cte WHERE row_num=23) as SIM,
+      (SELECT WPHL FROM cte WHERE row_num=23) as WPHL,
+      (SELECT ZIMW FROM cte WHERE row_num=23) as ZIMW,
+      '' 
+    FROM cte
+  UNION
+    SELECT
+      'max',
+      MAX(ASUN),
+      MAX(AXIA),
+      MAX(CMCL),
+      MAX(EDGR),
+      MAX(FCA),
+      MAX(INN),
+      MAX(INV),
+      MAX(NED),
+      MAX(PHL),
+      MAX(SCIL),
+      MAX(SIM),
+      MAX(WPHL),
+      MAX(ZIMW),
+      ''
+    FROM cte;
+END //
+delimiter ;
+
+
+delimiter //
+CREATE PROCEDURE returns_90_days()
+BEGIN
+  WITH 
+    cte_1 AS (
+      SELECT 
+        date, 
+        ASUN, AXIA, CMCL, EDGR, FCA, INN, INV, NED, PHL, SCIL, SIM, WPHL, ZIMW
+      FROM price order by date desc limit 91
+    ),
+    cte_2 AS (
+      SELECT 
+        date,
+        (ASUN  - LEAD(ASUN) OVER (ORDER BY date DESC )) / LEAD(ASUN) OVER (ORDER BY date DESC ) AS ASUN,
+        (AXIA  - LEAD(AXIA) OVER (ORDER BY date DESC )) / LEAD(AXIA) OVER (ORDER BY date DESC ) AS AXIA,
+        (CMCL  - LEAD(CMCL) OVER (ORDER BY date DESC )) / LEAD(CMCL) OVER (ORDER BY date DESC ) AS CMCL,
+        (EDGR  - LEAD(EDGR) OVER (ORDER BY date DESC )) / LEAD(EDGR) OVER (ORDER BY date DESC ) AS EDGR,
+        (FCA  - LEAD(FCA) OVER (ORDER BY date DESC )) / LEAD(FCA) OVER (ORDER BY date DESC ) AS FCA,
+        (INN  - LEAD(INN) OVER (ORDER BY date DESC )) / LEAD(INN) OVER (ORDER BY date DESC ) AS INN,
+        (INV  - LEAD(INV) OVER (ORDER BY date DESC )) / LEAD(INV) OVER (ORDER BY date DESC ) AS INV,
+        (NED  - LEAD(NED) OVER (ORDER BY date DESC )) / LEAD(NED) OVER (ORDER BY date DESC ) AS NED,
+        (PHL  - LEAD(PHL) OVER (ORDER BY date DESC )) / LEAD(PHL) OVER (ORDER BY date DESC ) AS PHL,
+        (SCIL  - LEAD(SCIL) OVER (ORDER BY date DESC )) / LEAD(SCIL) OVER (ORDER BY date DESC ) AS SCIL,
+        (SIM  - LEAD(SIM) OVER (ORDER BY date DESC )) / LEAD(SIM) OVER (ORDER BY date DESC ) AS SIM,
+        (WPHL  - LEAD(WPHL) OVER (ORDER BY date DESC )) / LEAD(WPHL) OVER (ORDER BY date DESC ) AS WPHL,
+        (ZIMW  - LEAD(ZIMW) OVER (ORDER BY date DESC )) / LEAD(ZIMW) OVER (ORDER BY date DESC ) AS ZIMW   
+      FROM cte_1 LIMIT 90
+    ),
+    cte_asun AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, asun FROM cte_2 ORDER BY asun
+    ),
+    cte_axia AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, axia FROM cte_2 ORDER BY axia
+    ),
+    cte_cmcl AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, cmcl FROM cte_2 ORDER BY cmcl
+    ),
+    cte_edgr AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, edgr FROM cte_2 ORDER BY edgr
+    ),
+    cte_fca AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, fca FROM cte_2 ORDER BY fca
+    ),
+    cte_inn AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, inn FROM cte_2 ORDER BY inn
+    ),
+    cte_inv AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, inv FROM cte_2 ORDER BY inv
+    ),
+    cte_ned AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, ned FROM cte_2 ORDER BY ned
+    ),
+    cte_phl AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, phl FROM cte_2 ORDER BY phl
+    ),
+    cte_scil AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, scil FROM cte_2 ORDER BY scil
+    ),
+    cte_sim AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, sim FROM cte_2 ORDER BY sim
+    ),
+    cte_wphl AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, wphl FROM cte_2 ORDER BY wphl
+    ),
+    cte_zimw AS (
+      SELECT ROW_NUMBER() OVER() AS row_num, zimw FROM cte_2 ORDER BY zimw
+    )
+    SELECT 
+      'asun' as 'ticker',
+      MIN(asun) as 'min',
+      (SELECT asun FROM cte_asun WHERE row_num=23) as '1Q',
+      ( ((SELECT asun FROM cte_asun WHERE row_num=45) + (SELECT asun FROM cte_asun WHERE row_num=46) ) / 2) as 'median',
+      (SELECT asun FROM cte_asun WHERE row_num=68) as '3Q',
+      MAX(asun) as 'max' 
+    from cte_asun
+    UNION
+    SELECT 
+      'axia' as 'ticker',
+      MIN(axia) as 'min',
+      (SELECT axia FROM cte_axia WHERE row_num=23) as '1Q',
+      ( ((SELECT axia FROM cte_axia WHERE row_num=45) + (SELECT axia FROM cte_axia WHERE row_num=46) ) / 2) as 'median',
+      (SELECT axia FROM cte_axia WHERE row_num=68) as '3Q',
+      MAX(axia) as 'max' 
+    from cte_axia
+    UNION
+    SELECT 
+      'cmcl' as 'ticker',
+      MIN(cmcl) as 'min',
+      (SELECT cmcl FROM cte_cmcl WHERE row_num=23) as '1Q',
+      ( ((SELECT cmcl FROM cte_cmcl WHERE row_num=45) + (SELECT cmcl FROM cte_cmcl WHERE row_num=46) ) / 2) as 'median',
+      (SELECT cmcl FROM cte_cmcl WHERE row_num=68) as '3Q',
+      MAX(cmcl) as 'max' 
+    from cte_cmcl
+    UNION
+    SELECT 
+      'edgr' as 'ticker',
+      MIN(edgr) as 'min',
+      (SELECT edgr FROM cte_edgr WHERE row_num=23) as '1Q',
+      ( ((SELECT edgr FROM cte_edgr WHERE row_num=45) + (SELECT edgr FROM cte_edgr WHERE row_num=46) ) / 2) as 'median',
+      (SELECT edgr FROM cte_edgr WHERE row_num=68) as '3Q',
+      MAX(edgr) as 'max' 
+    from cte_edgr
+    UNION
+    SELECT 
+      'fca' as 'ticker',
+      MIN(fca) as 'min',
+      (SELECT fca FROM cte_fca WHERE row_num=23) as '1Q',
+      ( ((SELECT fca FROM cte_fca WHERE row_num=45) + (SELECT fca FROM cte_fca WHERE row_num=46) ) / 2) as 'median',
+      (SELECT fca FROM cte_fca WHERE row_num=68) as '3Q',
+      MAX(fca) as 'max' 
+    from cte_fca
+    UNION
+    SELECT 
+      'inn' as 'ticker',
+      MIN(inn) as 'min',
+      (SELECT inn FROM cte_inn WHERE row_num=23) as '1Q',
+      ( ((SELECT inn FROM cte_inn WHERE row_num=45) + (SELECT inn FROM cte_inn WHERE row_num=46) ) / 2) as 'median',
+      (SELECT inn FROM cte_inn WHERE row_num=68) as '3Q',
+      MAX(inn) as 'max' 
+    from cte_inn
+    UNION
+    SELECT 
+      'inv' as 'ticker',
+      MIN(inv) as 'min',
+      (SELECT inv FROM cte_inv WHERE row_num=23) as '1Q',
+      ( ((SELECT inv FROM cte_inv WHERE row_num=45) + (SELECT inv FROM cte_inv WHERE row_num=46) ) / 2) as 'median',
+      (SELECT inv FROM cte_inv WHERE row_num=68) as '3Q',
+      MAX(inv) as 'max' 
+    from cte_inv
+    UNION
+    SELECT 
+      'ned' as 'ticker',
+      MIN(ned) as 'min',
+      (SELECT ned FROM cte_ned WHERE row_num=23) as '1Q',
+      ( ((SELECT ned FROM cte_ned WHERE row_num=45) + (SELECT ned FROM cte_ned WHERE row_num=46) ) / 2) as 'median',
+      (SELECT ned FROM cte_ned WHERE row_num=68) as '3Q',
+      MAX(ned) as 'max' 
+    from cte_ned
+    UNION
+    SELECT 
+      'phl' as 'ticker',
+      MIN(phl) as 'min',
+      (SELECT phl FROM cte_phl WHERE row_num=23) as '1Q',
+      ( ((SELECT phl FROM cte_phl WHERE row_num=45) + (SELECT phl FROM cte_phl WHERE row_num=46) ) / 2) as 'median',
+      (SELECT phl FROM cte_phl WHERE row_num=68) as '3Q',
+      MAX(phl) as 'max' 
+    from cte_phl
+    UNION
+    SELECT 
+      'scil' as 'ticker',
+      MIN(scil) as 'min',
+      (SELECT scil FROM cte_scil WHERE row_num=23) as '1Q',
+      ( ((SELECT scil FROM cte_scil WHERE row_num=45) + (SELECT scil FROM cte_scil WHERE row_num=46) ) / 2) as 'median',
+      (SELECT scil FROM cte_scil WHERE row_num=68) as '3Q',
+      MAX(scil) as 'max' 
+    from cte_scil
+    UNION
+    SELECT 
+      'sim' as 'ticker',
+      MIN(sim) as 'min',
+      (SELECT sim FROM cte_sim WHERE row_num=23) as '1Q',
+      ( ((SELECT sim FROM cte_sim WHERE row_num=45) + (SELECT sim FROM cte_sim WHERE row_num=46) ) / 2) as 'median',
+      (SELECT sim FROM cte_sim WHERE row_num=68) as '3Q',
+      MAX(sim) as 'max' 
+    from cte_sim
+    UNION
+    SELECT 
+      'wphl' as 'ticker',
+      MIN(wphl) as 'min',
+      (SELECT wphl FROM cte_wphl WHERE row_num=23) as '1Q',
+      ( ((SELECT wphl FROM cte_wphl WHERE row_num=45) + (SELECT wphl FROM cte_wphl WHERE row_num=46) ) / 2) as 'median',
+      (SELECT wphl FROM cte_wphl WHERE row_num=68) as '3Q',
+      MAX(wphl) as 'max' 
+    from cte_wphl
+    UNION
+    SELECT 
+      'zimw' as 'ticker',
+      MIN(zimw) as 'min',
+      (SELECT zimw FROM cte_zimw WHERE row_num=23) as '1Q',
+      ( ((SELECT zimw FROM cte_zimw WHERE row_num=45) + (SELECT zimw FROM cte_zimw WHERE row_num=46) ) / 2) as 'median',
+      (SELECT zimw FROM cte_zimw WHERE row_num=68) as '3Q',
+      MAX(zimw) as 'max' 
+    from cte_zimw;    
+END //
+delimiter ;

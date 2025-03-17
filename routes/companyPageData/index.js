@@ -4,8 +4,9 @@ const router = express.Router();
 import { summaryData, turnover90dayAverage } from '../../model/vfex_db_results.js';
 import { vfexSOCI } from '../../model/vfex_soci_db_result.js';
 import { equityData } from '../home/app.js';
-import { price90DayDataArray, tradeVolume90DayDataArray } from './tradeVolumeData90Days.js';
+import { price90DayDataArray, price90DayReturns, tradeVolume90DayDataArray } from './tradeVolumeData90Days.js';
 import barChartSvg from '../../model/charts/data/vfex/equity/barChart.js';
+import boxPlotSvg from '../../model/charts/data/vfex/equity/boxPlot.js';
 
 const currentEquitiesTickerList = JSON.parse( process.env.EQUITY_TICKERS );
 const month = JSON.parse(process.env.MONTHS_LONG);
@@ -14,6 +15,7 @@ const averageTurnover90Day = await turnover90dayAverage();
 const vfexSOCIData = await vfexSOCI();
 const clone = structuredClone(vfexSOCIData);
 const price90Days = price90DayDataArray;
+const price90DayReturnsDataArray = price90DayReturns[0];
 const tradeVolume90Days = tradeVolume90DayDataArray;
 
 // NUMBER FORMATTERS
@@ -22,7 +24,7 @@ const currencyTwoDecimalPointsNumberFormatterObject = new Intl.NumberFormat('en-
 const thousandsSeparandNumberFormatterObject = new Intl.NumberFormat('en-GB');
 const thousandsSeparandTwoDecimalPlacesNumberFormatterObject = new Intl.NumberFormat('en-GB', {notation: "compact", compactDisplay: "short", maximumFractionDigits: 2});
 
-// HANDLING THE REQUEST
+// HANDLE THE REQUEST
 router.get( '/:ticker', async ( req, res ) => {
   try {
     const tickerUpperCase = req.params.ticker.toUpperCase();
@@ -35,7 +37,8 @@ router.get( '/:ticker', async ( req, res ) => {
     } else {
         const dataset = structuredClone(tradeVolume90Days[tickerIndex + 2]);
         const dates = structuredClone(tradeVolume90Days[1]);
-        const barChart = barChartSvg(dataset,dates);
+        const barChart = barChartSvg(dataset, dates);
+        const boxPlot = boxPlotSvg(price90DayReturnsDataArray[tickerIndex]);
 
         const yearEndOfLatestFinancialStatement = vfexSOCIData[tickerIndex].at(-1).date;
     
@@ -74,7 +77,7 @@ router.get( '/:ticker', async ( req, res ) => {
               priceData: price90Days[tickerIndex + 2],
               scaleDates: tradeVolume90Days[1],
               tradeVolume: barChart,
-              // dailyReturns = ,
+              dailyReturns: boxPlot,
               volumeData: tradeVolume90Days[tickerIndex + 2],
             },
             description: summaryDataQueryResult[tickerIndex].company_description,

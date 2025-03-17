@@ -27,7 +27,7 @@ const barChartSvg = (dataset, dates) => {
     .attr('id', 'bar-chart')
     .attr("width", width + margin.left )
     .attr("height", height)
-    .attr("viewBox", [0, 0, width + margin.left + margin.right, height])
+    .attr("viewBox", [0, 0, width + margin.left + margin.right + 17.5, height])
     .attr("style", "max-width: 100%; height: auto;");
   // scales
   const xScale = scaleBand()
