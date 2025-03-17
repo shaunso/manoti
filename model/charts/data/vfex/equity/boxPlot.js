@@ -17,9 +17,9 @@ const boxPlotSvg = (dataset) => {
   const svg = select(body)
     .append('svg')
     .attr('id', 'box-plot')
-    .attr('width', width + margin.left )
+    .attr('width', width )
     .attr('height', height)
-    .attr('viewBox', [0, 0, width + margin.left + margin.right + 17.5, height])
+    .attr('viewBox', [0, 0, width + margin.left + margin.right, height])
     .attr('style', 'max-width: 100%; height: auto;');
 
   const chart = svg.append('g')
@@ -29,7 +29,7 @@ const boxPlotSvg = (dataset) => {
   // x-scale
   const xScale = scaleLinear()
     .domain([min, max])
-    .range([0, width - margin.right - margin.left]);
+    .range([0, width  ]);
 
   // x-axis
   const xAxis = chart.append('g')

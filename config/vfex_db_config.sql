@@ -515,7 +515,7 @@ delimiter ;
 WITH turnoverCTE AS (SELECT p.date as date, (p.ASUN * v.ASUN) as ASUN, (p.AXIA * v.AXIA) as AXIA, (p.CMCL * v.CMCL) as CMCL, (p.EDGR * v.EDGR) as EDGR, (p.FCA * v.FCA) as FCA, (p.INN * v.INN) as INN, (p.INV * v.INV) as INV, (p.NTFD * v.NTFD) as NTFD, (p.NED * v.NED) as NED, (p.PHL * v.PHL) as PHL, (p.SCIL * v.SCIL) as SCIL, (p.SIM * v.SIM) as SIM, (p.WPHL * v.WPHL) as WPHL, (p.ZIMW * v.ZIMW) as ZIMW FROM price p JOIN volume v USING (id) ORDER BY id DESC LIMIT 90)
 SELECT AVG(ASUN) as ASUN,AVG(AXIA) as AXIA,AVG(CMCL) as CMCL,AVG(EDGR) as EDGR,AVG(FCA) as FCA,AVG(INN) as INN,AVG(INV) as INV,AVG(NTFD) as NTFD,AVG(NED) as NED,AVG(PHL) as PHL,AVG(SCIL) as SCIL,AVG(SIM) as SIM,AVG(WPHL) as WPHL,AVG(ZIMW)  as ZIMW FROM turnoverCTE;
 
--- daily returns 90 days
+-- daily returns 30 days
 delimiter //
 CREATE PROCEDURE returns_30_days()
 BEGIN
@@ -665,7 +665,7 @@ BEGIN
 END //
 delimiter ;
 
-
+-- daily returns 90 days
 delimiter //
 CREATE PROCEDURE returns_90_days()
 BEGIN
