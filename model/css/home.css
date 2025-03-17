@@ -1,51 +1,4 @@
-<<<<<<< HEAD:model/css/home.css
 /* body */
-=======
-:root {
-  --bg-color: #F2F1F0;
-  --bg-color__slides: #f9f9f9de;
-  --prim-color: #0F0F0F;
-  --sec-color: #204134;
-  --sec-color_60_perc: #20413499;
-  --sec-color_80_perc: #204134cc;
-  --sec-color_98_perc:#204134fb;
-  --sec-color_border: #204134e6;
-  --ter-color: #F2F1F0;
-  --alt-ter-color: #fdf9f588;
-  --tooltip-bg-color: #f7f2f2f7;
-
-  --border-radius__xx_small: 2px;
-  --border-radius__x_small: 4px;
-  --border-radius__small: 6px;
-  --border-radius__medium: 10px;
-
-  --font-family: "Lato", Helvetica;
-  --font-size-xx_large: 3rem;
-  --font-size-x_large: 2.75rem;
-  --font-size-large: 2.25rem;
-  --font-size-medium_large: 1.75rem;
-  --font-size-medium: 1.625rem;
-  --font-size-normal_medium: 1.5rem;
-  --font-size-normal: 1.375rem;
-  --font-size-normal_small: 1.125rem;
-  --font-size-small: 0.875rem;
-  --font-size-x_small: 0.75rem;
-  --font-size-xx_small: 0.625rem;
-
-  --font-weight-light: 300;
-  --font-weight-regular: 400;
-  --font-weight-bold: 700;
-  --font-style-italic_regular: italic;
-
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
->>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/style.css
 body {
   background-color: var(--bg-color);
   font-family: var(--font-family);
@@ -137,7 +90,6 @@ aside > div#aside-container > div {
   flex-direction: column;
   width: 100%;
   row-gap: 0.25rem;
-<<<<<<< HEAD:model/css/home.css
 }
 
 div#aside-container > div > p:nth-child(1), div#aside-container > div#alsi > div.daily-change-overview > p {
@@ -146,12 +98,6 @@ div#aside-container > div > p:nth-child(1), div#aside-container > div#alsi > div
 
 div#aside-container > div > p:nth-child(1) {
   color: var(--sec-color_70_perc);
-=======
-}
-
-div#aside-container > div > p:nth-child(1), div#aside-container > div#alsi > div.daily-change-overview > p {
-  font-size: var(--font-size-normal_small);
->>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/style.css
 }
 
 div#aside-container > div > p:nth-child(2) {
@@ -187,7 +133,6 @@ div#aside-container > div > p:nth-child(2) {
   display: none;
 }
 
-<<<<<<< HEAD:model/css/home.css
 .treemap-label {
   font-size: 0.07rem;
   fill:rgba(32, 32, 68, 0.901);
@@ -202,8 +147,6 @@ div#market-cap p.market-cap {
   margin-bottom: 0.3rem;
 }
 
-=======
->>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/style.css
 svg#heat-map rect {
   transition: ease-in all 75ms;
 }
@@ -216,7 +159,6 @@ svg#heat-map rect:hover, svg#treemap rect:hover  {
   box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
 
-<<<<<<< HEAD:model/css/home.css
 svg#treemap rect {
   stroke: whitesmoke;
   stroke-width: 0.095px;
@@ -231,8 +173,6 @@ div.tooltip__treemap p.pe-ratio, div.tooltip__treemap p.trade-volume-30-days {
   color: var(--sec-color_70_perc);
 }
 
-=======
->>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/style.css
 svg#timeline text {
   font-size: 0.175rem;
   fill: var(--sec-color);
@@ -366,13 +306,10 @@ div.carousel__sub-grid--1 > div:nth-child(3) > p:nth-child(1) {
   word-spacing: 0.75px;
 }
 
-<<<<<<< HEAD:model/css/home.css
 div.daily-change-overview {
   display: flex;
 }
 
-=======
->>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/style.css
 div.chart {
   position: relative;
   width: 100%;
@@ -423,10 +360,7 @@ text.chart-sub-title {
   text-align: left;
   width: 145px;
   z-index: 500;
-<<<<<<< HEAD:model/css/home.css
   word-spacing: 1.75px;
-=======
->>>>>>> 35b6819c08f5fa8738fbe628c95ed2f7bca4d95d:public/style.css
 }
 
 .tooltip__pie-chart, .tooltip__heat-map, .tooltip__treemap {
