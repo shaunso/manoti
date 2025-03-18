@@ -123,8 +123,8 @@ p#overview-heading, p#income-statement-heading {
   font-size: var(--font-size-medium);
   margin-bottom: 0.35em;
   width: 100%;
-  background-color: rgba(131, 125, 125, 0.854);
-  color: var(--white);
+  background-color: rgba(131, 125, 125, 0.525);
+  color: var(--bg-color);
   border-radius: 8px;
   padding: 0.25rem 0.75rem;
 }
@@ -170,7 +170,10 @@ div#company-details div#company-website a {
   font-size: 1rem;
   user-select: none;
   -webkit-user-select: none;
-  transform: rotate(90);
+}
+
+g.xAxis g.tick text {
+  font-size: 1.125rem;
 }
 
 /* BAR CHART */
@@ -213,7 +216,7 @@ div#trade-volume-chart rect:hover {
 /* TABLE */
 table {
   table-layout: fixed;
-  width: 98%;
+  width: 100%;
   margin: 0 auto;
   border-collapse: collapse;
   font-size: var(--font-size-normal);
@@ -254,6 +257,7 @@ tr.currency > td:nth-child(4) {
 tr td:nth-child(1) {
   letter-spacing: -0.5px;
   word-spacing: 3px;
+  padding-right: 1.5rem;
 }
 tr td:nth-child(1)::first-letter {
   text-transform: capitalize;
@@ -263,6 +267,10 @@ tr :not(td:nth-child(1)) {
   letter-spacing: 0.375px;
   width: 20%;
 }
+tr td:nth-child(2), tr td:nth-child(3) {
+  white-space: nowrap;
+}
+
 tr.revenue, tr.gross_profit, tr.operating_profit, tr.profit_before_interest_and_tax, tr.net_income_from_continuing_operations, tr.net_income {
   font-weight: var(--font-weight-bold);
 }
@@ -411,8 +419,8 @@ tr.currency td:nth-last-child(1), tr td.percentage-change {
     flex-basis: 50%;
   }
   
-  div#company-details p#overview-heading, div#company-details p#income-statement-heading {
-    padding: 0.175rem 0.75rem;
+  p#overview-heading, p#income-statement-heading {
+    padding: 0.25rem 0.375rem;
   }
 
   div#company-details div#company-auditors, div#company-details div#daily-returns-chart, div#company-details div#trade-volume-chart {
@@ -473,4 +481,16 @@ tr.currency td:nth-last-child(1), tr td.percentage-change {
   }
 }
 
-  
+@media (max-width: 420px) {
+  tr td:nth-child(1) {
+    width: 40%;
+    padding-right: 0rem;
+  }
+  tr td:nth-child(2) {
+    padding-right: 0rem;
+  }
+  tr td:nth-child(3) {
+    padding-right: 0.375rem;
+  }
+}
+

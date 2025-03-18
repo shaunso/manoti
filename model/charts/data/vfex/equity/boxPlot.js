@@ -36,12 +36,12 @@ const boxPlotSvg = (dataset) => {
     .attr('class', 'xAxis')
     .attr('transform', `translate(0, ${height / 1.5 })`);
 
-  xAxis.call( axisBottom(xScale).tickFormat(d => d == 0 ? '0%' : format('+.1%')(d) ).tickValues([ min, q1, median, q3, max]));
+  xAxis.call( axisBottom(xScale).tickFormat(d => d == 0 ? '0%' : format('+.1%')(d) ).tickValues([ min, q1*2, median, q3*2, max]));
 
   xAxis.selectAll('text')  
   .style('text-anchor', 'end')
   .attr('x', '-9px')
-  .attr('y', '-5px')
+  .attr('y', '-6px')
   .attr('transform', 'rotate(-90)')
 
   // box-plot features
@@ -63,10 +63,10 @@ const boxPlotSvg = (dataset) => {
   chart.append('g')
     .attr('class', 'rect')
     .append('rect')
-    .attr('x', xScale(+q1))
-    .attr('y', boxCenterY - (boxHeight / 2) )
+    .attr('x', xScale(q1 * 2))
+    .attr('y', (boxCenterY - (boxHeight / 2)) )
     .attr('height', boxHeight)
-    .attr('width', xScale(+q3) - xScale(+q1) )
+    .attr('width', xScale(q3 * 2) - xScale(q1 * 2) )
     .attr('stroke', 'black')
     .attr('stroke-width', 1.5)
     .attr('fill', '#69b3a2')
@@ -83,6 +83,11 @@ const boxPlotSvg = (dataset) => {
     .attr('y2', boxCenterY + (boxHeight / 2))
     .attr('stroke', 'black')
     .attr('stroke-width', 1.25);
+
+  // adjust value for q1 & q3 ticks
+  const ticks = Array.from(body.querySelectorAll('g.xAxis g.tick text'));  
+  ticks[1].textContent = format('+.1%')(q1);
+  ticks[3].textContent = format('+.1%')(q3);
 
   const svgString = dom.serialize(); 
   const svgStart = svgString.indexOf( '<svg' );

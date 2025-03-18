@@ -5,7 +5,7 @@
   <meta name="description" content="Get the latest <%= longName %> (<%= ticker %>) analysis, historical charts, and other financial data to help you make savvier investment and trading decisions on the VFEX.">
   <meta name="keywords" content="manoti, <%= shortName %>, <%= longName %>, vfex, victoria falls stock exchange, zimbabwe stocks, zimbabwe shares, <%= shortName %> share price, <%= shortName %> analysis, buy <%= shortName %> shares, <%= shortName %> vfex, <%= shortName %> victoria falls stock exchange">
   <link rel="stylesheet" href="/stylesheets/data/vfex/equities/style.css">
-  <title><%= ticker.toLowerCase() %> - <%= longName %> Analysis | Manoti</title>
+  <title><%= ticker %> - <%= longName %> Analysis | Manoti</title>
 </head>
 <body>
   <%- include('partials/header') %>
@@ -143,14 +143,14 @@
                     <td><%= d.replaceAll('_', ' ').replace('non operating', 'non-operating').replace(' or expenses', '/(expenses)').replace('and', '&') %></td>
                 <% } else if (i ===  3) { %>
                       <% if (d > 0) { %>
-                        <td class="percentage-change positive_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(d) %></td>
+                        <td class="percentage-change positive_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumSignificantDigits: 2 }).format(d) %></td>
                       <% } else if (d < 0) { %>
-                        <td class="percentage-change negative_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(d) %></td>
+                        <td class="percentage-change negative_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumSignificantDigits: 2 }).format(d) %></td>
                       <% } else { %>
                         <td class="percentage-change no_percentage-change"><%= (d === null) ? 'n/a' : '0%' %></td>
                       <% } %>            
                 <% } else { %>
-                  <td><%= (!d ) ? '---' : new Intl.NumberFormat("GB", { style: "currency", currency: "USD", currencySign: "accounting", maximumFractionDigits: 0}).format(d).replace('US$','') %></td>
+                  <td class="table-data" data-value="<%= (!d ) ? '---' : d %>"><%= (!d ) ? '---' : d %></td>
                 <% } %> 
               <% }) %>
             </tr>
@@ -164,6 +164,31 @@
   <%- include('partials/footer') %>
   <script src="/js/data/vfex/equities/script.js"></script>
   <script>
+    function tableDataFormatter() {
+      const tableDataCells = Array.from(document.querySelectorAll('td.table-data'));
+      const browserWidth = window.innerWidth;
+      console.log(tableDataCells)
+
+      if ( tableDataCells[0].dataset.value === '---' ) {
+
+      } else {
+        if (browserWidth < 701) {
+          tableDataCells.forEach( d => {
+            const cell = d.dataset.value;
+            d.textContent = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2}).format(cell).replace('US$','')        
+          })
+        } else {
+          tableDataCells.forEach( d => {
+            const cell = d.dataset.value;
+            d.textContent = new Intl.NumberFormat("GB", { style: "currency", currency: "USD", currencySign: "accounting", maximumFractionDigits: 0}).format(cell).replace('US$','')        
+          })
+        }
+      }
+    };
+
+    window.addEventListener('resize', tableDataFormatter);    
+    tableDataFormatter();
+
     const { bisector, extent, max, scaleLinear, scaleTime, pointer, select, isoParse, timeFormat } = d3;
 
     barChart(<%- JSON.stringify(charts.priceData) %>, <%- JSON.stringify(charts.volumeData) %>, <%- JSON.stringify(charts.scaleDates) %>)

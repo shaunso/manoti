@@ -21,12 +21,7 @@ function barChart(price, volume, dates) {
     d.addEventListener('mousemove', (e) => {
       e.preventDefault();
 
-      const rectYposition = document.querySelector('svg#bar-chart').getBoundingClientRect().top;
-      const pointerPosition = e.clientY;
-      const tooltipYaxisPosition = pointerPosition - rectYposition;
-
       tooltip.style.display = 'block';
-      // tooltip.style.top = ( -1 ) + 'px';
       tooltip.style.left = ( e.clientX - ( tooltip.getBoundingClientRect().width / 2 ) )  + 'px';
       tooltip.querySelector('.volume span').textContent = thousandsSeparandNumberFormatterObject.format(volumeData);
       tooltip.querySelector('.date').textContent = dateFormatter(isoParse(dateData));
@@ -34,22 +29,6 @@ function barChart(price, volume, dates) {
     });
 
     d.addEventListener('mouseleave', () => {
-      tooltip.style.display = 'none';
-    });
-
-    d.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      d.style.opacity = 0.45;
-      tooltip.style.display = 'block';
-      tooltip.style.left = ( e.clientX - ( tooltip.getBoundingClientRect().width / 2 ) )  + 'px';
-      tooltip.querySelector('.volume span').textContent = thousandsSeparandNumberFormatterObject.format(volumeData);
-      tooltip.querySelector('.date').textContent = dateFormatter(isoParse(dateData));
-      tooltip.querySelector('.price span').textContent = closingPriceNumberFormatterObject.format(priceData);
-      e.stopPropagation()
-    });
-
-    body.addEventListener('touchstart', (e) => {
-      e.preventDefault();
       tooltip.style.display = 'none';
     });
   })
