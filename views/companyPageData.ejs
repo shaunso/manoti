@@ -169,13 +169,12 @@
       const browserWidth = window.innerWidth;
       console.log(tableDataCells)
 
-      if ( tableDataCells[0].dataset.value === '---' ) {
-
-      } else {
+      if ( tableDataCells[0].dataset.value === '---' ) {}
+      else {
         if (browserWidth < 701) {
           tableDataCells.forEach( d => {
             const cell = d.dataset.value;
-            d.textContent = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2}).format(cell).replace('US$','')        
+            d.textContent = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD', notation: "compact", compactDisplay: "short", maximumFractionDigits: 2}).format(cell).replace('$','')        
           })
         } else {
           tableDataCells.forEach( d => {
