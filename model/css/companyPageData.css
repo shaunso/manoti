@@ -248,7 +248,6 @@ tr.currency {
 }
 tr.currency td:nth-child(1), tr.currency td:not(:nth-child(1)) {
   text-transform: uppercase;
-  letter-spacing: -0.275px;
   font-weight: var(--font-weight-bold);
 }
 tr.currency > td:nth-child(4) {
@@ -269,6 +268,7 @@ tr :not(td:nth-child(1)) {
 }
 tr td:nth-child(2), tr td:nth-child(3) {
   white-space: nowrap;
+  letter-spacing: -0.275px;
 }
 
 tr.revenue, tr.gross_profit, tr.operating_profit, tr.profit_before_interest_and_tax, tr.net_income_from_continuing_operations, tr.net_income {
