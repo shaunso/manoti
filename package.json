@@ -1,6 +1,6 @@
 {
   "name": "manoti",
-  "version": "4.0.5",
+  "version": "5.0.9",
   "description": "victoria falls stock exchange dashboard",
   "main": "controller/server.js",
   "type": "module",
