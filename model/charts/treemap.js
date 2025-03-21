@@ -84,7 +84,7 @@ marketCapData.forEach( d => {
     .selectAll('g')
     .data(root.children)
     .join('g')
-    .attr('class', d => (d.x1 - d.x0) > 3 && ((d.y1 - d.y0) > 3) ? `${d.data.name}-label label--visible` : `${d.data.name}-label label--hidden` )
+    .attr('class', d => (d.x1 - d.x0) > 4 && ((d.y1 - d.y0) > 3) ? `${d.data.name}-label label--visible` : `${d.data.name}-label label--hidden` )
     .call( text => {
       text.append('text')
       .text( d => d.data.name )
