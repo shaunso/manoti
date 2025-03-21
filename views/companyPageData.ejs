@@ -147,7 +147,7 @@
                       <% } else if (d < 0) { %>
                         <td class="percentage-change negative_percentage-change"><%= new Intl.NumberFormat('en-GB', { style: 'percent', signDisplay: "always", maximumSignificantDigits: 2 }).format(d) %></td>
                       <% } else { %>
-                        <td class="percentage-change no_percentage-change"><%= (d === null) ? 'n/a' : '0%' %></td>
+                        <td class="percentage-change no_percentage-change"><%= (d === null) ? '---' : '0%' %></td>
                       <% } %>            
                 <% } else { %>
                   <td class="table-data" data-value="<%= (!d ) ? '---' : d %>"><%= (!d ) ? '---' : d %></td>
