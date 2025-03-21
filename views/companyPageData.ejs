@@ -150,7 +150,7 @@
                         <td class="percentage-change no_percentage-change"><%= (d === null) ? '---' : '0%' %></td>
                       <% } %>            
                 <% } else { %>
-                  <td class="table-data" data-value="<%= (!d ) ? '---' : d %>"><%= (!d ) ? '---' : d %></td>
+                  <td class="table-data" data-value="<%= (d === null ) ? '---' : d %>"><%= (!d ) ? '---' : d %></td>
                 <% } %> 
               <% }) %>
             </tr>
@@ -168,7 +168,9 @@
       const tableDataCells = Array.from(document.querySelectorAll('td.table-data'));
       const browserWidth = window.innerWidth;
 
-      if ( tableDataCells[0].dataset.value === '---' ) {}
+      if ( tableDataCells[0].dataset.value === '---' ) {
+        return
+      }
       else {
         if (browserWidth < 701) {
           tableDataCells.forEach( d => {
